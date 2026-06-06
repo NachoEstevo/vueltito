@@ -409,7 +409,6 @@ img{max-width:100%;display:block}
 .mc-tag{font-size:.78rem;color:var(--gris-medio)}
 .mc-progress{height:7px;border-radius:6px;background:var(--gris-claro);overflow:hidden;margin-top:6px}
 .mc-progress span{display:block;height:100%;background:linear-gradient(90deg,var(--verde-suave),var(--verde));border-radius:6px}
-.mc-pct{position:absolute;right:0;bottom:34px;font-size:.82rem;font-weight:700;color:var(--gris-oscuro)}
 .mc-meta{font-size:.82rem;color:var(--gris-oscuro);margin-top:2px;line-height:1.45}
 .mc-meta i{font-style:normal;color:var(--gris-medio)}
 .mini-link{margin-top:auto;padding-top:18px;display:inline-flex;align-items:center;gap:7px;font-size:.86rem;font-weight:600;color:var(--ink)}
