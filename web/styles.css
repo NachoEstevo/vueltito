@@ -253,7 +253,7 @@ img{max-width:100%;display:block}
 .ht-item{display:flex;gap:14px;align-items:flex-start}
 .ht-ic{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;color:var(--gris-oscuro);flex:none}
 .ht-item strong{display:block;font-size:.96rem;font-weight:600}
-.ht-item span{font-size:.86rem;color:var(--gris-medio)}
+.ht-item span{font-size:.86rem;color:var(--gris-oscuro)}
 
 /* =================================================================
    2 · COMMERCE WEDGE
