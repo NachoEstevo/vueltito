@@ -111,4 +111,75 @@
 
     render(false);
   }
+
+  // ---- onboarding ONG modal ----
+  var modal = document.getElementById('onboarding');
+  if (modal) {
+    var obForm = document.getElementById('ob-form');
+    var obSuccess = modal.querySelector('.ob-success');
+    var lastFocus = null;
+
+    function openModal() {
+      lastFocus = document.activeElement;
+      obForm.hidden = false;
+      obSuccess.hidden = true;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-lock');
+      setTimeout(function () {
+        var first = modal.querySelector('.ob-form input');
+        if (first) first.focus();
+      }, 60);
+    }
+    function closeModal() {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-lock');
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('[data-onboarding]').forEach(function (b) {
+      b.addEventListener('click', openModal);
+    });
+    modal.querySelectorAll('[data-close]').forEach(function (b) {
+      b.addEventListener('click', closeModal);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    obForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ong = obForm.ong, email = obForm.email;
+      var ok = true;
+      [ong, email].forEach(function (f) {
+        var valid = f.value.trim() && (f.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value));
+        f.classList.toggle('invalid', !valid);
+        if (!valid) ok = false;
+      });
+      if (!ok) { (ong.classList.contains('invalid') ? ong : email).focus(); return; }
+
+      var data = {
+        ong: ong.value.trim(),
+        email: email.value.trim(),
+        area: obForm.area.value,
+        msg: obForm.msg.value.trim(),
+        ts: new Date().toISOString()
+      };
+      // Persist the request locally. To capture server-side, POST `data`
+      // to a form endpoint (Formspree, Sheets, etc.) here.
+      try {
+        var key = 'vueltito_ong_requests';
+        var arr = JSON.parse(localStorage.getItem(key) || '[]');
+        arr.push(data);
+        localStorage.setItem(key, JSON.stringify(arr));
+      } catch (err) {}
+
+      modal.querySelector('#ob-name').textContent = data.ong || 'tu ONG';
+      modal.querySelector('#ob-mail').textContent = data.email;
+      obForm.reset();
+      obForm.hidden = true;
+      obSuccess.hidden = false;
+    });
+  }
 })();

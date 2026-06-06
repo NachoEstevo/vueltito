@@ -65,8 +65,8 @@
       <a href="#recursos">Recursos</a>
     </nav>
     <div class="nav-cta">
-      <a class="btn btn-ghost" href="#demo">Demo</a>
-      <a class="btn btn-dark" href="#demo">Iniciar</a>
+      <a class="btn btn-ghost" href="#flujo">Cómo funciona</a>
+      <button class="btn btn-dark" type="button" data-onboarding>Inscribí tu ONG</button>
     </div>
     <button class="nav-burger" aria-label="Abrir menú" id="burger"><span></span><span></span></button>
   </div>
@@ -81,7 +81,7 @@
     <h1 class="hero-title">Pequeñas vueltas.<br>Gran impacto.</h1>
     <p class="hero-sub">Microaportes visibles para cada checkout integrado.</p>
     <div class="hero-actions">
-      <a class="btn btn-dark btn-lg" href="#demo">Ver demo</a>
+      <button class="btn btn-dark btn-lg" type="button" data-onboarding>Inscribí a tu ONG</button>
       <a class="btn btn-link" href="#flujo">Cómo funciona <svg class="ic"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
@@ -180,7 +180,7 @@
             <h3 class="wv-title">Canales integrados</h3>
             <p class="wv-sub">Plugins que conectan tu tienda con vueltito y Mercado Pago.</p>
           </div>
-          <span class="chip chip-green chip-dot">6 activos</span>
+          <span class="chip chip-green chip-dot">4 activos</span>
         </div>
         <div class="plugin-grid">
           <article class="plugin">
@@ -193,18 +193,6 @@
             <span class="pg-ic tint-sky"><svg class="ic"><use href="#i-cloud"/></svg></span>
             <div class="pg-titlerow"><h4>Tiendanube</h4><span class="chip chip-amber">Piloto</span></div>
             <p>App para Tiendanube con opción de aporte en checkout.</p>
-            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
-          </article>
-          <article class="plugin">
-            <span class="pg-ic tint-amber"><svg class="ic"><use href="#i-box"/></svg></span>
-            <div class="pg-titlerow"><h4>VTEX</h4><span class="chip chip-violet">Enterprise</span></div>
-            <p>Conector vía Payment Provider Protocol (PPP).</p>
-            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
-          </article>
-          <article class="plugin">
-            <span class="pg-ic tint-coral"><svg class="ic"><use href="#i-bag"/></svg></span>
-            <div class="pg-titlerow"><h4>Adobe Commerce</h4><span class="chip chip-violet">Enterprise</span></div>
-            <p>Módulo compatible con Adobe Commerce / Magento.</p>
             <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
           </article>
           <article class="plugin">
@@ -416,7 +404,7 @@
     <h2 class="serif-h2 big center">Que cada pago<br>deje algo bueno.</h2>
     <p class="lead center">Empezá con un comercio integrado. Escalá con evidencia.</p>
     <div class="hero-actions center">
-      <a class="btn btn-dark btn-lg" href="#demo">Agendar demo</a>
+      <button class="btn btn-dark btn-lg" type="button" data-onboarding>Inscribí a tu ONG</button>
       <a class="btn btn-ghost btn-lg" href="#recursos">Leer spec técnico</a>
     </div>
   </div>
@@ -471,6 +459,58 @@
 </section>
 
 </main>
+
+<!-- ============ ONBOARDING ONG MODAL ============ -->
+<div class="modal" id="onboarding" aria-hidden="true">
+  <div class="modal-overlay" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="ob-title">
+    <button class="modal-x" type="button" data-close aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+
+    <form class="ob-form" id="ob-form" novalidate>
+      <span class="eyebrow eyebrow-blue">Para ONGs</span>
+      <h3 id="ob-title" class="modal-title">Inscribí a tu ONG</h3>
+      <p class="modal-sub">Dejanos los datos de tu organización y un mail de contacto. Registramos tu solicitud y te escribimos para sumarte a vueltito.</p>
+
+      <div class="ob-field">
+        <label for="ob-ong">Nombre de la ONG</label>
+        <input id="ob-ong" name="ong" type="text" required placeholder="Fundación Agua Clara" />
+      </div>
+      <div class="ob-row">
+        <div class="ob-field">
+          <label for="ob-email">Email de contacto</label>
+          <input id="ob-email" name="email" type="email" required placeholder="hola@tuong.org" />
+        </div>
+        <div class="ob-field">
+          <label for="ob-area">Área</label>
+          <select id="ob-area" name="area">
+            <option>Alimentación</option>
+            <option>Salud</option>
+            <option>Educación</option>
+            <option>Ambiente</option>
+            <option>Niñez</option>
+            <option>Animales</option>
+            <option>Otra</option>
+          </select>
+        </div>
+      </div>
+      <div class="ob-field">
+        <label for="ob-msg">Contanos en una línea <span class="ob-opt">(opcional)</span></label>
+        <textarea id="ob-msg" name="msg" rows="2" placeholder="Qué hacen y a quién ayudan."></textarea>
+      </div>
+      <button class="btn btn-dark btn-lg ob-submit" type="submit">Enviar solicitud</button>
+      <p class="ob-fine">Solo usamos tu mail para contactarte por la inscripción.</p>
+    </form>
+
+    <div class="ob-success" hidden>
+      <span class="ob-check"><svg class="ic"><use href="#i-check"/></svg></span>
+      <h3>¡Solicitud registrada!</h3>
+      <p>Gracias, <b id="ob-name">tu ONG</b>. Te vamos a escribir a <b id="ob-mail"></b> para los próximos pasos.</p>
+      <button class="btn btn-ghost" type="button" data-close>Cerrar</button>
+    </div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

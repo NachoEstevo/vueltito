@@ -269,7 +269,7 @@ img{max-width:100%;display:block}
 .wv-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
 .wv-title{font-size:1.2rem;font-weight:700}
 .wv-sub{font-size:.9rem;color:var(--gris-oscuro);margin-top:4px}
-.plugin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.plugin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .plugin{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 15px;display:flex;flex-direction:column;gap:8px}
 .pg-ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center}
 .tint-violet{background:#EEEBFB;color:var(--violet)}
@@ -478,6 +478,38 @@ img{max-width:100%;display:block}
 .fb-tag{font-family:var(--font-serif);font-style:italic;font-size:.95rem;color:var(--gris-oscuro)}
 
 /* =================================================================
+   ONBOARDING MODAL
+   ================================================================= */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
+.modal.is-open{display:flex}
+.modal-overlay{position:absolute;inset:0;background:rgba(31,35,40,.42);backdrop-filter:blur(4px);animation:obFade .3s var(--ease)}
+.modal-card{position:relative;z-index:1;width:100%;max-width:480px;max-height:92vh;overflow-y:auto;background:#fff;border-radius:var(--r-lg);box-shadow:0 40px 90px -28px rgba(31,35,40,.5);padding:34px 34px 28px;animation:obPop .36s var(--ease)}
+.modal-x{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--gris-oscuro);display:grid;place-items:center;transition:background .2s,color .2s}
+.modal-x:hover{background:var(--papel);color:var(--ink)}
+.modal-title{font-family:var(--font-serif);font-weight:400;font-optical-sizing:auto;font-size:1.95rem;line-height:1.08;letter-spacing:-.01em;margin:10px 0 8px}
+.modal-sub{font-size:.95rem;color:var(--gris-oscuro);line-height:1.5;margin-bottom:22px}
+.ob-form{display:flex;flex-direction:column;gap:14px}
+.ob-form[hidden],.ob-success[hidden]{display:none}
+.ob-row{display:grid;grid-template-columns:1.4fr .9fr;gap:14px}
+.ob-field{display:flex;flex-direction:column;gap:6px}
+.ob-field label{font-size:.82rem;font-weight:600;color:var(--gris-oscuro)}
+.ob-opt{color:var(--gris-medio);font-weight:400}
+.ob-field input,.ob-field select,.ob-field textarea{font-family:var(--font-sans);font-size:.95rem;color:var(--ink);background:var(--papel);border:1px solid var(--line);border-radius:11px;padding:12px 13px;outline:none;width:100%;resize:none;transition:border-color .2s,box-shadow .2s}
+.ob-field input:focus,.ob-field select:focus,.ob-field textarea:focus{border-color:var(--verde);box-shadow:0 0 0 3px rgba(122,201,67,.18)}
+.ob-field input::placeholder,.ob-field textarea::placeholder{color:var(--gris-medio)}
+.ob-field input.invalid,.ob-field select.invalid{border-color:var(--red);box-shadow:0 0 0 3px rgba(229,86,75,.14)}
+.ob-submit{margin-top:6px;width:100%}
+.ob-fine{font-size:.78rem;color:var(--gris-medio);text-align:center;margin-top:2px}
+.ob-success{text-align:center;padding:18px 6px 8px;animation:obFade .3s var(--ease)}
+.ob-check{width:56px;height:56px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;margin:0 auto 16px}
+.ob-check .ic{width:26px;height:26px}
+.ob-success h3{font-family:var(--font-serif);font-weight:400;font-size:1.6rem;margin-bottom:8px}
+.ob-success p{font-size:.95rem;color:var(--gris-oscuro);line-height:1.55;margin:0 auto 20px;max-width:36ch}
+body.modal-lock{overflow:hidden}
+@keyframes obFade{from{opacity:0}to{opacity:1}}
+@keyframes obPop{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+
+/* =================================================================
    reveal animation
    ================================================================= */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -531,4 +563,6 @@ img{max-width:100%;display:block}
   .footer-bottom{flex-direction:column;align-items:flex-start}
   .hero-actions{flex-direction:column;align-items:stretch}
   .nav-inner{padding:14px 18px}
+  .ob-row{grid-template-columns:1fr}
+  .modal-card{padding:28px 22px 24px}
 }
