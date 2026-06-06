@@ -182,4 +182,47 @@
       obSuccess.hidden = false;
     });
   }
+
+  // ---- ONG picker overlay ----
+  var picker = document.getElementById('ong-picker');
+  if (picker) {
+    var pkLastFocus = null;
+    var openPicker = function () {
+      pkLastFocus = document.activeElement;
+      picker.classList.add('is-open');
+      picker.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-lock');
+    };
+    var closePicker = function () {
+      picker.classList.remove('is-open');
+      picker.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-lock');
+      if (pkLastFocus && pkLastFocus.focus) pkLastFocus.focus();
+    };
+
+    document.querySelectorAll('[data-ong-picker]').forEach(function (b) {
+      b.addEventListener('click', openPicker);
+    });
+    picker.querySelectorAll('[data-close]').forEach(function (b) {
+      b.addEventListener('click', closePicker);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && picker.classList.contains('is-open')) closePicker();
+    });
+
+    var destName = document.querySelector('.cc-dest-name');
+    var destMeta = document.querySelector('.cc-dest-meta');
+    var destImg = document.querySelector('.cc-dest-logo img');
+    var ongOpts = picker.querySelectorAll('.ong-opt');
+    ongOpts.forEach(function (o) {
+      o.addEventListener('click', function () {
+        ongOpts.forEach(function (x) { x.classList.remove('is-active'); });
+        o.classList.add('is-active');
+        if (destName) destName.textContent = o.dataset.name;
+        if (destMeta) destMeta.textContent = o.dataset.meta;
+        if (destImg) { destImg.src = o.dataset.logo; destImg.alt = o.dataset.name; }
+        closePicker();
+      });
+    });
+  }
 })();

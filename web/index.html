@@ -153,7 +153,7 @@
               <span class="cc-dest-name">Fundación Paisanos</span>
               <span class="cc-dest-meta">Ambiente y sostenibilidad</span>
             </div>
-            <a class="cc-change" href="#ongs">Cambiar <svg class="ic"><use href="#i-arrow"/></svg></a>
+            <button class="cc-change" type="button" data-ong-picker>Cambiar <svg class="ic"><use href="#i-arrow"/></svg></button>
           </div>
         </div>
       </div>
@@ -494,6 +494,36 @@
       <h3>¡Solicitud registrada!</h3>
       <p>Gracias, <b id="ob-name">tu ONG</b>. Te vamos a escribir a <b id="ob-mail"></b> para los próximos pasos.</p>
       <button class="btn btn-ghost" type="button" data-close>Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ONG PICKER OVERLAY ============ -->
+<div class="modal" id="ong-picker" aria-hidden="true">
+  <div class="modal-overlay" data-close></div>
+  <div class="modal-card modal-card-wide" role="dialog" aria-modal="true" aria-labelledby="op-title">
+    <button class="modal-x" type="button" data-close aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <h3 id="op-title" class="modal-title">Elegí a quién ayudar</h3>
+    <p class="modal-sub">Tu aporte va directo a la ONG que elijas. Podés cambiarla cuando quieras.</p>
+    <div class="ong-grid">
+      <button class="ong-opt" type="button" data-name="Amnistía Internacional" data-meta="Derechos humanos" data-logo="assets/img/ongs/amnistia.webp"><span class="ong-logo"><img src="assets/img/ongs/amnistia.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Amnistía Internacional</span><span class="ong-meta">Derechos humanos</span></span></button>
+      <button class="ong-opt" type="button" data-name="ACIJ" data-meta="Igualdad y justicia" data-logo="assets/img/ongs/acij.webp"><span class="ong-logo"><img src="assets/img/ongs/acij.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">ACIJ</span><span class="ong-meta">Igualdad y justicia</span></span></button>
+      <button class="ong-opt" type="button" data-name="ASDRA" data-meta="Síndrome de Down" data-logo="assets/img/ongs/asdra.webp"><span class="ong-logo"><img src="assets/img/ongs/asdra.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">ASDRA</span><span class="ong-meta">Síndrome de Down</span></span></button>
+      <button class="ong-opt" type="button" data-name="Alegría Intensiva" data-meta="Salud y bienestar" data-logo="assets/img/ongs/alegria.webp"><span class="ong-logo"><img src="assets/img/ongs/alegria.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Alegría Intensiva</span><span class="ong-meta">Salud y bienestar</span></span></button>
+      <button class="ong-opt" type="button" data-name="Alimentaris" data-meta="Alimentación" data-logo="assets/img/ongs/alimentaris.webp"><span class="ong-logo"><img src="assets/img/ongs/alimentaris.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Alimentaris</span><span class="ong-meta">Alimentación</span></span></button>
+      <button class="ong-opt" type="button" data-name="CELS" data-meta="Derechos humanos" data-logo="assets/img/ongs/cels.webp"><span class="ong-logo"><img src="assets/img/ongs/cels.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">CELS</span><span class="ong-meta">Derechos humanos</span></span></button>
+      <button class="ong-opt" type="button" data-name="CIMA / Unidas" data-meta="Salud" data-logo="assets/img/ongs/cima.svg"><span class="ong-logo"><img src="assets/img/ongs/cima.svg" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">CIMA / Unidas</span><span class="ong-meta">Salud</span></span></button>
+      <button class="ong-opt" type="button" data-name="Consciente Colectivo" data-meta="Acción climática" data-logo="assets/img/ongs/consciente.webp"><span class="ong-logo"><img src="assets/img/ongs/consciente.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Consciente Colectivo</span><span class="ong-meta">Acción climática</span></span></button>
+      <button class="ong-opt" type="button" data-name="DER" data-meta="Discapacidad" data-logo="assets/img/ongs/der.svg"><span class="ong-logo"><img src="assets/img/ongs/der.svg" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">DER</span><span class="ong-meta">Discapacidad</span></span></button>
+      <button class="ong-opt" type="button" data-name="FUNDEPS" data-meta="Políticas sustentables" data-logo="assets/img/ongs/fundeps.webp"><span class="ong-logo"><img src="assets/img/ongs/fundeps.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">FUNDEPS</span><span class="ong-meta">Políticas sustentables</span></span></button>
+      <button class="ong-opt" type="button" data-name="Fundación Huésped" data-meta="Salud" data-logo="assets/img/ongs/huesped.webp"><span class="ong-logo"><img src="assets/img/ongs/huesped.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Fundación Huésped</span><span class="ong-meta">Salud</span></span></button>
+      <button class="ong-opt" type="button" data-name="ILDa" data-meta="Datos e innovación" data-logo="assets/img/ongs/ilda.webp"><span class="ong-logo"><img src="assets/img/ongs/ilda.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">ILDa</span><span class="ong-meta">Datos e innovación</span></span></button>
+      <button class="ong-opt" type="button" data-name="Latam Lab" data-meta="Innovación social" data-logo="assets/img/ongs/latamlab.webp"><span class="ong-logo"><img src="assets/img/ongs/latamlab.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Latam Lab</span><span class="ong-meta">Innovación social</span></span></button>
+      <button class="ong-opt" type="button" data-name="Mujeres 2000" data-meta="Mujeres y desarrollo" data-logo="assets/img/ongs/mujeres2000.webp"><span class="ong-logo"><img src="assets/img/ongs/mujeres2000.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Mujeres 2000</span><span class="ong-meta">Mujeres y desarrollo</span></span></button>
+      <button class="ong-opt" type="button" data-name="Pequeños Pasos" data-meta="Niñez" data-logo="assets/img/ongs/pequenospasos.webp"><span class="ong-logo"><img src="assets/img/ongs/pequenospasos.webp" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Pequeños Pasos</span><span class="ong-meta">Niñez</span></span></button>
+      <button class="ong-opt" type="button" data-name="Sostén" data-meta="Acompañamiento" data-logo="assets/img/ongs/sosten.svg"><span class="ong-logo"><img src="assets/img/ongs/sosten.svg" alt="" loading="lazy"/></span><span class="ong-info"><span class="ong-name">Sostén</span><span class="ong-meta">Acompañamiento</span></span></button>
     </div>
   </div>
 </div>
