@@ -1,0 +1,16 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>vueltito favicon</title>
+  <circle cx="512" cy="512" r="512" fill="#FFFFFF"/>
+  <g transform="translate(512 512) scale(1.1) translate(-512 -512)">
+    <g stroke="#25231F" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M312 322C386 244 505 217 610 257C724 301 795 409 789 529C782 654 692 755 573 781C475 802 372 765 309 690" stroke-width="74"/>
+      <path d="M302 664L283 774L393 756" stroke-width="74"/>
+      <path d="M713 303L730 194L621 213" stroke-width="74"/>
+    </g>
+    <g>
+      <path d="M514 548C480 513 480 458 514 424C548 458 548 513 514 548Z" fill="#63B77A"/>
+      <path d="M535 566C575 552 602 515 599 472C556 475 519 502 505 542C500 557 520 571 535 566Z" fill="#63B77A"/>
+      <path d="M491 566C451 552 424 515 427 472C470 475 507 502 521 542C526 557 506 571 491 566Z" fill="#63B77A"/>
+    </g>
+  </g>
+</svg>
