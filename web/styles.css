@@ -243,6 +243,8 @@ img{max-width:100%;display:block}
 .cc-dest{margin-top:22px}
 .cc-dest-row{display:flex;align-items:center;gap:12px;margin-top:12px}
 .cc-dest-ic{width:38px;height:38px;border-radius:50%;background:#E6F1FB;color:#3a83c2;display:grid;place-items:center;flex:none}
+.cc-dest-logo{background:none;overflow:hidden}
+.cc-dest-logo img{width:100%;height:100%;object-fit:cover;display:block}
 .cc-dest-info{display:flex;flex-direction:column;flex:1}
 .cc-dest-name{font-weight:600;font-size:.95rem}
 .cc-dest-meta{font-size:.8rem;color:var(--gris-medio)}
