@@ -106,26 +106,27 @@
         <div class="cc-total"><span>Total</span><span>$27.980</span></div>
       </div>
 
-      <div class="cc-col cc-vuelto">
-        <div class="cc-vhead">
+      <div class="cc-col cc-vuelto" id="vcard" data-enabled="true" data-mode="porcentaje">
+        <button class="cc-vhead" type="button" id="cc-toggle" aria-pressed="true">
           <span class="cc-check"><svg class="ic"><use href="#i-check"/></svg></span>
           <span class="cc-h">Sumar vueltito</span>
           <span class="chip chip-blue">Opcional</span>
-        </div>
+        </button>
         <p class="cc-vnote">Aporte solidario por esta compra.</p>
         <div class="cc-options">
-          <button class="cc-opt">
+          <button class="cc-opt" type="button" data-mode="fijo">
             <span class="cc-opt-t">Fijo</span>
             <span class="cc-opt-v">$10</span>
+            <span class="cc-opt-tick"><svg class="ic"><use href="#i-check"/></svg></span>
           </button>
-          <button class="cc-opt is-active">
+          <button class="cc-opt is-active" type="button" data-mode="porcentaje">
             <span class="cc-opt-t">Porcentaje</span>
             <span class="cc-opt-v">0,5%</span>
             <span class="cc-opt-tick"><svg class="ic"><use href="#i-check"/></svg></span>
           </button>
         </div>
-        <div class="cc-row cc-aporte"><span>Aporte por esta compra</span><strong>$140</strong></div>
-        <p class="cc-vnote">Podés quitarlo antes de pagar.</p>
+        <div class="cc-row cc-aporte"><span>Aporte por esta compra</span><strong id="cc-aporte">$140</strong></div>
+        <p class="cc-vnote" id="cc-vnote2">Podés quitarlo antes de pagar.</p>
         <div class="cc-banner">
           <svg class="ic"><use href="#i-shield"/></svg>
           <span>100% transparente. Vos elegís la ONG.</span>
@@ -139,11 +140,11 @@
         </div>
         <div class="cc-split">
           <div class="cc-split-row">
-            <div><span class="cc-split-l">Vendedor</span><span class="cc-split-v">$27.840</span></div>
+            <div><span class="cc-split-l">Vendedor</span><span class="cc-split-v" id="cc-vendedor">$27.840</span></div>
             <div class="cc-split-div"></div>
-            <div><span class="cc-split-l">vueltito</span><span class="cc-split-v">$140</span></div>
+            <div><span class="cc-split-l">vueltito</span><span class="cc-split-v" id="cc-vueltito">$140</span></div>
           </div>
-          <span class="cc-split-note">Split automático 99,5% / 0,5%</span>
+          <span class="cc-split-note" id="cc-splitnote">Split automático 99,5% / 0,5%</span>
         </div>
         <div class="cc-dest">
           <span class="cc-h-sm">Destinado a</span>
