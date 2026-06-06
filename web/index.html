@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>vueltito — Pequeñas vueltas. Gran impacto.</title>
+<meta name="description" content="Microaportes solidarios visibles para cada checkout integrado. Procesados con Mercado Pago, registrados en un ledger auditable y asignados a ONGs verificadas." />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,360;9..144,400;9..144,500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============ SVG SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7EC8F4"/>
+      <stop offset="100%" stop-color="#7AC943"/>
+    </linearGradient>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.2 11.2a1.5 1.5 0 0 0 1.5 1.2h8.1a1.5 1.5 0 0 0 1.5-1.2L21 7H6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.4" fill="currentColor"/><circle cx="18" cy="20" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6 9.5 4.5 4.5 0 0 0 7 18Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><rect x="8.5" y="8.5" width="7" height="7" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 2.5v5c0 4.5-3 8-7 9.5-4-1.5-7-5-7-9.5v-5L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-9.3A3.7 3.7 0 0 1 12 8a3.7 3.7 0 0 1 7 2.7C19 15.6 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M4 9.5 12 4l8 5.5M5 9.5h14M6.5 9.5V18M11 9.5V18M13 9.5V18M17.5 9.5V18M4.5 18h15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 20v-7M12 13c0-3.3-2.7-6-6-6 0 3.3 2.7 6 6 6Zm0-1c0-3 2.4-5.4 5.4-5.4C17.4 9.6 15 12 12 12Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-webhook" viewBox="0 0 24 24"><path d="M9 8.5A3.5 3.5 0 1 1 14 12l-2.5 4M8 13a3.5 3.5 0 1 0 4 5.5h5M16.5 14.5A3.5 3.5 0 1 0 12 11l2.5-4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-refund" viewBox="0 0 24 24"><path d="M5 8a8 8 0 1 1-1.5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4v4h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 10l1.8 1.8L15 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 15l-1 6 4-2 4 2-1-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ledger" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8h6M9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15 5.5A2 2 0 0 0 13 4H6a2 2 0 0 0-2 2v7a2 2 0 0 0 1.5 1.9" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 9h16M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-audit" viewBox="0 0 24 24"><path d="M5 4h9l5 5v11H5V4Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 4v5h5M8.5 13.5l2 2 3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V8a4 4 0 0 1 8 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-graph" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.6s.8-.3 2.7 1a9.3 9.3 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .4 1 .2 2 .1 2.6a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .3.3.6.9.6 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z" fill="currentColor"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 17v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- Brand mark template (reused) -->
+<template id="brandmark">
+  <svg class="mark" viewBox="0 0 40 40" aria-hidden="true">
+    <path d="M32 20a12 12 0 1 0-3.6 8.6" fill="none" stroke="url(#brandGrad)" stroke-width="3.4" stroke-linecap="round"/>
+    <path d="M27 18.5l1.8 4.2 4.4-1.2" fill="none" stroke="#7AC943" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20 28v-7M20 21c0-3.4-2.8-5.6-6-5.6.2 3.4 2.8 5.6 6 5.6Zm0-.6c0-3 2.5-5 5.6-5 .1 3.2-2.5 5-5.6 5Z" fill="#7AC943"/>
+  </svg>
+</template>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="vueltito inicio">
+      <span class="brand-mark"></span>
+      <span class="wordmark">vueltito</span>
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#producto">Producto</a>
+      <a href="#comercios">Comercios</a>
+      <a href="#ongs">ONGs</a>
+      <a href="#impacto">Impacto</a>
+      <a href="#recursos">Recursos</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-ghost" href="#demo">Demo</a>
+      <a class="btn btn-dark" href="#demo">Iniciar</a>
+    </div>
+    <button class="nav-burger" aria-label="Abrir menú" id="burger"><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ 1 · HERO ============ -->
+<section class="hero" id="producto">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-content reveal">
+    <h1 class="hero-title">Pequeñas vueltas.<br>Gran impacto.</h1>
+    <p class="hero-sub">Microaportes visibles para cada checkout integrado.</p>
+    <div class="hero-actions">
+      <a class="btn btn-dark btn-lg" href="#demo">Ver demo</a>
+      <a class="btn btn-link" href="#flujo">Cómo funciona <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+
+  <!-- Floating checkout showcase -->
+  <div class="hero-card-wrap reveal">
+    <div class="checkout-card">
+      <div class="cc-col cc-buy">
+        <h3 class="cc-h">Tu compra</h3>
+        <div class="cc-product">
+          <div class="cc-thumb" aria-hidden="true"></div>
+          <div class="cc-pinfo">
+            <span class="cc-pname">Kit cuidado diario</span>
+            <span class="cc-pmeta">1 unidad</span>
+          </div>
+          <span class="cc-price">$25.990</span>
+        </div>
+        <div class="cc-rows">
+          <div class="cc-row"><span>Subtotal</span><span>$25.990</span></div>
+          <div class="cc-row"><span>Envío</span><span>$1.990</span></div>
+        </div>
+        <div class="cc-total"><span>Total</span><span>$27.980</span></div>
+      </div>
+
+      <div class="cc-col cc-vuelto">
+        <div class="cc-vhead">
+          <span class="cc-check"><svg class="ic"><use href="#i-check"/></svg></span>
+          <span class="cc-h">Sumar vueltito</span>
+          <span class="chip chip-blue">Opcional</span>
+        </div>
+        <p class="cc-vnote">Aporte solidario por esta compra.</p>
+        <div class="cc-options">
+          <button class="cc-opt">
+            <span class="cc-opt-t">Fijo</span>
+            <span class="cc-opt-v">$10</span>
+          </button>
+          <button class="cc-opt is-active">
+            <span class="cc-opt-t">Porcentaje</span>
+            <span class="cc-opt-v">0,5%</span>
+            <span class="cc-opt-tick"><svg class="ic"><use href="#i-check"/></svg></span>
+          </button>
+        </div>
+        <div class="cc-row cc-aporte"><span>Aporte por esta compra</span><strong>$140</strong></div>
+        <p class="cc-vnote">Podés quitarlo antes de pagar.</p>
+        <div class="cc-banner">
+          <svg class="ic"><use href="#i-shield"/></svg>
+          <span>100% transparente. Vos elegís la ONG.</span>
+        </div>
+      </div>
+
+      <div class="cc-col cc-pay">
+        <div class="cc-payhead">
+          <span class="cc-h">Pago seguro con</span>
+          <span class="mp-logo"><b>mercado</b><i>pago</i></span>
+        </div>
+        <div class="cc-split">
+          <div class="cc-split-row">
+            <div><span class="cc-split-l">Vendedor</span><span class="cc-split-v">$27.840</span></div>
+            <div class="cc-split-div"></div>
+            <div><span class="cc-split-l">vueltito</span><span class="cc-split-v">$140</span></div>
+          </div>
+          <span class="cc-split-note">Split automático 99,5% / 0,5%</span>
+        </div>
+        <div class="cc-dest">
+          <span class="cc-h-sm">Destinado a</span>
+          <div class="cc-dest-row">
+            <span class="cc-dest-ic"><svg class="ic"><use href="#i-sprout"/></svg></span>
+            <div class="cc-dest-info">
+              <span class="cc-dest-name">Fundación Verde</span>
+              <span class="cc-dest-meta">Ambiente y sostenibilidad</span>
+            </div>
+            <a class="cc-change" href="#ongs">Cambiar <svg class="ic"><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- trust bar -->
+    <div class="hero-trust">
+      <div class="ht-item"><span class="ht-ic"><svg class="ic"><use href="#i-refund"/></svg></span><div><strong>Sin costos extras</strong><span>El aporte no afecta tus beneficios</span></div></div>
+      <div class="ht-item"><span class="ht-ic"><svg class="ic"><use href="#i-heart"/></svg></span><div><strong>Cancelás cuando quieras</strong><span>Sin permanencias ni complicaciones</span></div></div>
+      <div class="ht-item"><span class="ht-ic"><svg class="ic"><use href="#i-eye"/></svg></span><div><strong>Impacto real</strong><span>Informes públicos y auditables</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · COMMERCE WEDGE ============ -->
+<section class="wedge" id="comercios">
+  <div class="wedge-grid">
+    <div class="wedge-visual reveal">
+      <div class="wv-bg" aria-hidden="true"></div>
+      <div class="wv-panel">
+        <div class="wv-head">
+          <div>
+            <h3 class="wv-title">Canales integrados</h3>
+            <p class="wv-sub">Plugins que conectan tu tienda con vueltito y Mercado Pago.</p>
+          </div>
+          <span class="chip chip-green chip-dot">6 activos</span>
+        </div>
+        <div class="plugin-grid">
+          <article class="plugin">
+            <span class="pg-ic tint-violet"><svg class="ic"><use href="#i-cart"/></svg></span>
+            <div class="pg-titlerow"><h4>WooCommerce</h4><span class="chip chip-blue">Demo</span></div>
+            <p>Plugin oficial para tiendas WooCommerce.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+          </article>
+          <article class="plugin">
+            <span class="pg-ic tint-sky"><svg class="ic"><use href="#i-cloud"/></svg></span>
+            <div class="pg-titlerow"><h4>Tiendanube</h4><span class="chip chip-amber">Piloto</span></div>
+            <p>App para Tiendanube con opción de aporte en checkout.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+          </article>
+          <article class="plugin">
+            <span class="pg-ic tint-amber"><svg class="ic"><use href="#i-box"/></svg></span>
+            <div class="pg-titlerow"><h4>VTEX</h4><span class="chip chip-violet">Enterprise</span></div>
+            <p>Conector vía Payment Provider Protocol (PPP).</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+          </article>
+          <article class="plugin">
+            <span class="pg-ic tint-coral"><svg class="ic"><use href="#i-bag"/></svg></span>
+            <div class="pg-titlerow"><h4>Adobe Commerce</h4><span class="chip chip-violet">Enterprise</span></div>
+            <p>Módulo compatible con Adobe Commerce / Magento.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+          </article>
+          <article class="plugin">
+            <span class="pg-ic tint-green"><svg class="ic"><use href="#i-bag"/></svg></span>
+            <div class="pg-titlerow"><h4>Shopify</h4><span class="chip chip-amber">En evaluación</span></div>
+            <p>App + extensiones de checkout para Shopify Plus.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+          </article>
+          <article class="plugin">
+            <span class="pg-ic tint-sky"><svg class="ic"><use href="#i-scan"/></svg></span>
+            <div class="pg-titlerow"><h4>QR / Point</h4><span class="chip chip-gray">Futuro</span></div>
+            <p>Aportes en pagos presenciales con QR y Point.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+          </article>
+        </div>
+        <div class="wv-foot">
+          <div class="wvf"><span class="wvf-ic"><svg class="ic"><use href="#i-shield"/></svg></span><div><strong>Un solo core</strong><span>Cálculo, consentimiento, ledger y conciliación centralizados.</span></div></div>
+          <div class="wvf"><span class="wvf-ic"><svg class="ic"><use href="#i-graph"/></svg></span><div><strong>Trazabilidad total</strong><span>Cada aporte queda registrado y conciliable.</span></div></div>
+          <div class="wvf"><span class="wvf-ic"><svg class="ic"><use href="#i-lock"/></svg></span><div><strong>Seguro y compatible</strong><span>OAuth, webhooks y cumplimiento por canal.</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wedge-text reveal">
+      <span class="eyebrow eyebrow-blue">Plugins primero</span>
+      <h2 class="serif-h2">Llega al checkout antes de ser una billetera.</h2>
+      <span class="rule"></span>
+      <p class="lead">vueltito se instala donde los comercios ya venden. El core calcula, registra y concilia; cada plugin solo adapta el canal.</p>
+      <a class="btn btn-link dark" href="#recursos">Ver roadmap de integraciones <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · SPLIT FLOW ============ -->
+<section class="flow" id="flujo">
+  <span class="flow-vertical">No desvía. Consentimiento.</span>
+  <div class="flow-intro reveal">
+    <span class="eyebrow-pill"><span class="dot dot-blue"></span>Split autorizado</span>
+    <h2 class="serif-h2">El vuelto no se esconde.<br>Se registra.</h2>
+    <p class="lead">El comprador acepta el aporte, Mercado Pago procesa el pago, y <strong>vueltito</strong> separa la asignación en un ledger auditable.</p>
+    <a class="btn btn-link dark" href="#recursos">Leer modelo técnico <svg class="ic"><use href="#i-arrow"/></svg></a>
+  </div>
+
+  <div class="flow-steps reveal">
+    <article class="step">
+      <div class="step-head"><span class="step-n">1</span><h4>Compra</h4><span class="step-ic"><svg class="ic"><use href="#i-bag"/></svg></span></div>
+      <div class="step-card">
+        <div class="step-meta"><strong>Pedido #A9821</strong><span>Supermercado Norte</span></div>
+        <div class="step-line"><span class="sl-prod"><span class="sl-thumb"></span>Productos</span><span>$27.840,00</span></div>
+        <div class="step-total"><span>Total</span><span class="st-amt">$27.840,00 <i>ARS</i></span></div>
+      </div>
+      <p class="step-cap">El comprador inicia su compra en el comercio integrado.</p>
+    </article>
+    <span class="connector"></span>
+    <article class="step">
+      <div class="step-head"><span class="step-n">2</span><h4>Aporte visible</h4><span class="step-ic"><svg class="ic"><use href="#i-heart"/></svg></span></div>
+      <div class="step-card">
+        <div class="step-meta"><span>Suma un aporte a</span><strong>Fundación Arcoíris <span class="emoji">🌈</span></strong></div>
+        <div class="step-pick">
+          <span class="cc-check sm"><svg class="ic"><use href="#i-check"/></svg></span>
+          <span class="sp-l">Aporte seleccionado</span>
+          <strong>$140,00</strong>
+        </div>
+        <div class="step-subrow"><span>0,50% del total · Opcional</span><a href="#flujo">Editar</a></div>
+      </div>
+      <p class="step-cap">El comprador ve el aporte antes de pagar y da su consentimiento.</p>
+    </article>
+    <span class="connector"></span>
+    <article class="step">
+      <div class="step-head"><span class="step-n">3</span><h4>Split / fee</h4><span class="step-ic"><svg class="ic"><use href="#i-bank"/></svg></span></div>
+      <div class="step-card">
+        <p class="step-note">Mercado Pago procesa el pago</p>
+        <div class="step-line"><span>Total a pagar</span><span>$27.980,00</span></div>
+        <div class="step-line"><span>Marketplace fee (vueltito)</span><span class="pos">-$140,00</span></div>
+        <div class="step-line strong"><span>A acreditar al comercio</span><span>$27.840,00</span></div>
+        <div class="step-mono"><span class="mono-dot"></span><code>marketplace_fee</code><span class="mono-amt">ARS 140,00</span></div>
+      </div>
+      <p class="step-cap">vueltito recibe el fee como marketplace fee desde Mercado Pago.</p>
+    </article>
+    <span class="connector"></span>
+    <article class="step">
+      <div class="step-head"><span class="step-n">4</span><h4>ONG + ledger</h4><span class="step-ic"><svg class="ic"><use href="#i-shield"/></svg></span></div>
+      <div class="step-card">
+        <div class="step-meta"><span>Asignado a <strong>Fundación Arcoíris</strong> <span class="emoji">🌈</span></span></div>
+        <div class="step-subrow"><span>Ledger entry</span><span class="ledger-id">LE-24-06-06-000842 <svg class="ic"><use href="#i-copy"/></svg></span></div>
+        <ul class="step-ledger">
+          <li><span class="ldot g"></span>Aporte recibido<span>$140,00</span></li>
+          <li><span class="ldot g"></span>Asignación confirmada<span>$140,00</span></li>
+          <li><span class="ldot n"></span>Pendiente de liquidación<span>$140,00</span></li>
+        </ul>
+      </div>
+      <p class="step-cap">El aporte se asigna a la ONG y queda registrado en un ledger auditable.</p>
+    </article>
+  </div>
+
+  <div class="flow-trust reveal">
+    <div class="ft"><svg class="ic ft-ic"><use href="#i-check"/></svg><div><strong>Consentimiento explícito</strong><span>Siempre opt-in y visible.</span></div></div>
+    <div class="ft"><svg class="ic ft-ic"><use href="#i-check"/></svg><div><strong>Trazabilidad completa</strong><span>Cada transacción, cada movimiento.</span></div></div>
+    <div class="ft"><svg class="ic ft-ic"><use href="#i-check"/></svg><div><strong>Conciliación automatizada</strong><span>Con reportes de Mercado Pago.</span></div></div>
+    <div class="ft"><svg class="ic ft-ic"><use href="#i-check"/></svg><div><strong>Asignación protegida</strong><span>Liquida a ONGs verificadas.</span></div></div>
+  </div>
+</section>
+
+<!-- ============ 4 · IMPACT / LEADERBOARD ============ -->
+<section class="impact" id="impacto">
+  <div class="impact-bg" aria-hidden="true"></div>
+  <div class="impact-grid">
+    <div class="impact-text reveal">
+      <span class="eyebrow-ic"><span class="ei-circle"><svg class="ic"><use href="#i-sprout"/></svg></span>Impacto opt-in</span>
+      <h2 class="serif-h2">Competir por ayudar,<br>sin exponer de más.</h2>
+      <p class="lead">Alias, períodos y reglas de privacidad para que el ranking motive sin convertir la solidaridad en presión.</p>
+      <a class="btn btn-dark btn-lg" href="#impacto">Ver leaderboard <svg class="ic"><use href="#i-arrow"/></svg></a>
+    </div>
+
+    <div class="impact-cards reveal">
+      <div class="lb-card">
+        <div class="lb-head">
+          <h3>Leaderboard mensual</h3>
+          <div class="lb-tools">
+            <span class="lb-date"><svg class="ic"><use href="#i-cal"/></svg> 1 – 30 Jun</span>
+            <span class="lb-filter"><svg class="ic"><use href="#i-filter"/></svg></span>
+          </div>
+        </div>
+        <div class="lb-table">
+          <div class="lb-thead"><span>#</span><span>Alias</span><span>Impacto generado</span><span>Asignado a ONGs</span><span>Insignias</span></div>
+          <div class="lb-row"><span class="lb-rank">1</span><span class="lb-alias"><i class="av av-1"></i>Brisa</span><span>$18.450</span><span>3 ONGs</span><span class="chip chip-green">Transparente</span></div>
+          <div class="lb-row"><span class="lb-rank">2</span><span class="lb-alias"><i class="av av-2"></i>Horizonte</span><span>$14.230</span><span>2 ONGs</span><span class="chip chip-blue">Constante</span></div>
+          <div class="lb-row"><span class="lb-rank">3</span><span class="lb-alias"><i class="av av-3"></i>Raíz</span><span>$11.890</span><span>2 ONGs</span><span class="chip chip-violet">Comercio aliado</span></div>
+          <div class="lb-row"><span class="lb-rank">4</span><span class="lb-alias"><i class="av av-4"></i>Norte</span><span>$9.620</span><span>1 ONG</span><span class="chip chip-green">Transparente</span></div>
+          <div class="lb-row"><span class="lb-rank">5</span><span class="lb-alias"><i class="av av-5"></i>Aurora</span><span>$8.340</span><span>2 ONGs</span><span class="chip chip-blue">Constante</span></div>
+        </div>
+      </div>
+      <div class="impact-sub">
+        <div class="mini-card">
+          <h4>Campaña destacada</h4>
+          <div class="mc-body">
+            <div class="mc-img" aria-hidden="true"></div>
+            <div class="mc-info">
+              <strong>Comedor<br>Los Pinos</strong>
+              <span class="mc-tag">Alimentación</span>
+              <div class="mc-progress"><span style="width:68%"></span></div>
+              <span class="mc-pct">68%</span>
+              <p class="mc-meta">$1.742.300 recaudados<br><i>Meta: $2.550.000</i></p>
+            </div>
+          </div>
+          <a class="mini-link" href="#impacto">Ver campaña <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="mini-card">
+          <h4>Transparencia</h4>
+          <ul class="trans-list">
+            <li><span class="tl-ic"><svg class="ic"><use href="#i-audit"/></svg></span><div><strong>Auditoría externa</strong><span>Activa</span></div></li>
+            <li><span class="tl-ic"><svg class="ic"><use href="#i-badge"/></svg></span><div><strong>Asignación verificada 100%</strong></div><span class="tl-ok"><svg class="ic"><use href="#i-check"/></svg></span></li>
+            <li><span class="tl-ic"><svg class="ic"><use href="#i-ledger"/></svg></span><div><strong>Reportes públicos</strong><span>Mensuales</span></div></li>
+          </ul>
+          <a class="mini-link" href="#recursos">Ver reportes <svg class="ic"><use href="#i-arrow"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · TRUST / COMPLIANCE ============ -->
+<section class="trust" id="recursos">
+  <div class="trust-head reveal">
+    <div class="trust-head-l">
+      <span class="eyebrow eyebrow-dark">Confianza y cumplimiento <svg class="ic"><use href="#i-shield"/></svg></span>
+      <h2 class="serif-h2 big">Primero confianza.<br>Después escala.</h2>
+      <p class="lead">Ledger append-only, consentimiento por transacción, ONGs verificadas y conciliación antes de cualquier ranking.</p>
+    </div>
+    <div class="trust-head-r">
+      <a class="btn btn-ghost" href="#demo">Ver controles <svg class="ic"><use href="#i-arrow"/></svg></a>
+      <span class="trust-note">Preparado para pilotos reales</span>
+    </div>
+  </div>
+
+  <div class="trust-grid reveal">
+    <div class="trust-features">
+      <div class="tf"><span class="tf-ic"><svg class="ic"><use href="#i-badge"/></svg></span><div><strong>Consentimiento visible</strong><p>El aporte se muestra antes de pagar y el usuario siempre puede quitarlo.</p></div></div>
+      <div class="tf"><span class="tf-ic"><svg class="ic"><use href="#i-ledger"/></svg></span><div><strong>Ledger auditable</strong><p>Registro inmutable de cada evento. Trazabilidad completa de punta a punta.</p></div></div>
+      <div class="tf"><span class="tf-ic"><svg class="ic"><use href="#i-webhook"/></svg></span><div><strong>Webhooks idempotentes</strong><p>Recepción segura con validaciones, deduplicación y reintentos controlados.</p></div></div>
+      <div class="tf"><span class="tf-ic"><svg class="ic"><use href="#i-badge"/></svg></span><div><strong>ONGs verificadas</strong><p>ONGs con validaciones KYC y datos bancarios / cuenta MP verificados.</p></div></div>
+      <div class="tf tf-wide"><span class="tf-ic"><svg class="ic"><use href="#i-refund"/></svg></span><div><strong>Reembolsos reversibles</strong><p>Políticas claras y reversas en el ledger. El aporte se ajusta según la situación.</p></div></div>
+    </div>
+
+    <div class="audit-card">
+      <div class="audit-head"><span class="audit-title"><svg class="ic"><use href="#i-shield"/></svg> Registro de auditoría</span><span class="chip chip-green chip-dot">Todo en orden</span></div>
+      <div class="audit-table">
+        <div class="audit-thead"><span>Fecha</span><span>Evento</span><span>Transacción ID</span><span>Split</span><span>Allocation</span></div>
+        <div class="audit-row"><span>06/06/2026 11:32</span><span>Pago aprobado</span><code>txn_01HV8ZP8J3Q7X8E1</code><span class="tag tag-green">recibido</span><span class="tag tag-amber">pendiente</span></div>
+        <div class="audit-row"><span>06/06/2026 11:32</span><span>Split recibido</span><code>spl_01HV8ZP8QSDKZJ9M</code><span class="tag tag-green">completado</span><span class="tag tag-amber">pendiente</span></div>
+        <div class="audit-row"><span>06/06/2026 11:33</span><span>Aporte asignado a ONG</span><code>alloc_01HV8ZPB4M1F6X5A</code><span class="tag tag-green">completado</span><span class="tag tag-green">asignado</span></div>
+        <div class="audit-row"><span>06/06/2026 11:33</span><span>Ledger actualizado</span><code>led_01HV8ZPC9B2TQ1Y7</code><span class="tag tag-green">completado</span><span class="tag tag-green">confirmado</span></div>
+        <div class="audit-row"><span>06/06/2026 11:40</span><span>Liquidación programada</span><code>payout_01HV8ZPFMZ8K4R0</code><span class="tag tag-mute">–</span><span class="tag tag-blue">programado</span></div>
+        <div class="audit-row"><span>06/06/2026 11:55</span><span>Reembolso parcial</span><code>ref_01HV8ZPHQG9L3C2D</code><span class="tag tag-red">revertido</span><span class="tag tag-red">reversado</span></div>
+      </div>
+      <div class="audit-foot"><svg class="ic"><use href="#i-check"/></svg> Trazabilidad completa. Listo para auditorías y reportes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · FINAL CTA + FOOTER ============ -->
+<section class="final" id="demo">
+  <div class="final-bg" aria-hidden="true"></div>
+  <div class="final-cta reveal">
+    <a class="brand brand-center" href="#top">
+      <span class="brand-mark"></span>
+      <span class="wordmark">vueltito</span>
+    </a>
+    <h2 class="serif-h2 big center">Que cada pago<br>deje algo bueno.</h2>
+    <p class="lead center">Empezá con un comercio integrado. Escalá con evidencia.</p>
+    <div class="hero-actions center">
+      <a class="btn btn-dark btn-lg" href="#demo">Agendar demo</a>
+      <a class="btn btn-ghost btn-lg" href="#recursos">Leer spec técnico</a>
+    </div>
+  </div>
+
+  <footer class="footer reveal" id="recursos-foot">
+    <div class="footer-cols">
+      <div class="fcol">
+        <h5>Producto</h5>
+        <a href="#flujo">Cómo funciona</a>
+        <a href="#comercios">Comercios</a>
+        <a href="#producto">Donantes</a>
+        <a href="#impacto">Panel de control</a>
+      </div>
+      <div class="fcol">
+        <h5>Integraciones</h5>
+        <a href="#comercios">Mercado Pago</a>
+        <a href="#comercios">WooCommerce</a>
+        <a href="#comercios">Tiendanube</a>
+        <a href="#comercios">VTEX</a>
+        <a href="#comercios">Adobe Commerce</a>
+      </div>
+      <div class="fcol">
+        <h5>ONGs</h5>
+        <a href="#ongs">Para ONGs</a>
+        <a href="#impacto">Campañas</a>
+        <a href="#recursos">Transparencia</a>
+        <a href="#recursos">Liquidación</a>
+      </div>
+      <div class="fcol">
+        <h5>Recursos</h5>
+        <a href="#recursos">Documentación</a>
+        <a href="#recursos">Spec técnico</a>
+        <a href="#recursos">Guías</a>
+        <a href="#recursos">Blog</a>
+        <a href="#demo">Contacto</a>
+      </div>
+      <div class="fcol fcol-brand">
+        <span class="brand-mark brand-mark-lg"></span>
+        <p>Microaportes visibles. Argentina.</p>
+        <div class="socials">
+          <a href="#" aria-label="GitHub"><svg class="ic"><use href="#i-github"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg class="ic"><use href="#i-linkedin"/></svg></a>
+          <a href="#" aria-label="Email"><svg class="ic"><use href="#i-mail"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 vueltito · Todos los derechos reservados.</span>
+      <span class="fb-tag">Pequeñas vueltas. Gran impacto.</span>
+    </div>
+  </footer>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

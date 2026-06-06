@@ -1,0 +1,5 @@
+# local preview / tooling artifacts
+.playwright-cli/
+output/
+*.local.png
+.DS_Store
