@@ -285,7 +285,7 @@ img{max-width:100%;display:block}
 .pg-v{width:24px;height:24px;border-radius:7px;background:#EEF4EA;color:var(--verde);font-weight:700;font-size:.78rem;display:grid;place-items:center;flex:none}
 .pg-dots{flex:none;width:16px;border-top:2px dotted var(--gris-medio)}
 .pg-mp{display:inline-flex;align-items:center;gap:6px;font-size:.74rem;font-weight:600;color:var(--gris-oscuro);background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px 10px;white-space:nowrap}
-.mp-dot{width:14px;height:10px;border-radius:7px;background:linear-gradient(90deg,#56b8e8,#2d7bbd);flex:none}
+.mp-dot{width:17px;height:17px;background:url("assets/img/mercadopago.svg") center/contain no-repeat;flex:none}
 .wv-foot{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px;padding-top:22px;border-top:1px solid var(--line)}
 .wvf{display:flex;gap:11px;align-items:flex-start}
 .wvf-ic{color:var(--gris-oscuro);flex:none;margin-top:1px}
@@ -379,7 +379,10 @@ img{max-width:100%;display:block}
 .lb-date{display:inline-flex;align-items:center;gap:7px;font-size:.84rem;font-weight:500;border:1px solid var(--line);border-radius:9px;padding:7px 12px;color:var(--gris-oscuro)}
 .lb-filter{width:34px;height:34px;border:1px solid var(--line);border-radius:9px;display:grid;place-items:center;color:var(--gris-oscuro)}
 .lb-table{display:flex;flex-direction:column}
-.lb-thead,.lb-row{display:grid;grid-template-columns:36px 1.3fr 1fr .85fr auto;align-items:center;gap:10px}
+.lb-thead,.lb-row{display:grid;grid-template-columns:34px 1.35fr 1fr .85fr 132px;align-items:center;gap:10px}
+.lb-thead span:nth-child(3),.lb-row span:nth-child(3),
+.lb-thead span:nth-child(4),.lb-row span:nth-child(4){text-align:right;justify-self:end}
+.lb-thead span:last-child,.lb-row span:last-child{justify-self:start}
 .lb-thead{font-size:.76rem;color:var(--gris-medio);font-weight:600;padding:14px 0 12px;border-bottom:1px solid var(--line)}
 .lb-row{padding:14px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--gris-oscuro)}
 .lb-row:last-child{border-bottom:0}
