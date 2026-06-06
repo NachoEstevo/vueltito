@@ -400,6 +400,7 @@ img{max-width:100%;display:block}
 .mini-card h4{font-size:1rem;font-weight:700;margin-bottom:16px}
 .mc-body{display:flex;gap:16px}
 .mc-img{width:96px;height:108px;border-radius:12px;flex:none;background:
+  url("assets/img/campaign-lospinos.webp") center/cover no-repeat,
   linear-gradient(180deg,#bfe0ef 0%,#9ec9ad 55%,#7faf7b 100%)}
 .mc-info{display:flex;flex-direction:column;gap:6px;flex:1;position:relative}
 .mc-info strong{font-size:1.04rem;line-height:1.15}
