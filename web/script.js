@@ -139,7 +139,10 @@
     }
 
     document.querySelectorAll('[data-onboarding]').forEach(function (b) {
-      b.addEventListener('click', openModal);
+      b.addEventListener('click', function (e) {
+        if (e.cancelable) e.preventDefault();
+        openModal();
+      });
     });
     modal.querySelectorAll('[data-close]').forEach(function (b) {
       b.addEventListener('click', closeModal);
