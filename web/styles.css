@@ -35,17 +35,16 @@
   --font-sans:'Satoshi','Inter',system-ui,-apple-system,sans-serif;
   --font-serif:'Fraunces',Georgia,'Times New Roman',serif;
 
-  /* ---- natural background slots ----------------------------------
-     Drop your generated nature photos in web/assets/img/ and point
-     these vars at them, e.g.:  --hero-img:url("assets/img/hero.jpg");
-     Each photo gets a soft brand wash on top (matches the brandkit).
-     If a var is unset, an on-brand gradient is used as fallback.
-     Used by: .hero-bg / .wv-bg / .impact-bg / .final-bg
+  /* ---- natural backgrounds (brand photos) -------------------------
+     Each photo gets a soft brand wash on top for legibility.
+     Used by: .hero-bg / .wv-bg / .flow / .impact-bg / .final-bg
   ------------------------------------------------------------------ */
-  /* --hero-img:   url("assets/img/hero.jpg"); */
-  /* --wedge-img:  url("assets/img/wedge.jpg"); */
-  /* --impact-img: url("assets/img/impact.jpg"); */
-  /* --final-img:  url("assets/img/final.jpg"); */
+  --hero-img:   url("assets/img/hero.png");
+  --wedge-img:  url("assets/img/wedge.png");
+  --flow-img:   url("assets/img/flow.png");
+  --impact-img: url("assets/img/impact.png");
+  --final-img:  url("assets/img/final.png");
+  --isotipo:    url("assets/img/isotipo.svg");
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -132,7 +131,7 @@ img{max-width:100%;display:block}
 /* ---------- brand / logo ---------- */
 .brand{display:inline-flex;align-items:center;gap:11px}
 .brand-center{flex-direction:row;justify-content:center;margin-bottom:24px}
-.brand-mark{width:30px;height:30px;display:inline-block;background-image:var(--mark-url);background-size:contain;background-repeat:no-repeat}
+.brand-mark{width:30px;height:30px;display:inline-block;background-image:var(--isotipo);background-size:contain;background-repeat:no-repeat;background-position:center}
 .brand-mark-lg{width:34px;height:34px}
 .mark{width:100%;height:100%}
 .wordmark{font-weight:700;font-size:1.5rem;letter-spacing:-.03em;color:var(--ink)}
@@ -287,10 +286,10 @@ img{max-width:100%;display:block}
    3 · SPLIT FLOW
    ================================================================= */
 .flow{position:relative;padding:100px 32px;overflow:hidden}
-.flow::before{content:"";position:absolute;inset:0;z-index:0;background:
-  radial-gradient(70% 80% at 12% 0%, rgba(206,231,246,.7), transparent 55%),
-  radial-gradient(80% 90% at 90% 5%, rgba(189,232,196,.6), transparent 55%),
-  linear-gradient(180deg,#eef5f3 0%,var(--papel) 60%)}
+.flow::before{content:"";position:absolute;inset:0;z-index:0;background-color:#eef5f3;background-image:
+  linear-gradient(180deg, rgba(250,250,248,.46) 0%, rgba(250,250,248,.82) 62%, var(--papel) 100%),
+  var(--flow-img, linear-gradient(180deg,#eef5f3 0%,#fafaf8 60%));
+  background-size:cover;background-position:center top}
 .flow > *{position:relative;z-index:1}
 .flow-vertical{position:absolute;right:30px;top:70px;writing-mode:vertical-rl;font-size:.82rem;letter-spacing:.04em;color:var(--gris-oscuro);z-index:1}
 .flow-vertical::before{content:"";position:absolute;top:-44px;left:50%;width:1px;height:34px;background:var(--gris-medio)}
