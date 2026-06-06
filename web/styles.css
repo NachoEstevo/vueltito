@@ -565,6 +565,42 @@ body.modal-lock{overflow:hidden}
 @media (max-width:680px){.doc-cols{grid-template-columns:1fr}}
 
 /* =================================================================
+   MERCHANT (comercios) PAGE
+   ================================================================= */
+.msec{max-width:var(--maxw);margin:0 auto;padding:74px 32px}
+.msec-head{max-width:740px;margin:0 auto 42px;text-align:center}
+.msec-head .serif-h2{margin:14px 0 14px}
+.msec-head .lead{margin-inline:auto}
+.msec-tint{background:linear-gradient(180deg,rgba(174,227,247,.14),rgba(189,232,196,.14))}
+.mval-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 38px}
+.mval{display:flex;gap:15px;align-items:flex-start}
+.mval-ic{width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--gris-oscuro);flex:none}
+.mval-ic .ic{width:21px;height:21px}
+.mval strong{display:block;font-size:1.04rem;font-weight:700;margin-bottom:5px;color:var(--ink)}
+.mval p{font-size:.92rem;color:var(--gris-oscuro);line-height:1.55}
+.steps-wrap{max-width:720px;margin:0 auto}
+.plat-cta{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:.85rem;font-weight:600;color:var(--ink);cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
+.plat-cta .ic{width:14px;height:14px;transition:transform .3s var(--ease)}
+.plat-cta:hover .ic{transform:translateX(4px)}
+.plat-card{display:flex;flex-direction:column}
+.plat-ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;margin-bottom:12px}
+.plat-card .ch-row{margin-bottom:8px}
+.plat-card p{flex:1}
+.client-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:var(--maxw);margin:0 auto}
+.consent-mini{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:24px 26px;max-width:420px}
+.cc-vhead-static{display:flex;align-items:center;gap:10px}
+.consent-mini .cc-banner{margin-top:18px}
+.faq{max-width:780px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{cursor:pointer;list-style:none;padding:18px 2px;font-weight:600;font-size:1rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:18px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--gris-medio);font-weight:400}
+.faq-item[open] summary::after{content:"\2013"}
+.faq-item p{padding:0 2px 18px;color:var(--gris-oscuro);line-height:1.62;max-width:70ch}
+@media (max-width:900px){.mval-grid{grid-template-columns:1fr 1fr}.client-grid{grid-template-columns:1fr;gap:32px}}
+@media (max-width:560px){.mval-grid{grid-template-columns:1fr}.msec{padding-left:18px;padding-right:18px}}
+
+/* =================================================================
    reveal animation
    ================================================================= */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}

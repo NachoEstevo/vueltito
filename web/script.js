@@ -228,4 +228,78 @@
       });
     });
   }
+
+  // ---- merchant pilot modal ----
+  var mModal = document.getElementById('merchant');
+  if (mModal) {
+    var mForm = document.getElementById('m-form');
+    var mSuccess = mModal.querySelector('.ob-success');
+    var mLastFocus = null;
+
+    var openM = function () {
+      mLastFocus = document.activeElement;
+      mForm.hidden = false;
+      mSuccess.hidden = true;
+      mModal.classList.add('is-open');
+      mModal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-lock');
+      setTimeout(function () {
+        var f = mModal.querySelector('.ob-form input');
+        if (f) f.focus();
+      }, 60);
+    };
+    var closeM = function () {
+      mModal.classList.remove('is-open');
+      mModal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-lock');
+      if (mLastFocus && mLastFocus.focus) mLastFocus.focus();
+    };
+
+    document.querySelectorAll('[data-merchant]').forEach(function (b) {
+      b.addEventListener('click', function (e) {
+        if (e.cancelable) e.preventDefault();
+        openM();
+      });
+    });
+    mModal.querySelectorAll('[data-close]').forEach(function (b) {
+      b.addEventListener('click', closeM);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && mModal.classList.contains('is-open')) closeM();
+    });
+
+    mForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var comercio = mForm.comercio, email = mForm.email;
+      var ok = true;
+      [comercio, email].forEach(function (f) {
+        var valid = f.value.trim() && (f.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value));
+        f.classList.toggle('invalid', !valid);
+        if (!valid) ok = false;
+      });
+      if (!ok) { (comercio.classList.contains('invalid') ? comercio : email).focus(); return; }
+
+      var data = {
+        comercio: comercio.value.trim(),
+        email: email.value.trim(),
+        plataforma: mForm.plataforma.value,
+        msg: mForm.msg.value.trim(),
+        ts: new Date().toISOString()
+      };
+      // Persist locally. To capture server-side, POST `data` to a form
+      // endpoint (Formspree, Sheets, etc.) here.
+      try {
+        var key = 'vueltito_merchant_requests';
+        var arr = JSON.parse(localStorage.getItem(key) || '[]');
+        arr.push(data);
+        localStorage.setItem(key, JSON.stringify(arr));
+      } catch (err) {}
+
+      mModal.querySelector('#m-name-out').textContent = data.comercio || 'tu comercio';
+      mModal.querySelector('#m-mail-out').textContent = data.email;
+      mForm.reset();
+      mForm.hidden = true;
+      mSuccess.hidden = false;
+    });
+  }
 })();
