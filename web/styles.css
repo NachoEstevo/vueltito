@@ -39,11 +39,11 @@
      Each photo gets a soft brand wash on top for legibility.
      Used by: .hero-bg / .wv-bg / .flow / .impact-bg / .final-bg
   ------------------------------------------------------------------ */
-  --hero-img:   url("assets/img/hero.png");
-  --wedge-img:  url("assets/img/wedge.png");
-  --flow-img:   url("assets/img/flow.png");
-  --impact-img: url("assets/img/impact.png");
-  --final-img:  url("assets/img/final.png");
+  --hero-img:   url("assets/img/hero.webp");
+  --wedge-img:  url("assets/img/wedge.webp");
+  --flow-img:   url("assets/img/flow.webp");
+  --impact-img: url("assets/img/impact.webp");
+  --final-img:  url("assets/img/final.webp");
   --isotipo:    url("assets/img/isotipo.svg");
 }
 
