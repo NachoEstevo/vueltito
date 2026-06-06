@@ -156,6 +156,10 @@ img{max-width:100%;display:block}
    1 · HERO
    ================================================================= */
 .hero{position:relative;padding:64px 32px 0;overflow:hidden}
+.hero-vh{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:48px}
+.hero-vh .hero-content{padding-top:0}
+.hero-vh .hero-card-wrap{margin-top:30px;padding-bottom:0}
+@media (max-height:800px){.hero-vh{justify-content:flex-start;padding-top:84px}}
 .hero-bg{
   position:absolute;inset:0;z-index:0;background-color:#e3eff0;
   background-image:
