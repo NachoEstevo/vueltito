@@ -571,8 +571,8 @@ body.modal-lock{overflow:hidden}
 /* =================================================================
    MERCHANT (comercios) PAGE
    ================================================================= */
-.msec{max-width:var(--maxw);margin:0 auto;padding:74px 32px}
-.msec-head{max-width:740px;margin:0 auto 42px;text-align:center}
+.msec{max-width:var(--maxw);margin:0 auto;padding:96px 32px}
+.msec-head{max-width:740px;margin:0 auto 50px;text-align:center}
 .msec-head .serif-h2{margin:14px 0 14px}
 .msec-head .lead{margin-inline:auto}
 .msec-tint{background:linear-gradient(180deg,rgba(174,227,247,.14),rgba(189,232,196,.14))}
