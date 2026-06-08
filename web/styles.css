@@ -575,7 +575,7 @@ body.modal-lock{overflow:hidden}
 .msec-head{max-width:740px;margin:0 auto 50px;text-align:center}
 .msec-head .serif-h2{margin:14px 0 14px}
 .msec-head .lead{margin-inline:auto}
-.msec-tint{background:linear-gradient(180deg,rgba(174,227,247,.14),rgba(189,232,196,.14))}
+.msec-tint{background:linear-gradient(180deg,rgba(174,227,247,.14),rgba(189,232,196,.14));border-radius:32px}
 .mval-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 38px}
 .mval{display:flex;gap:15px;align-items:flex-start}
 .mval-ic{width:46px;height:46px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--gris-oscuro);flex:none}
@@ -596,11 +596,17 @@ body.modal-lock{overflow:hidden}
 .consent-mini .cc-banner{margin-top:18px}
 .faq{max-width:780px;margin:0 auto}
 .faq-item{border-bottom:1px solid var(--line)}
-.faq-item summary{cursor:pointer;list-style:none;padding:18px 2px;font-weight:600;font-size:1rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:18px}
+.faq-item summary{cursor:pointer;list-style:none;padding:18px 2px;font-weight:600;font-size:1rem;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:18px;transition:color .2s var(--ease)}
+.faq-item summary:hover{color:var(--gris-oscuro)}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--gris-medio);font-weight:400}
-.faq-item[open] summary::after{content:"\2013"}
-.faq-item p{padding:0 2px 18px;color:var(--gris-oscuro);line-height:1.62;max-width:70ch}
+.faq-item summary::after{content:"+";font-size:1.6rem;line-height:1;color:var(--gris-medio);font-weight:300;flex:none;transition:transform .34s var(--ease),color .2s var(--ease)}
+.faq-item.is-open summary::after{transform:rotate(135deg);color:var(--ink)}
+/* smooth open/close: animate the wrapped body height */
+.faq-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s var(--ease)}
+.faq-item.is-open .faq-body{grid-template-rows:1fr}
+.faq-body-inner{overflow:hidden;min-height:0}
+.faq-item p{padding:2px 2px 18px;color:var(--gris-oscuro);line-height:1.62;max-width:70ch}
+@media (prefers-reduced-motion:reduce){.faq-body{transition:none}.faq-item summary::after{transition:none}}
 @media (max-width:900px){.mval-grid{grid-template-columns:1fr 1fr}.client-grid{grid-template-columns:1fr;gap:32px}}
 @media (max-width:560px){.mval-grid{grid-template-columns:1fr}.msec{padding-left:18px;padding-right:18px}}
 
@@ -628,9 +634,13 @@ body.modal-lock{overflow:hidden}
 }
 @media (max-width:900px){
   .nav-links,.nav-cta{display:none}
-  .nav-burger{display:flex}
-  .nav.menu-open .nav-links{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:rgba(250,250,248,.98);backdrop-filter:blur(14px);padding:20px 32px;gap:18px;border-bottom:1px solid var(--line)}
-  .nav.menu-open .nav-cta{display:flex;position:absolute;top:calc(100% + 200px);left:32px}
+  .nav-burger{display:flex;margin-left:auto}
+  /* stacked dropdown: items flow on their own full-width rows (no absolute hacks) */
+  .nav.menu-open .nav-inner{flex-wrap:wrap;row-gap:0}
+  .nav.menu-open .nav-links{display:flex;order:3;flex-basis:100%;flex-direction:column;gap:2px;margin:12px 0 0;padding-top:12px;border-top:1px solid var(--line)}
+  .nav.menu-open .nav-links a{padding:11px 2px;font-size:1.05rem}
+  .nav.menu-open .nav-cta{display:flex;order:4;flex-basis:100%;flex-direction:column;align-items:stretch;gap:10px;margin-top:14px;padding-bottom:4px}
+  .nav.menu-open .nav-cta .btn{width:100%;justify-content:center}
   .checkout-card{grid-template-columns:1fr;transform:none}
   .cc-col + .cc-col{border-left:0;border-top:1px solid var(--line)}
   .hero-trust{grid-template-columns:1fr;gap:18px}
@@ -660,4 +670,93 @@ body.modal-lock{overflow:hidden}
   .nav-inner{padding:14px 18px}
   .ob-row{grid-template-columns:1fr}
   .modal-card{padding:28px 22px 24px}
+}
+
+/* =================================================================
+   MOBILE DENSITY — reduce vertical footprint on phones
+   All rules are phone-only (max-width based); desktop stays intact.
+   Strategy: tighten section rhythm, collapse cards to 2 columns
+   where it reads well, and hide secondary / duplicated copy inside
+   the showcase cards & graphics.
+   ================================================================= */
+@media (max-width:680px){
+  /* ---- tighter section rhythm ---- */
+  /* hero still fills the viewport on phones (short hero content = full screen) */
+  .hero-vh{min-height:100vh;min-height:100svh;padding-top:84px;padding-bottom:30px}
+  .hero-vh .hero-card-wrap{margin-top:22px}
+  .wedge{padding-top:48px;padding-bottom:48px}
+  .flow{padding-top:48px;padding-bottom:48px}
+  .impact{padding-top:48px;padding-bottom:48px}
+  .trust{padding-top:48px;padding-bottom:56px}
+  .final{padding-top:46px;padding-bottom:24px}
+  .serif-h2{font-size:clamp(2.05rem,7.4vw,2.55rem)}
+  .flow-intro .serif-h2{margin:10px 0 12px}
+  .impact-text .serif-h2{margin:12px 0 12px}
+  .trust-head .serif-h2{margin:12px 0 14px}
+
+  /* ---- HERO checkout card: condense + drop duplicated lines ---- */
+  .hero-card-wrap{padding-bottom:0}
+  .cc-col{padding:18px 18px}
+  .cc-product{margin:14px 0}
+  .cc-options{margin:14px 0}
+  .cc-banner{display:none}          /* trust line repeated below in "Destinado a" */
+  #cc-vnote2{display:none}          /* "Podés quitarlo antes de pagar" (dup) */
+  .cc-split-note{display:none}      /* split % already explicit in card */
+  .cc-dest{margin-top:16px}
+
+  /* ---- WEDGE: 2-col plugins, strip repeated chips + sub-copy ---- */
+  .wedge-grid{gap:30px}
+  .wedge-visual{padding:14px}
+  .wv-panel{padding:16px}
+  .wv-head{margin-bottom:16px}
+  .plugin-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .plugin{padding:13px 12px;gap:6px}
+  .pg-ic{width:34px;height:34px}
+  .pg-flow{display:none}            /* "V ⋯ Mercado Pago" chip repeated x4 */
+  .wv-foot{display:none}            /* value props restated in wedge text + trust */
+
+  /* ---- FLOW: drop captions, tighten step cards ---- */
+  .flow-steps{gap:14px;margin-top:24px}
+  .step-card{padding:14px 15px;gap:8px}
+  .step-cap{display:none}           /* caption duplicates the card content */
+
+  /* ---- IMPACT: tighten leaderboard + mini cards ---- */
+  .impact-cards{gap:14px}
+  .lb-card{padding:18px}
+  .mini-card{padding:18px}
+  .trans-list{gap:13px}
+
+  /* ---- TRUST: tighten features, slim the audit table ---- */
+  .trust-head{margin-bottom:28px}
+  .trust-grid{gap:32px}
+  .trust-features{gap:18px}
+  .audit-card{padding:18px}
+  .audit-row{padding:11px 0}
+  .audit-table .audit-row:nth-child(3),
+  .audit-table .audit-row:nth-child(5){display:none} /* keep pago/asignado/reembolso */
+
+  /* ---- FINAL + FOOTER: 2-col footer instead of a long stack ---- */
+  .final-cta{padding:20px 0 34px}
+  .footer{padding-top:40px}
+  .footer-cols{grid-template-columns:1fr 1fr;gap:24px 20px}
+  .fcol-brand{grid-column:1 / -1}
+  .footer-bottom{margin-top:30px}
+
+  /* ---- MERCHANT (comercios) shared tightening ---- */
+  .msec{padding-top:48px;padding-bottom:48px}
+  .msec-head{margin-bottom:28px}
+
+  /* "Más valor" — tighten the 6 value props (1 col, but denser) */
+  .mval-grid{gap:16px}
+  .mval{gap:13px}
+  .mval-ic{width:42px;height:42px}
+  .mval p{font-size:.9rem;line-height:1.5}
+
+  /* "Donde ya vendés" — compact 2-col platform cards (name + status) */
+  #plataformas .doc-cols{grid-template-columns:1fr 1fr;gap:10px}
+  #plataformas .plat-card{padding:14px 13px}
+  #plataformas .plat-ic{width:36px;height:36px;margin-bottom:10px}
+  #plataformas .ch-row{flex-wrap:wrap;gap:4px 8px;margin-bottom:0}
+  #plataformas .plat-card p{display:none}     /* secondary copy; keep board compact */
+  #plataformas .plat-cta{display:none}        /* global "Sumate al piloto" CTA covers it */
 }

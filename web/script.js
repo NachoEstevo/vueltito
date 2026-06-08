@@ -302,4 +302,69 @@
       mSuccess.hidden = false;
     });
   }
+
+  // ---- smooth FAQ (animated <details>) ----
+  var reduceMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    var summary = item.querySelector('summary');
+    if (!summary) return;
+
+    // Wrap everything after <summary> so its height can be animated.
+    var body = document.createElement('div');
+    body.className = 'faq-body';
+    var inner = document.createElement('div');
+    inner.className = 'faq-body-inner';
+    var node = summary.nextSibling;
+    while (node) {
+      var next = node.nextSibling;
+      inner.appendChild(node);
+      node = next;
+    }
+    body.appendChild(inner);
+    item.appendChild(body);
+    if (item.open) item.classList.add('is-open');
+
+    var animating = false;
+
+    summary.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // No animation requested by the user agent: toggle instantly.
+      if (reduceMotion) {
+        item.open = !item.open;
+        item.classList.toggle('is-open', item.open);
+        return;
+      }
+      if (animating) return;
+
+      if (item.open) {
+        // ---- close: animate to 0, then collapse <details> ----
+        animating = true;
+        item.classList.remove('is-open');
+        var done = false;
+        var finish = function () {
+          if (done) return;
+          done = true;
+          body.removeEventListener('transitionend', onEnd);
+          item.open = false;
+          animating = false;
+        };
+        var onEnd = function (ev) {
+          if (ev.target === body && ev.propertyName === 'grid-template-rows') finish();
+        };
+        body.addEventListener('transitionend', onEnd);
+        setTimeout(finish, 500); // fallback if transitionend never fires
+      } else {
+        // ---- open: render content, then animate to full height ----
+        item.open = true;
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            item.classList.add('is-open');
+          });
+        });
+      }
+    });
+  });
 })();
