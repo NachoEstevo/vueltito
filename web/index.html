@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>vueltito — Tu vuelto, en buenas manos.</title>
-<meta name="description" content="Microaportes solidarios visibles para cada checkout integrado. Procesados con Mercado Pago, registrados en un ledger auditable y asignados a ONGs verificadas." />
+<meta name="description" content="Microdonaciones visibles para cada checkout integrado. El comercio cobra con su pasarela; vueltito registra consentimiento, ledger y remesas a ONGs verificadas." />
 <link rel="preconnect" href="https://api.fontshare.com" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -102,7 +102,7 @@
           <div class="cc-row"><span>Subtotal</span><span>$25.990</span></div>
           <div class="cc-row"><span>Envío</span><span>$1.990</span></div>
         </div>
-        <div class="cc-total"><span>Total</span><span>$27.980</span></div>
+        <div class="cc-total"><span>Compra</span><span>$27.980</span></div>
       </div>
 
       <div class="cc-col cc-vuelto" id="vcard" data-enabled="true" data-mode="porcentaje">
@@ -134,16 +134,16 @@
 
       <div class="cc-col cc-pay">
         <div class="cc-payhead">
-          <span class="cc-h">Pago seguro con</span>
-          <span class="mp-logo"><b>mercado</b><i>pago</i></span>
+          <span class="cc-h">Pedido en tu tienda</span>
+          <span class="chip chip-blue">Modelo actual</span>
         </div>
         <div class="cc-split">
           <div class="cc-split-row">
-            <div><span class="cc-split-l">Vendedor</span><span class="cc-split-v" id="cc-vendedor">$27.840</span></div>
+            <div><span class="cc-split-l">Total cobrado</span><span class="cc-split-v" id="cc-vendedor">$28.120</span></div>
             <div class="cc-split-div"></div>
-            <div><span class="cc-split-l">vueltito</span><span class="cc-split-v" id="cc-vueltito">$140</span></div>
+            <div><span class="cc-split-l">Donación registrada</span><span class="cc-split-v" id="cc-vueltito">$140</span></div>
           </div>
-          <span class="cc-split-note" id="cc-splitnote">Split automático 99,5% / 0,5%</span>
+          <span class="cc-split-note" id="cc-splitnote">Sin reparto automático · remesa pendiente a ONG</span>
         </div>
         <div class="cc-dest">
           <span class="cc-h-sm">Destinado a</span>
@@ -171,39 +171,39 @@
         <div class="wv-head">
           <div>
             <h3 class="wv-title">Canales integrados</h3>
-            <p class="wv-sub">Plugins que conectan tu tienda con vueltito y Mercado Pago.</p>
+            <p class="wv-sub">Plugins que conectan tu tienda con el core de vueltito.</p>
           </div>
         </div>
         <div class="plugin-grid">
           <article class="plugin">
             <span class="pg-ic tint-violet"><svg class="ic"><use href="#i-cart"/></svg></span>
             <div class="pg-titlerow"><h4>WooCommerce</h4></div>
-            <p>Plugin oficial para tiendas WooCommerce.</p>
-            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+            <p>Plugin para Classic Checkout y Checkout Blocks.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp">Core Vueltito</span></div>
           </article>
           <article class="plugin">
             <span class="pg-ic tint-sky"><svg class="ic"><use href="#i-cloud"/></svg></span>
             <div class="pg-titlerow"><h4>Tiendanube</h4></div>
-            <p>App para Tiendanube con opción de aporte en checkout.</p>
-            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+            <p>App en desarrollo; checkout productivo sujeto a aprobación.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp">En validación</span></div>
           </article>
           <article class="plugin">
             <span class="pg-ic tint-green"><svg class="ic"><use href="#i-bag"/></svg></span>
             <div class="pg-titlerow"><h4>Shopify</h4><span class="chip chip-gray">Futuro</span></div>
-            <p>App + extensiones de checkout para Shopify Plus.</p>
-            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+            <p>App futura con checkout extensions donde aplique.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp">Roadmap</span></div>
           </article>
           <article class="plugin">
             <span class="pg-ic tint-sky"><svg class="ic"><use href="#i-scan"/></svg></span>
             <div class="pg-titlerow"><h4>QR / Point</h4><span class="chip chip-gray">Futuro</span></div>
-            <p>Aportes en pagos presenciales con QR y Point.</p>
-            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp"><span class="mp-dot"></span>Mercado Pago</span></div>
+            <p>Pagos presenciales después de cerrar conciliación.</p>
+            <div class="pg-flow"><span class="pg-v">V</span><span class="pg-dots"></span><span class="pg-mp">Roadmap</span></div>
           </article>
         </div>
         <div class="wv-foot">
           <div class="wvf"><span class="wvf-ic"><svg class="ic"><use href="#i-shield"/></svg></span><div><strong>Un solo core</strong><span>Cálculo, consentimiento, ledger y conciliación centralizados.</span></div></div>
           <div class="wvf"><span class="wvf-ic"><svg class="ic"><use href="#i-graph"/></svg></span><div><strong>Trazabilidad total</strong><span>Cada aporte queda registrado y conciliable.</span></div></div>
-          <div class="wvf"><span class="wvf-ic"><svg class="ic"><use href="#i-lock"/></svg></span><div><strong>Seguro y compatible</strong><span>OAuth, webhooks y cumplimiento por canal.</span></div></div>
+          <div class="wvf"><span class="wvf-ic"><svg class="ic"><use href="#i-lock"/></svg></span><div><strong>Seguro y compatible</strong><span>API keys, webhooks e idempotencia por canal.</span></div></div>
         </div>
       </div>
     </div>
@@ -217,13 +217,13 @@
   </div>
 </section>
 
-<!-- ============ 3 · SPLIT FLOW ============ -->
+<!-- ============ 3 · OPERATING FLOW ============ -->
 <section class="flow" id="flujo">
   <span class="flow-vertical">No desvía. Consentimiento.</span>
   <div class="flow-inner">
   <div class="flow-intro reveal">
     <h2 class="serif-h2">El vuelto no se esconde.<br>Se registra.</h2>
-    <p class="lead">El comprador acepta el aporte, Mercado Pago procesa el pago, y <strong>vueltito</strong> separa la asignación en un ledger auditable.</p>
+    <p class="lead">El comprador acepta la donación, el comercio procesa el pedido con su pasarela, y <strong>vueltito</strong> registra la obligación en un ledger auditable.</p>
     <a class="btn btn-link dark" href="#recursos">Leer modelo técnico <svg class="ic"><use href="#i-arrow"/></svg></a>
   </div>
 
@@ -241,7 +241,7 @@
     <article class="step">
       <div class="step-head"><span class="step-n">2</span><h4>Aporte visible</h4><span class="step-ic"><svg class="ic"><use href="#i-heart"/></svg></span></div>
       <div class="step-card">
-        <div class="step-meta"><span>Suma un aporte a</span><strong>Fundación Arcoíris <span class="emoji">🌈</span></strong></div>
+        <div class="step-meta"><span>Suma una donación a</span><strong>Fundación Arcoíris</strong></div>
         <div class="step-pick">
           <span class="cc-check sm"><svg class="ic"><use href="#i-check"/></svg></span>
           <span class="sp-l">Aporte seleccionado</span>
@@ -253,26 +253,26 @@
     </article>
     <span class="connector"></span>
     <article class="step">
-      <div class="step-head"><span class="step-n">3</span><h4>Split / fee</h4><span class="step-ic"><svg class="ic"><use href="#i-bank"/></svg></span></div>
+      <div class="step-head"><span class="step-n">3</span><h4>Cobro comercio</h4><span class="step-ic"><svg class="ic"><use href="#i-bank"/></svg></span></div>
       <div class="step-card">
-        <p class="step-note">Mercado Pago procesa el pago</p>
-        <div class="step-line"><span>Total a pagar</span><span>$27.980,00</span></div>
-        <div class="step-line"><span>Marketplace fee (vueltito)</span><span class="pos">-$140,00</span></div>
-        <div class="step-line strong"><span>A acreditar al comercio</span><span>$27.840,00</span></div>
-        <div class="step-mono"><span class="mono-dot"></span><code>marketplace_fee</code><span class="mono-amt">ARS 140,00</span></div>
+        <p class="step-note">La pasarela del comercio procesa el pago</p>
+        <div class="step-line"><span>Compra</span><span>$27.980,00</span></div>
+        <div class="step-line"><span>Donación aceptada</span><span class="pos">+$140,00</span></div>
+        <div class="step-line strong"><span>Total cobrado</span><span>$28.120,00</span></div>
+        <div class="step-mono"><span class="mono-dot"></span><code>external_order_id</code><span class="mono-amt">#A9821</span></div>
       </div>
-      <p class="step-cap">vueltito recibe el fee como marketplace fee desde Mercado Pago.</p>
+      <p class="step-cap">La donación queda en la liquidación del comercio; vueltito registra la obligación.</p>
     </article>
     <span class="connector"></span>
     <article class="step">
       <div class="step-head"><span class="step-n">4</span><h4>ONG + ledger</h4><span class="step-ic"><svg class="ic"><use href="#i-shield"/></svg></span></div>
       <div class="step-card">
-        <div class="step-meta"><span>Asignado a <strong>Fundación Arcoíris</strong> <span class="emoji">🌈</span></span></div>
+        <div class="step-meta"><span>Asignado a <strong>Fundación Arcoíris</strong></span></div>
         <div class="step-subrow"><span>Ledger entry</span><span class="ledger-id">LE-24-06-06-000842 <svg class="ic"><use href="#i-copy"/></svg></span></div>
         <ul class="step-ledger">
-          <li><span class="ldot g"></span>Aporte recibido<span>$140,00</span></li>
-          <li><span class="ldot g"></span>Asignación confirmada<span>$140,00</span></li>
-          <li><span class="ldot n"></span>Pendiente de liquidación<span>$140,00</span></li>
+          <li><span class="ldot g"></span>Donación observada<span>$140,00</span></li>
+          <li><span class="ldot g"></span>Campaña asignada<span>$140,00</span></li>
+          <li><span class="ldot n"></span>Remesa pendiente<span>$140,00</span></li>
         </ul>
       </div>
       <p class="step-cap">El aporte se asigna a la ONG y queda registrado en un ledger auditable.</p>
@@ -346,7 +346,7 @@
     </div>
     <div class="trust-head-r">
       <a class="btn btn-ghost" href="#demo">Ver controles <svg class="ic"><use href="#i-arrow"/></svg></a>
-      <span class="trust-note">Preparado para pilotos reales</span>
+      <span class="trust-note">Listo para comercios reales</span>
     </div>
   </div>
 
@@ -362,12 +362,11 @@
     <div class="audit-card">
       <div class="audit-head"><span class="audit-title"><svg class="ic"><use href="#i-shield"/></svg> Registro de auditoría</span></div>
       <div class="audit-table">
-        <div class="audit-thead"><span>Fecha</span><span>Evento</span><span>Transacción ID</span><span>Split</span><span>Allocation</span></div>
-        <div class="audit-row"><span>06/06/2026 11:32</span><span>Pago aprobado</span><code>txn_01HV8ZP8J3Q7X8E1</code><span class="tag tag-green">recibido</span><span class="tag tag-amber">pendiente</span></div>
-        <div class="audit-row"><span>06/06/2026 11:32</span><span>Split recibido</span><code>spl_01HV8ZP8QSDKZJ9M</code><span class="tag tag-green">completado</span><span class="tag tag-amber">pendiente</span></div>
-        <div class="audit-row"><span>06/06/2026 11:33</span><span>Aporte asignado a ONG</span><code>alloc_01HV8ZPB4M1F6X5A</code><span class="tag tag-green">completado</span><span class="tag tag-green">asignado</span></div>
-        <div class="audit-row"><span>06/06/2026 11:33</span><span>Ledger actualizado</span><code>led_01HV8ZPC9B2TQ1Y7</code><span class="tag tag-green">completado</span><span class="tag tag-green">confirmado</span></div>
-        <div class="audit-row"><span>06/06/2026 11:55</span><span>Reembolso parcial</span><code>ref_01HV8ZPHQG9L3C2D</code><span class="tag tag-red">revertido</span><span class="tag tag-red">reversado</span></div>
+        <div class="audit-thead"><span>Fecha</span><span>Evento</span><span>Orden</span><span>Ledger</span><span>Remesa</span></div>
+        <div class="audit-row"><span>06/06/2026 11:32</span><span>Pago aprobado</span><code>wc_10483</code><span class="tag tag-green">registrado</span><span class="tag tag-amber">pendiente</span></div>
+        <div class="audit-row"><span>06/06/2026 11:33</span><span>Donación asignada a ONG</span><code>don_01HV8ZP</code><span class="tag tag-green">completado</span><span class="tag tag-amber">pendiente</span></div>
+        <div class="audit-row"><span>06/06/2026 11:33</span><span>Ledger actualizado</span><code>led_01HV8ZP</code><span class="tag tag-green">completado</span><span class="tag tag-green">conciliable</span></div>
+        <div class="audit-row"><span>06/06/2026 11:55</span><span>Reembolso parcial</span><code>ref_01HV8ZP</code><span class="tag tag-red">revertido</span><span class="tag tag-red">ajustado</span></div>
       </div>
       <div class="audit-foot"><svg class="ic"><use href="#i-check"/></svg> Trazabilidad completa. Listo para auditorías y reportes.</div>
     </div>
@@ -402,7 +401,7 @@
       </div>
       <div class="fcol">
         <h5>Integraciones</h5>
-        <a href="#comercios">Mercado Pago</a>
+        <a href="comercios.html#operacion">Pagos y remesas</a>
         <a href="#comercios">WooCommerce</a>
         <a href="#comercios">Tiendanube</a>
         <a href="#comercios">Shopify</a>

@@ -109,11 +109,11 @@ no la más difícil.
 
 ## Estado del proyecto
 
-Hoy **don.ar** está en etapa de diseño y definición de producto.
+Hoy **vueltito** ya tiene una primera integración instalable para WooCommerce.
 
 - La idea, la estrategia y la arquitectura están documentadas.
-- El primer objetivo es una demo de punta a punta en un comercio piloto.
-- Buscamos ONGs, comercios y aliados para sumarse a los primeros pasos.
+- WooCommerce 0.4.7 permite instalar el plugin, mostrar una donación visible en checkout y reportar eventos al core.
+- Buscamos ONGs, comercios y aliados para crecer con un modelo claro: el comercio cobra la donación, transfiere el 100% a la ONG y vueltito no custodia esos fondos.
 
 > ¿Te interesa la idea, querés sumar tu ONG o tu comercio, o simplemente charlar?
 > Estamos abriendo la conversación.
@@ -122,6 +122,6 @@ Hoy **don.ar** está en etapa de diseño y definición de producto.
 
 <div align="center">
 
-**don.ar** — Donar el vuelto, sin pensarlo.
+**vueltito** — Donar el vuelto, sin pensarlo.
 
 </div>

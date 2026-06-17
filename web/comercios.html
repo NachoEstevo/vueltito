@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>vueltito para comercios — Sumá impacto a tu checkout</title>
-<meta name="description" content="Instalá vueltito en tu tienda: tus clientes suman un aporte solidario opcional y visible en el checkout, procesado con Mercado Pago. Cobrás igual, sin rehacer tu stack de pagos." />
+<meta name="description" content="Instalá vueltito en tu tienda: tus clientes suman una donación opcional y visible en el checkout. Cobrás con tu pasarela de siempre; vueltito registra consentimiento, reportes y remesas." />
 <link rel="preconnect" href="https://api.fontshare.com" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -49,12 +49,13 @@
     <nav class="nav-links" aria-label="Para comercios">
       <a href="#valor">Beneficios</a>
       <a href="#instalar">Instalación</a>
+      <a href="#operacion">Operación</a>
       <a href="#plataformas">Plataformas</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="index.html"><svg class="ic"><use href="#i-back"/></svg> Inicio</a>
-      <button class="btn btn-dark" type="button" data-merchant>Sumate al piloto</button>
+      <button class="btn btn-dark" type="button" data-merchant>Instalar vueltito</button>
     </div>
     <button class="nav-burger" aria-label="Abrir menú" id="burger"><span></span><span></span></button>
   </div>
@@ -68,9 +69,9 @@
   <div class="hero-content">
     <span class="eyebrow eyebrow-dark">Para comercios</span>
     <h1 class="hero-title" style="margin-top:14px">Sumá impacto<br>a tu checkout.</h1>
-    <p class="hero-sub">Tus clientes suman un aporte solidario opcional y visible al pagar. Vos cobrás igual, sin rehacer tu stack de pagos.</p>
+    <p class="hero-sub">Tus clientes suman una donación opcional y visible al pagar. Vos cobrás con tu pasarela de siempre; vueltito registra consentimiento, reportes y remesas.</p>
     <div class="hero-actions">
-      <button class="btn btn-dark btn-lg" type="button" data-merchant>Sumate al piloto</button>
+      <a class="btn btn-dark btn-lg" href="downloads/vueltito-donations-0.4.7.zip" download>Descargar WooCommerce</a>
       <a class="btn btn-link" href="#instalar">Cómo se instala <svg class="ic"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
@@ -80,14 +81,14 @@
 <section class="msec" id="valor">
   <div class="msec-head">
     <h2 class="serif-h2">Más valor en cada compra.<br>Cero fricción para vos.</h2>
-    <p class="lead">vueltito vive sobre el checkout que ya usás. Activás una causa real sin cambiar de pasarela ni tocar tus liquidaciones.</p>
+    <p class="lead">vueltito vive sobre el checkout que ya usás. Activás una causa real sin cambiar de pasarela ni asumir una integración financiera nueva.</p>
   </div>
   <div class="mval-grid">
-    <div class="mval"><span class="mval-ic"><svg class="ic"><use href="#i-bank"/></svg></span><div><strong>Cobrás igual</strong><p>El pago lo procesa Mercado Pago. El aporte viaja como <em>marketplace fee</em> separado; tu liquidación no cambia.</p></div></div>
+    <div class="mval"><span class="mval-ic"><svg class="ic"><use href="#i-bank"/></svg></span><div><strong>Cobrás igual</strong><p>La donación entra como línea visible del pedido. Tu pasarela procesa el total; vueltito no custodia esos fondos.</p></div></div>
     <div class="mval"><span class="mval-ic"><svg class="ic"><use href="#i-box"/></svg></span><div><strong>Sin rehacer tu stack</strong><p>Se instala sobre lo que ya tenés. No cambiás de pasarela ni de checkout.</p></div></div>
     <div class="mval"><span class="mval-ic"><svg class="ic"><use href="#i-eye"/></svg></span><div><strong>Opcional y visible</strong><p>Tu cliente ve el aporte antes de pagar y puede quitarlo. Nada oculto, sin sorpresas.</p></div></div>
     <div class="mval"><span class="mval-ic"><svg class="ic"><use href="#i-heart"/></svg></span><div><strong>Diferenciás tu marca</strong><p>Mostrás compromiso real y fidelizás compradores que eligen comprar con causa.</p></div></div>
-    <div class="mval"><span class="mval-ic"><svg class="ic"><use href="#i-refund"/></svg></span><div><strong>Sin costo de setup</strong><p>La instalación es gratuita. vueltito se sostiene con un micro-fee del aporte, no de tu venta.</p></div></div>
+    <div class="mval"><span class="mval-ic"><svg class="ic"><use href="#i-refund"/></svg></span><div><strong>Sin costo de setup</strong><p>La instalación es gratuita. Al cierre mensual, vueltito factura el 1% de las donaciones generadas.</p></div></div>
     <div class="mval"><span class="mval-ic"><svg class="ic"><use href="#i-ledger"/></svg></span><div><strong>Reportes y transparencia</strong><p>Ledger auditable y reportes conciliables de cada aporte, para vos y para tus clientes.</p></div></div>
   </div>
 </section>
@@ -96,16 +97,46 @@
 <section class="msec msec-tint" id="instalar">
   <div class="msec-head">
     <h2 class="serif-h2">En cinco pasos, listo.</h2>
-    <p class="lead">Así funciona la activación. Hoy estamos en piloto y te acompañamos en todo el proceso, de punta a punta.</p>
+    <p class="lead">WooCommerce ya está disponible. Descargás el plugin, lo conectás con tus credenciales y probás una compra antes de activarlo.</p>
   </div>
   <div class="steps-wrap">
     <ol class="doc-steps">
-      <li>Elegí tu plataforma: WooCommerce, Tiendanube y más.</li>
-      <li>Instalá el plugin o app de vueltito en tu tienda.</li>
-      <li>Conectá tu cuenta de Mercado Pago por OAuth.</li>
+      <li>Descargá el ZIP de WooCommerce 0.4.7 desde esta página o desde tu dashboard.</li>
+      <li>Instalá el plugin desde WordPress, en Plugins > Añadir nuevo > Subir plugin.</li>
+      <li>Conectá la instalación con el ID y la API key que te damos en el dashboard.</li>
       <li>Elegí las ONGs y campañas verificadas que querés habilitar.</li>
-      <li>Activá la regla de aporte —fijo, porcentaje o redondeo— y listo.</li>
+      <li>Activá la regla de donación y usá los reportes mensuales para transferir a cada ONG.</li>
     </ol>
+  </div>
+</section>
+
+<!-- ============ OPERACIÓN ============ -->
+<section class="msec" id="operacion">
+  <div class="msec-head">
+    <h2 class="serif-h2">Cómo se mueve la plata.</h2>
+    <p class="lead">Vueltito no reparte pagos ni retiene donaciones. Registramos consentimiento, ledger y obligaciones para que el comercio pueda liquidar con claridad.</p>
+  </div>
+  <div class="ops-grid">
+    <div class="ops-card">
+      <span class="ops-num">01</span>
+      <h3>Checkout</h3>
+      <p>El comprador acepta una donación visible y opcional. Guardamos quote, consentimiento, campaña y snapshot de la UI.</p>
+    </div>
+    <div class="ops-card">
+      <span class="ops-num">02</span>
+      <h3>Cobro</h3>
+      <p>El comercio cobra el pedido completo con su pasarela actual. La donación queda dentro de su liquidación.</p>
+    </div>
+    <div class="ops-card">
+      <span class="ops-num">03</span>
+      <h3>Ledger</h3>
+      <p>Vueltito registra altas, cancelaciones y reembolsos. El dashboard muestra cuánto se debe transferir a cada ONG.</p>
+    </div>
+    <div class="ops-card">
+      <span class="ops-num">04</span>
+      <h3>Cierre mensual</h3>
+      <p>El comercio reporta remesas a ONGs y vueltito factura su fee mensual sobre donaciones generadas.</p>
+    </div>
   </div>
 </section>
 
@@ -113,13 +144,13 @@
 <section class="msec" id="plataformas">
   <div class="msec-head">
     <h2 class="serif-h2">Donde ya vendés.</h2>
-    <p class="lead">Empezamos por los canales con mejor control técnico y más relevancia en Argentina. El resto está en el roadmap.</p>
+    <p class="lead">Cada plataforma tiene un camino distinto. Empezamos por donde podemos controlar el checkout sin romper la operación del comercio.</p>
   </div>
   <div class="doc-cols">
-    <div class="doc-card plat-card"><span class="plat-ic tint-violet"><svg class="ic"><use href="#i-cart"/></svg></span><div class="ch-row"><h4>WooCommerce</h4><span class="chip chip-blue">Primer MVP</span></div><p>Plugin propio con control total del checkout y demo en sandbox.</p><button class="plat-cta" type="button" data-merchant>Sumate al piloto <svg class="ic"><use href="#i-arrow"/></svg></button></div>
-    <div class="doc-card plat-card"><span class="plat-ic tint-sky"><svg class="ic"><use href="#i-cloud"/></svg></span><div class="ch-row"><h4>Tiendanube</h4><span class="chip chip-amber">Piloto</span></div><p>App con aporte en checkout. Alta relevancia para el mercado argentino.</p><button class="plat-cta" type="button" data-merchant>Sumate al piloto <svg class="ic"><use href="#i-arrow"/></svg></button></div>
-    <div class="doc-card plat-card"><span class="plat-ic tint-green"><svg class="ic"><use href="#i-bag"/></svg></span><div class="ch-row"><h4>Shopify</h4><span class="chip chip-gray">Roadmap</span></div><p>App de intención y reportes; checkout en planes Shopify Plus.</p><button class="plat-cta" type="button" data-merchant>Avisame cuando esté <svg class="ic"><use href="#i-arrow"/></svg></button></div>
-    <div class="doc-card plat-card"><span class="plat-ic tint-sky"><svg class="ic"><use href="#i-scan"/></svg></span><div class="ch-row"><h4>QR / Point</h4><span class="chip chip-gray">Roadmap</span></div><p>Aportes en pagos presenciales con QR y Point de Mercado Pago.</p><button class="plat-cta" type="button" data-merchant>Avisame cuando esté <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+    <div class="doc-card plat-card"><span class="plat-ic tint-violet"><svg class="ic"><use href="#i-cart"/></svg></span><div class="ch-row"><h4>WooCommerce</h4><span class="chip chip-blue">Disponible</span></div><p>Plugin propio para Classic Checkout y Checkout Blocks. Agrega una fee no gravada por defecto y reporta eventos de orden.</p><a class="plat-cta" href="downloads/vueltito-donations-0.4.7.zip" download>Descargar plugin <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+    <div class="doc-card plat-card"><span class="plat-ic tint-sky"><svg class="ic"><use href="#i-cloud"/></svg></span><div class="ch-row"><h4>Tiendanube</h4><span class="chip chip-amber">Próximo</span></div><p>App en desarrollo. La versión storefront sirve para demo; checkout real depende de las capacidades aprobadas por Tiendanube.</p><button class="plat-cta" type="button" data-merchant>Avisame cuando esté <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+    <div class="doc-card plat-card"><span class="plat-ic tint-green"><svg class="ic"><use href="#i-bag"/></svg></span><div class="ch-row"><h4>Shopify</h4><span class="chip chip-gray">Roadmap</span></div><p>App futura con checkout extensions donde aplique. Para tiendas sin extensibilidad suficiente, empezará por reportes y campañas.</p><button class="plat-cta" type="button" data-merchant>Avisame cuando esté <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+    <div class="doc-card plat-card"><span class="plat-ic tint-sky"><svg class="ic"><use href="#i-scan"/></svg></span><div class="ch-row"><h4>QR / Point</h4><span class="chip chip-gray">Roadmap</span></div><p>Pagos presenciales más adelante. Primero necesitamos resolver consentimiento, comprobantes y conciliación fuera de checkout web.</p><button class="plat-cta" type="button" data-merchant>Avisame cuando esté <svg class="ic"><use href="#i-arrow"/></svg></button></div>
   </div>
 </section>
 
@@ -150,12 +181,14 @@
     <h2 class="serif-h2">Lo que todo comercio pregunta.</h2>
   </div>
   <div class="faq">
-    <details class="faq-item"><summary>¿Tiene costo para mi comercio?</summary><p>No. La instalación es gratuita. vueltito se sostiene con un micro-fee sobre el aporte solidario, no sobre tu venta.</p></details>
-    <details class="faq-item"><summary>¿Afecta mis cobros o liquidaciones?</summary><p>No. Seguís cobrando con Mercado Pago como siempre. El aporte viaja como <em>marketplace fee</em> separado y queda registrado aparte.</p></details>
+    <details class="faq-item"><summary>¿Tiene costo para mi comercio?</summary><p>No hay costo de setup. Vueltito factura mensualmente el 1% de las donaciones generadas por tu tienda.</p></details>
+    <details class="faq-item"><summary>¿Afecta mis cobros o liquidaciones?</summary><p>No cambiás de pasarela. La donación se cobra dentro del pedido y queda en tu liquidación; vueltito registra cuánto corresponde transferir a cada ONG.</p></details>
     <details class="faq-item"><summary>¿Qué pasa con los reembolsos?</summary><p>El aporte se ajusta según la política definida: si la compra se cancela antes de la liquidación, el aporte se revierte automáticamente en el ledger.</p></details>
     <details class="faq-item"><summary>¿Quién elige la ONG?</summary><p>Habilitás un set de ONGs verificadas y tu cliente elige entre esas en el checkout. Todas pasan por validación antes de recibir aportes.</p></details>
+    <details class="faq-item"><summary>¿Quién transfiere a las ONGs?</summary><p>El comercio transfiere el 100% recaudado a la ONG y reporta el comprobante en vueltito. El dashboard deja trazabilidad de pendiente, reportado y confirmado.</p></details>
+    <details class="faq-item"><summary>¿Mis clientes aparecen en el leaderboard?</summary><p>Solo si aceptan aparecer públicamente. Sin opt-in, la donación suma a los totales agregados pero no muestra datos personales.</p></details>
     <details class="faq-item"><summary>¿Mis clientes están obligados a aportar?</summary><p>Nunca. El aporte es 100% opcional y visible: el comprador puede quitarlo antes de pagar.</p></details>
-    <details class="faq-item"><summary>¿Necesito conocimientos técnicos?</summary><p>Mínimos. Instalás el plugin y conectás Mercado Pago. Durante el piloto te acompañamos en toda la integración.</p></details>
+    <details class="faq-item"><summary>¿Necesito conocimientos técnicos?</summary><p>Mínimos. Instalás el plugin, cargás las credenciales de vueltito y probás un checkout antes de activarlo.</p></details>
   </div>
 </section>
 
@@ -168,9 +201,9 @@
       <span class="wordmark">vueltito</span>
     </a>
     <h2 class="serif-h2 big center">Sumá vueltito<br>a tu tienda.</h2>
-    <p class="lead center">Empezá con un comercio integrado. Escalá con evidencia.</p>
+    <p class="lead center">Empezá con WooCommerce. Tiendanube y Shopify siguen después.</p>
     <div class="hero-actions center">
-      <button class="btn btn-dark btn-lg" type="button" data-merchant>Sumate al piloto</button>
+      <button class="btn btn-dark btn-lg" type="button" data-merchant>Solicitar credenciales</button>
       <a class="btn btn-ghost btn-lg" href="spec.html">Leer spec técnico</a>
     </div>
   </div>
@@ -187,7 +220,7 @@
       </div>
       <div class="fcol">
         <h5>Integraciones</h5>
-        <a href="#plataformas">Mercado Pago</a>
+        <a href="#operacion">Pagos y remesas</a>
         <a href="#plataformas">WooCommerce</a>
         <a href="#plataformas">Tiendanube</a>
         <a href="#plataformas">Shopify</a>
@@ -225,7 +258,7 @@
 </section>
 </main>
 
-<!-- ============ PILOTO COMERCIO MODAL ============ -->
+<!-- ============ CONTACTO COMERCIO MODAL ============ -->
 <div class="modal" id="merchant" aria-hidden="true">
   <div class="modal-overlay" data-close></div>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="m-title">
@@ -234,8 +267,8 @@
     </button>
 
     <form class="ob-form" id="m-form" novalidate>
-      <h3 id="m-title" class="modal-title">Sumate al piloto</h3>
-      <p class="modal-sub">Dejanos los datos de tu comercio y te contactamos para sumarte al piloto de vueltito.</p>
+      <h3 id="m-title" class="modal-title">Instalar vueltito</h3>
+      <p class="modal-sub">Dejanos los datos de tu comercio y te contactamos con las credenciales y los pasos de conexión.</p>
 
       <div class="ob-field">
         <label for="m-name">Nombre del comercio</label>
@@ -263,14 +296,14 @@
         <label for="m-msg">Contanos sobre tu tienda <span class="ob-opt">(opcional)</span></label>
         <textarea id="m-msg" name="msg" rows="2" placeholder="Qué vendés y cuánto vendés por mes."></textarea>
       </div>
-      <button class="btn btn-dark btn-lg ob-submit" type="submit">Quiero sumarme</button>
-      <p class="ob-fine">Solo usamos tu mail para contactarte por el piloto.</p>
+      <button class="btn btn-dark btn-lg ob-submit" type="submit">Solicitar credenciales</button>
+      <p class="ob-fine">Solo usamos tu mail para responderte sobre la instalación.</p>
     </form>
 
     <div class="ob-success" hidden>
       <span class="ob-check"><svg class="ic"><use href="#i-check"/></svg></span>
       <h3>¡Te anotamos!</h3>
-      <p>Gracias, <b id="m-name-out">tu comercio</b>. Te escribimos a <b id="m-mail-out"></b> para empezar el piloto.</p>
+      <p>Gracias, <b id="m-name-out">tu comercio</b>. Te escribimos a <b id="m-mail-out"></b> para coordinar la instalación.</p>
       <button class="btn btn-ghost" type="button" data-close>Cerrar</button>
     </div>
   </div>

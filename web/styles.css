@@ -156,7 +156,7 @@ img{max-width:100%;display:block}
    1 · HERO
    ================================================================= */
 .hero{position:relative;padding:64px 32px 0;overflow:hidden}
-.hero-vh{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:48px}
+.hero-vh{min-height:calc(100vh - 260px);min-height:calc(100svh - 260px);display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:48px}
 .hero-vh .hero-content{padding-top:0}
 .hero-vh .hero-card-wrap{margin-top:30px;padding-bottom:0}
 @media (max-height:800px){.hero-vh{justify-content:flex-start;padding-top:84px}}
@@ -354,7 +354,6 @@ img{max-width:100%;display:block}
 .ldot{width:8px;height:8px;border-radius:50%;flex:none}
 .ldot.g{background:var(--verde)}
 .ldot.n{background:var(--gris-medio)}
-.emoji{font-size:1em}
 .connector{flex:0 0 30px;position:relative;align-self:center;height:2px;margin-top:-46px}
 .connector::before{content:"";position:absolute;top:50%;left:1px;right:1px;height:2px;transform:translateY(-50%);background:linear-gradient(90deg,var(--cielo),var(--verde));opacity:.55}
 .connector::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:11px;height:11px;border-radius:50%;background:#fff;border:2px solid var(--cielo)}
@@ -583,6 +582,11 @@ body.modal-lock{overflow:hidden}
 .mval strong{display:block;font-size:1.04rem;font-weight:700;margin-bottom:5px;color:var(--ink)}
 .mval p{font-size:.92rem;color:var(--gris-oscuro);line-height:1.55}
 .steps-wrap{max-width:720px;margin:0 auto}
+.ops-grid{display:grid;grid-template-columns:1.05fr .95fr 1.05fr .95fr;gap:14px}
+.ops-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 20px 22px;box-shadow:var(--shadow-soft);min-height:190px;display:flex;flex-direction:column}
+.ops-num{font-size:.72rem;font-weight:800;letter-spacing:.12em;color:var(--gris-medio);margin-bottom:34px}
+.ops-card h3{font-size:1.02rem;font-weight:800;letter-spacing:-.01em;margin:0 0 8px;color:var(--ink)}
+.ops-card p{font-size:.9rem;color:var(--gris-oscuro);line-height:1.55;margin:0}
 .plat-cta{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:.85rem;font-weight:600;color:var(--ink);cursor:pointer;background:none;border:0;padding:0;font-family:inherit}
 .plat-cta .ic{width:14px;height:14px;transition:transform .3s var(--ease)}
 .plat-cta:hover .ic{transform:translateX(4px)}
@@ -607,8 +611,9 @@ body.modal-lock{overflow:hidden}
 .faq-body-inner{overflow:hidden;min-height:0}
 .faq-item p{padding:2px 2px 18px;color:var(--gris-oscuro);line-height:1.62;max-width:70ch}
 @media (prefers-reduced-motion:reduce){.faq-body{transition:none}.faq-item summary::after{transition:none}}
+@media (max-width:1040px){.ops-grid{grid-template-columns:1fr 1fr}}
 @media (max-width:900px){.mval-grid{grid-template-columns:1fr 1fr}.client-grid{grid-template-columns:1fr;gap:32px}}
-@media (max-width:560px){.mval-grid{grid-template-columns:1fr}.msec{padding-left:18px;padding-right:18px}}
+@media (max-width:560px){.mval-grid{grid-template-columns:1fr}.msec{padding-left:18px;padding-right:18px}.ops-grid{grid-template-columns:1fr}.ops-card{min-height:0}.ops-num{margin-bottom:18px}}
 
 /* =================================================================
    reveal animation
@@ -682,7 +687,7 @@ body.modal-lock{overflow:hidden}
 @media (max-width:680px){
   /* ---- tighter section rhythm ---- */
   /* hero still fills the viewport on phones (short hero content = full screen) */
-  .hero-vh{min-height:100vh;min-height:100svh;padding-top:84px;padding-bottom:30px}
+  .hero-vh{min-height:calc(100vh - 180px);min-height:calc(100svh - 180px);padding-top:84px;padding-bottom:30px}
   .hero-vh .hero-card-wrap{margin-top:22px}
   .wedge{padding-top:48px;padding-bottom:48px}
   .flow{padding-top:48px;padding-bottom:48px}
@@ -712,7 +717,7 @@ body.modal-lock{overflow:hidden}
   .plugin-grid{grid-template-columns:1fr 1fr;gap:10px}
   .plugin{padding:13px 12px;gap:6px}
   .pg-ic{width:34px;height:34px}
-  .pg-flow{display:none}            /* "V ⋯ Mercado Pago" chip repeated x4 */
+  .pg-flow{display:none}            /* integration badges are decorative on mobile */
   .wv-foot{display:none}            /* value props restated in wedge text + trust */
 
   /* ---- FLOW: drop captions, tighten step cards ---- */
@@ -758,5 +763,5 @@ body.modal-lock{overflow:hidden}
   #plataformas .plat-ic{width:36px;height:36px;margin-bottom:10px}
   #plataformas .ch-row{flex-wrap:wrap;gap:4px 8px;margin-bottom:0}
   #plataformas .plat-card p{display:none}     /* secondary copy; keep board compact */
-  #plataformas .plat-cta{display:none}        /* global "Sumate al piloto" CTA covers it */
+  #plataformas .plat-cta{display:none}        /* hero and final install CTAs cover it */
 }

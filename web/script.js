@@ -41,7 +41,7 @@
   // ---- interactive hero checkout card ----
   var vcard = document.getElementById('vcard');
   if (vcard) {
-    var TOTAL = 27980;          // subtotal + envío
+    var TOTAL = 27980;          // subtotal + envío, before donation
     var FIJO = 10;              // aporte fijo
     var PCT = 0.005;            // 0,5%
 
@@ -58,10 +58,6 @@
     function money(n) {
       return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     }
-    function pct(val) {
-      var p = Math.round((val / TOTAL) * 10000) / 100; // 2 decimals
-      return p.toString().replace('.', ',');
-    }
     function pop(el) {
       if (!el) return;
       el.classList.remove('value-pop');
@@ -71,17 +67,17 @@
 
     function render(animate) {
       var aporte = !state.enabled ? 0 : (state.mode === 'fijo' ? FIJO : Math.round(TOTAL * PCT));
-      var vendedor = TOTAL - aporte;
+      var totalCobrado = TOTAL + aporte;
 
       elAporte.textContent = money(aporte);
-      elVendedor.textContent = money(vendedor);
+      elVendedor.textContent = money(totalCobrado);
       elVueltito.textContent = money(aporte);
 
       if (state.enabled) {
-        elNote.textContent = 'Split automático ' + pct(vendedor) + '% / ' + pct(aporte) + '%';
+        elNote.textContent = 'El comercio cobra el total · remesa pendiente a ONG';
         elVnote2.textContent = 'Podés quitarlo antes de pagar.';
       } else {
-        elNote.textContent = 'Sin aporte · 100% al comercio';
+        elNote.textContent = 'Sin donación · se cobra solo la compra';
         elVnote2.textContent = 'Activalo cuando quieras sumar tu aporte.';
       }
 
