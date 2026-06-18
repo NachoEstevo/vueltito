@@ -16,21 +16,26 @@
   /* ---- leaderboard page (reuses landing tokens) ---- */
   .lbp{position:relative;overflow:hidden}
   .lbp-bg{position:absolute;inset:0;z-index:0;background-color:#dff0ec;background-image:
-    radial-gradient(70% 60% at 18% 12%, rgba(220,238,248,.85), transparent 60%),
-    radial-gradient(80% 70% at 88% 0%, rgba(255,244,214,.7), transparent 55%),
-    linear-gradient(180deg,#e7f3ef 0%,#eef5ef 40%,var(--papel) 100%)}
-  .lbp-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(250,250,248,0) 60%,var(--papel) 100%)}
-  .lbp-head{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:64px 32px 30px;text-align:center}
+    radial-gradient(70% 58% at 12% 10%, rgba(220,238,248,.78), transparent 62%),
+    radial-gradient(75% 66% at 88% 2%, rgba(255,244,214,.62), transparent 56%),
+    linear-gradient(180deg,rgba(231,243,239,.82) 0%,rgba(238,245,239,.7) 42%,var(--papel) 100%),
+    var(--impact-img);background-size:cover;background-position:center}
+  .lbp-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(250,250,248,.08) 0%,rgba(250,250,248,.78) 68%,var(--papel) 100%)}
+  .lbp-head{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:70px 32px 34px;text-align:left}
   .lbp-head .serif-h2{margin:14px 0 14px}
-  .lbp-head .lead{margin-inline:auto}
-  .lbp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:760px;margin:32px auto 0}
+  .lbp-head .lead{max-width:620px}
+  .lbp-topline{display:flex;align-items:flex-end;justify-content:space-between;gap:28px}
+  .lbp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:760px;margin:32px 0 0}
   .lbp-stat{background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:var(--r-md);
     backdrop-filter:blur(6px);padding:18px 20px;text-align:left}
   .lbp-stat .lbp-k{font-family:var(--font-serif);font-weight:400;font-size:1.9rem;line-height:1;color:var(--ink)}
   .lbp-stat .lbp-l{display:block;margin-top:8px;font-size:.86rem;color:var(--gris-oscuro)}
 
-  .lbp-body{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:8px 32px 70px}
-  .lbp-layout{display:grid;grid-template-columns:1.55fr .75fr;gap:26px;align-items:start}
+  .lbp-live{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.76);border:1px solid rgba(255,255,255,.9);border-radius:999px;padding:9px 14px;font-size:.86rem;font-weight:700;color:var(--gris-oscuro);box-shadow:var(--shadow-soft)}
+  .lbp-live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--verde);box-shadow:0 0 0 6px rgba(122,201,67,.14)}
+
+  .lbp-body{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:8px 32px 76px}
+  .lbp-layout{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(280px,.72fr);gap:26px;align-items:start}
 
   .lbp-tabs{display:inline-flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px;margin-bottom:16px}
   .lbp-tab{border:0;background:none;font:inherit;font-weight:600;font-size:.88rem;color:var(--gris-oscuro);
@@ -52,6 +57,12 @@
 
   .lbp-note{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:.86rem;color:var(--gris-oscuro)}
   .lbp-note .ic{color:var(--verde)}
+  .lbp-state{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px;padding:13px 15px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.82);font-size:.88rem;color:var(--gris-oscuro)}
+  .lbp-state strong{color:var(--ink)}
+  .lbp-state[data-state="live"]{border-color:rgba(122,201,67,.35);background:#F4FAF1}
+  .lbp-state[data-state="error"],.lbp-state[data-state="fallback"]{background:#fff}
+  .lbp-empty{padding:34px 18px;text-align:center;color:var(--gris-oscuro)}
+  .lbp-empty strong{display:block;color:var(--ink);font-size:1.02rem;margin-bottom:4px}
 
   .lbp-side{display:flex;flex-direction:column;gap:18px}
   .lbp-ong{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
@@ -61,6 +72,7 @@
   .lbp-ong .lbp-ong-amt{font-size:.88rem;color:var(--gris-oscuro)}
 
   @media (max-width:980px){
+    .lbp-topline{align-items:flex-start;flex-direction:column}
     .lbp-layout{grid-template-columns:1fr;gap:20px}
   }
   @media (max-width:680px){
@@ -87,6 +99,8 @@
     <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 9h16M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
     <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 2.5v5c0 4.5-3 8-7 9.5-4-1.5-7-5-7-9.5v-5L12 3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V8a4 4 0 0 1 8 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
     <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-9.3A3.7 3.7 0 0 1 12 8a3.7 3.7 0 0 1 7 2.7C19 15.6 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 10l1.8 1.8L15 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 15l-1 6 4-2 4 2-1-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="i-ledger" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 8h6M9 12h6M9 16h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
@@ -123,20 +137,26 @@
 <section class="lbp">
   <div class="lbp-bg" aria-hidden="true"></div>
   <div class="lbp-head reveal">
-    <h2 class="serif-h2 big">Quiénes hacen<br>el vuelto grande.</h2>
-    <p class="lead center">El ranking público de quienes suman su vuelto en cada compra. Participás con un alias —o donás en privado—. Lo que se muestra acá ya está conciliado y asignado a ONGs verificadas.</p>
+    <div class="lbp-topline">
+      <div>
+        <span class="eyebrow-pill">Leaderboard público</span>
+        <h2 class="serif-h2 big">Quiénes hacen<br>el vuelto grande.</h2>
+        <p class="lead">El ranking público de quienes eligen aparecer con alias. Si el comprador dona en privado, su aporte suma al impacto agregado pero no aparece acá.</p>
+      </div>
+      <span class="lbp-live" id="leaderboard-status-pill">Cargando datos</span>
+    </div>
     <div class="lbp-stats">
       <div class="lbp-stat">
-        <span class="lbp-k">$4.8M</span>
-        <span class="lbp-l">Donado este mes por la comunidad</span>
+        <span class="lbp-k" id="leaderboard-total">$0</span>
+        <span class="lbp-l">Impacto opt-in publicado</span>
       </div>
       <div class="lbp-stat">
-        <span class="lbp-k">16</span>
-        <span class="lbp-l">ONGs verificadas recibiendo aportes</span>
+        <span class="lbp-k" id="leaderboard-donors">0</span>
+        <span class="lbp-l">Aliases visibles</span>
       </div>
       <div class="lbp-stat">
-        <span class="lbp-k">12.430</span>
-        <span class="lbp-l">Aportes registrados en el ledger</span>
+        <span class="lbp-k" id="leaderboard-donations">0</span>
+        <span class="lbp-l">Aportes con consentimiento público</span>
       </div>
     </div>
   </div>
@@ -147,59 +167,44 @@
       <!-- main leaderboard -->
       <div class="lb-card">
         <div class="lb-head">
-          <h3>Leaderboard</h3>
+          <h3>Ranking actual</h3>
           <div class="lb-tools">
-            <span class="lb-date"><svg class="ic"><use href="#i-cal"/></svg> 1 – 30 Jun</span>
+            <span class="lb-date"><svg class="ic"><use href="#i-cal"/></svg> Datos públicos</span>
             <span class="lb-filter"><svg class="ic"><use href="#i-filter"/></svg></span>
           </div>
         </div>
 
         <div class="lbp-tabs" role="tablist" aria-label="Período del ranking">
-          <button class="lbp-tab is-active" type="button" data-tab="mes" role="tab" aria-selected="true">Este mes</button>
-          <button class="lbp-tab" type="button" data-tab="acumulado" role="tab" aria-selected="false">Acumulado</button>
+          <button class="lbp-tab is-active" type="button" data-tab="mes" role="tab" aria-selected="true">Ranking</button>
+          <button class="lbp-tab" type="button" data-tab="acumulado" role="tab" aria-selected="false">Reglas</button>
         </div>
 
         <!-- monthly -->
         <div class="lb-panel is-active" data-panel="mes">
+          <div class="lbp-state" id="leaderboard-state" data-state="loading">
+            <span><strong>Cargando leaderboard.</strong> Buscando donantes con opt-in público.</span>
+          </div>
           <div class="lb-table">
-            <div class="lb-thead"><span>#</span><span>Alias</span><span>Impacto generado</span><span>Asignado a ONGs</span><span>Insignias</span></div>
-            <div class="lb-row r1"><span class="lb-rank">1</span><span class="lb-alias"><i class="av av-1"></i>Lucía</span><span>$18.450</span><span>3 ONGs</span><span class="chip chip-green">Transparente</span></div>
-            <div class="lb-row r2"><span class="lb-rank">2</span><span class="lb-alias"><i class="av av-2"></i>Mateo</span><span>$14.230</span><span>2 ONGs</span><span class="chip chip-blue">Constante</span></div>
-            <div class="lb-row r3"><span class="lb-rank">3</span><span class="lb-alias"><i class="av av-3"></i>Valentina</span><span>$11.890</span><span>2 ONGs</span><span class="chip chip-violet">Comercio aliado</span></div>
-            <div class="lb-row"><span class="lb-rank">4</span><span class="lb-alias"><i class="av av-4"></i>Tomás</span><span>$9.620</span><span>1 ONG</span><span class="chip chip-green">Transparente</span></div>
-            <div class="lb-row lb-you"><span class="lb-rank">5</span><span class="lb-alias"><i class="av av-5"></i>Camila</span><span>$8.340</span><span>2 ONGs</span><span class="chip chip-blue">Constante</span></div>
-            <div class="lb-row"><span class="lb-rank">6</span><span class="lb-alias"><i class="av av-1"></i>Joaquín</span><span>$7.115</span><span>1 ONG</span><span class="chip chip-green">Transparente</span></div>
-            <div class="lb-row"><span class="lb-rank">7</span><span class="lb-alias"><i class="av av-2"></i>Sofía</span><span>$6.480</span><span>2 ONGs</span><span class="chip chip-amber">Nueva</span></div>
-            <div class="lb-row"><span class="lb-rank">8</span><span class="lb-alias"><i class="av av-3"></i>Benjamín</span><span>$5.905</span><span>1 ONG</span><span class="chip chip-blue">Constante</span></div>
-            <div class="lb-row"><span class="lb-rank">9</span><span class="lb-alias"><i class="av av-4"></i>Martina</span><span>$5.220</span><span>1 ONG</span><span class="chip chip-green">Transparente</span></div>
-            <div class="lb-row"><span class="lb-rank">10</span><span class="lb-alias"><i class="av av-5"></i>Bruno</span><span>$4.760</span><span>2 ONGs</span><span class="chip chip-violet">Comercio aliado</span></div>
-            <div class="lb-row"><span class="lb-rank">11</span><span class="lb-alias"><i class="av av-1"></i>Renata</span><span>$4.130</span><span>1 ONG</span><span class="chip chip-amber">Nueva</span></div>
-            <div class="lb-row"><span class="lb-rank">12</span><span class="lb-alias"><i class="av av-2"></i>Thiago</span><span>$3.690</span><span>1 ONG</span><span class="chip chip-green">Transparente</span></div>
+            <div class="lb-thead"><span>#</span><span>Alias</span><span>Impacto generado</span><span>Aportes</span><span>Insignias</span></div>
+            <div id="leaderboard-rows" aria-live="polite"></div>
           </div>
         </div>
 
         <!-- all-time -->
         <div class="lb-panel" data-panel="acumulado">
-          <div class="lb-table">
-            <div class="lb-thead"><span>#</span><span>Alias</span><span>Impacto generado</span><span>Asignado a ONGs</span><span>Insignias</span></div>
-            <div class="lb-row r1"><span class="lb-rank">1</span><span class="lb-alias"><i class="av av-3"></i>Valentina</span><span>$142.300</span><span>6 ONGs</span><span class="chip chip-violet">Leyenda</span></div>
-            <div class="lb-row r2"><span class="lb-rank">2</span><span class="lb-alias"><i class="av av-1"></i>Lucía</span><span>$128.940</span><span>5 ONGs</span><span class="chip chip-green">Transparente</span></div>
-            <div class="lb-row r3"><span class="lb-rank">3</span><span class="lb-alias"><i class="av av-5"></i>Camila</span><span>$96.510</span><span>4 ONGs</span><span class="chip chip-blue">Constante</span></div>
-            <div class="lb-row"><span class="lb-rank">4</span><span class="lb-alias"><i class="av av-2"></i>Mateo</span><span>$88.700</span><span>4 ONGs</span><span class="chip chip-blue">Constante</span></div>
-            <div class="lb-row"><span class="lb-rank">5</span><span class="lb-alias"><i class="av av-4"></i>Tomás</span><span>$74.220</span><span>3 ONGs</span><span class="chip chip-green">Transparente</span></div>
-            <div class="lb-row"><span class="lb-rank">6</span><span class="lb-alias"><i class="av av-3"></i>Benjamín</span><span>$61.080</span><span>3 ONGs</span><span class="chip chip-violet">Comercio aliado</span></div>
-            <div class="lb-row"><span class="lb-rank">7</span><span class="lb-alias"><i class="av av-1"></i>Joaquín</span><span>$53.940</span><span>2 ONGs</span><span class="chip chip-green">Transparente</span></div>
-            <div class="lb-row"><span class="lb-rank">8</span><span class="lb-alias"><i class="av av-2"></i>Sofía</span><span>$47.610</span><span>3 ONGs</span><span class="chip chip-blue">Constante</span></div>
-            <div class="lb-row"><span class="lb-rank">9</span><span class="lb-alias"><i class="av av-4"></i>Martina</span><span>$41.350</span><span>2 ONGs</span><span class="chip chip-green">Transparente</span></div>
-            <div class="lb-row"><span class="lb-rank">10</span><span class="lb-alias"><i class="av av-5"></i>Bruno</span><span>$38.770</span><span>2 ONGs</span><span class="chip chip-violet">Comercio aliado</span></div>
-            <div class="lb-row"><span class="lb-rank">11</span><span class="lb-alias"><i class="av av-1"></i>Renata</span><span>$33.120</span><span>2 ONGs</span><span class="chip chip-blue">Constante</span></div>
-            <div class="lb-row"><span class="lb-rank">12</span><span class="lb-alias"><i class="av av-2"></i>Thiago</span><span>$29.480</span><span>2 ONGs</span><span class="chip chip-green">Transparente</span></div>
+          <div class="mini-card" style="box-shadow:none">
+            <h4>Privacidad y moderación</h4>
+            <ul class="trans-list">
+              <li><span class="tl-ic"><svg class="ic"><use href="#i-eye"/></svg></span><div><strong>Opt-in explícito</strong><span>El comprador decide si aparece con alias.</span></div></li>
+              <li><span class="tl-ic"><svg class="ic"><use href="#i-lock"/></svg></span><div><strong>Email privado</strong><span>Se usa para identidad interna y nunca se publica.</span></div></li>
+              <li><span class="tl-ic"><svg class="ic"><use href="#i-shield"/></svg></span><div><strong>Moderación</strong><span>Vueltito puede ocultar aliases abusivos o inválidos.</span></div></li>
+            </ul>
           </div>
         </div>
 
         <div class="lbp-note">
           <svg class="ic"><use href="#i-shield"/></svg>
-          <span>Solo aparecen aportes conciliados y asignados. El ranking es opcional: podés donar en privado.</span>
+          <span>Solo aparecen compradores que aceptaron figurar. El ranking muestra alias, no datos personales.</span>
         </div>
       </div>
 
@@ -217,9 +222,9 @@
         <div class="mini-card">
           <h4>Cómo se mide</h4>
           <ul class="trans-list">
-            <li><span class="tl-ic"><svg class="ic"><use href="#i-heart"/></svg></span><div><strong>Impacto generado</strong><span>Suma de tus aportes del período</span></div></li>
+            <li><span class="tl-ic"><svg class="ic"><use href="#i-heart"/></svg></span><div><strong>Impacto generado</strong><span>Suma de aportes publicados</span></div></li>
             <li><span class="tl-ic"><svg class="ic"><use href="#i-badge"/></svg></span><div><strong>Insignias</strong><span>Constancia, transparencia y más</span></div></li>
-            <li><span class="tl-ic"><svg class="ic"><use href="#i-ledger"/></svg></span><div><strong>Conciliado</strong><span>Cada peso, trazable hasta la ONG</span></div></li>
+            <li><span class="tl-ic"><svg class="ic"><use href="#i-ledger"/></svg></span><div><strong>Ledger</strong><span>Cada aporte queda registrado</span></div></li>
           </ul>
           <a class="mini-link" href="index.html#recursos">Leer transparencia <svg class="ic"><use href="#i-arrow"/></svg></a>
         </div>
@@ -307,6 +312,143 @@
         });
       });
     });
+  })();
+
+  // Live public leaderboard.
+  (function () {
+    var API_URL = 'https://vueltito-api-production.up.railway.app/v1/public/leaderboard?limit=12';
+    var fallbackRows = [
+      { publicAlias: 'Lucia', amountCents: 1845000, currency: 'ARS', donations: 9 },
+      { publicAlias: 'Mateo', amountCents: 1423000, currency: 'ARS', donations: 7 },
+      { publicAlias: 'Valentina', amountCents: 1189000, currency: 'ARS', donations: 6 },
+      { publicAlias: 'Tomas', amountCents: 962000, currency: 'ARS', donations: 5 },
+      { publicAlias: 'Camila', amountCents: 834000, currency: 'ARS', donations: 5 },
+      { publicAlias: 'Joaquin', amountCents: 711500, currency: 'ARS', donations: 4 },
+      { publicAlias: 'Sofia', amountCents: 648000, currency: 'ARS', donations: 4 },
+      { publicAlias: 'Benjamin', amountCents: 590500, currency: 'ARS', donations: 3 },
+      { publicAlias: 'Martina', amountCents: 522000, currency: 'ARS', donations: 3 },
+      { publicAlias: 'Bruno', amountCents: 476000, currency: 'ARS', donations: 3 },
+      { publicAlias: 'Renata', amountCents: 413000, currency: 'ARS', donations: 2 },
+      { publicAlias: 'Thiago', amountCents: 369000, currency: 'ARS', donations: 2 }
+    ];
+
+    var rowsEl = document.getElementById('leaderboard-rows');
+    var stateEl = document.getElementById('leaderboard-state');
+    var statusPill = document.getElementById('leaderboard-status-pill');
+    var totalEl = document.getElementById('leaderboard-total');
+    var donorsEl = document.getElementById('leaderboard-donors');
+    var donationsEl = document.getElementById('leaderboard-donations');
+    if (!rowsEl || !stateEl || !statusPill || !totalEl || !donorsEl || !donationsEl) return;
+
+    function money(cents, currency) {
+      try {
+        return new Intl.NumberFormat('es-AR', {
+          style: 'currency',
+          currency: currency || 'ARS',
+          maximumFractionDigits: 0
+        }).format((Number(cents) || 0) / 100);
+      } catch (error) {
+        return '$' + Math.round((Number(cents) || 0) / 100).toLocaleString('es-AR');
+      }
+    }
+
+    function number(value) {
+      return new Intl.NumberFormat('es-AR').format(Number(value) || 0);
+    }
+
+    function textNode(value) {
+      return document.createTextNode(String(value));
+    }
+
+    function badgeFor(row, index) {
+      if (index === 0) return ['Transparente', 'chip-green'];
+      if ((row.donations || 0) >= 6) return ['Constante', 'chip-blue'];
+      if ((row.donations || 0) <= 2) return ['Nuevo', 'chip-amber'];
+      return ['Impacto', 'chip-violet'];
+    }
+
+    function setState(kind, strong, text) {
+      stateEl.setAttribute('data-state', kind);
+      stateEl.innerHTML = '';
+      var span = document.createElement('span');
+      var bold = document.createElement('strong');
+      bold.appendChild(textNode(strong));
+      span.appendChild(bold);
+      span.appendChild(textNode(' ' + text));
+      stateEl.appendChild(span);
+      statusPill.textContent = kind === 'live' ? 'Datos en vivo' : kind === 'fallback' ? 'Vista de ejemplo' : 'Sin datos reales';
+    }
+
+    function renderRows(rows, mode) {
+      rowsEl.innerHTML = '';
+      if (!rows.length) {
+        rowsEl.innerHTML = '<div class="lbp-empty"><strong>No hay aliases públicos todavía.</strong><span>Cuando compradores opten por aparecer, el ranking se completa automáticamente.</span></div>';
+        setState('empty', 'Aún sin participantes.', 'Las donaciones privadas siguen sumando al impacto agregado.');
+        totalEl.textContent = money(0, 'ARS');
+        donorsEl.textContent = '0';
+        donationsEl.textContent = '0';
+        return;
+      }
+
+      rows.forEach(function (row, index) {
+        var badge = badgeFor(row, index);
+        var item = document.createElement('div');
+        item.className = 'lb-row' + (index < 3 ? ' r' + (index + 1) : '');
+
+        var rank = document.createElement('span');
+        rank.className = 'lb-rank';
+        rank.appendChild(textNode(index + 1));
+
+        var alias = document.createElement('span');
+        alias.className = 'lb-alias';
+        var avatar = document.createElement('i');
+        avatar.className = 'av av-' + ((index % 5) + 1);
+        alias.appendChild(avatar);
+        alias.appendChild(textNode(row.publicAlias || 'Donante'));
+
+        var amount = document.createElement('span');
+        amount.appendChild(textNode(money(row.amountCents, row.currency)));
+
+        var donations = document.createElement('span');
+        donations.appendChild(textNode(number(row.donations) + (row.donations === 1 ? ' aporte' : ' aportes')));
+
+        var chip = document.createElement('span');
+        chip.className = 'chip ' + badge[1];
+        chip.appendChild(textNode(badge[0]));
+
+        item.appendChild(rank);
+        item.appendChild(alias);
+        item.appendChild(amount);
+        item.appendChild(donations);
+        item.appendChild(chip);
+        rowsEl.appendChild(item);
+      });
+
+      var total = rows.reduce(function (sum, row) { return sum + (Number(row.amountCents) || 0); }, 0);
+      var donationsTotal = rows.reduce(function (sum, row) { return sum + (Number(row.donations) || 0); }, 0);
+      totalEl.textContent = money(total, rows[0] && rows[0].currency);
+      donorsEl.textContent = number(rows.length);
+      donationsEl.textContent = number(donationsTotal);
+
+      if (mode === 'live') {
+        setState('live', 'Datos en vivo.', 'Ranking cargado desde Core con aliases que aceptaron aparecer.');
+      } else {
+        setState('fallback', 'Vista de ejemplo.', 'La API no devolvió participantes públicos todavía.');
+      }
+    }
+
+    window.fetch(API_URL, { cache: 'no-store' })
+      .then(function (response) {
+        if (!response.ok) throw new Error('leaderboard_unavailable');
+        return response.json();
+      })
+      .then(function (payload) {
+        var rows = payload && Array.isArray(payload.rows) ? payload.rows : [];
+        renderRows(rows.length ? rows : fallbackRows, rows.length ? 'live' : 'fallback');
+      })
+      .catch(function () {
+        renderRows(fallbackRows, 'fallback');
+      });
   })();
 </script>
 <script src="script.js"></script>

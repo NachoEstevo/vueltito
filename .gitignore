@@ -1,2 +1,7 @@
 .DS_Store
 .superpowers/
+.logs/
+.pnpm-store/
+*.log
+*.zone
+vueltito-platform-staging/

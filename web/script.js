@@ -299,6 +299,86 @@
     });
   }
 
+  // ---- live leaderboard preview on the home page ----
+  (function hydrateLeaderboardPreview() {
+    var preview = document.getElementById('home-leaderboard-preview');
+    if (!preview || !window.fetch) return;
+
+    function money(cents, currency) {
+      try {
+        return new Intl.NumberFormat('es-AR', {
+          style: 'currency',
+          currency: currency || 'ARS',
+          maximumFractionDigits: 0
+        }).format((Number(cents) || 0) / 100);
+      } catch (error) {
+        return '$' + Math.round((Number(cents) || 0) / 100).toLocaleString('es-AR');
+      }
+    }
+
+    function badgeFor(row, index) {
+      if (index === 0) return ['Transparente', 'chip-green'];
+      if ((row.donations || 0) >= 6) return ['Constante', 'chip-blue'];
+      if ((row.donations || 0) <= 2) return ['Nuevo', 'chip-amber'];
+      return ['Impacto', 'chip-violet'];
+    }
+
+    function appendText(parent, value) {
+      parent.appendChild(document.createTextNode(String(value)));
+    }
+
+    function render(rows) {
+      var head = preview.querySelector('.lb-thead');
+      preview.innerHTML = '';
+      if (head) preview.appendChild(head);
+
+      rows.slice(0, 5).forEach(function (row, index) {
+        var badge = badgeFor(row, index);
+        var item = document.createElement('div');
+        item.className = 'lb-row';
+
+        var rank = document.createElement('span');
+        rank.className = 'lb-rank';
+        appendText(rank, index + 1);
+
+        var alias = document.createElement('span');
+        alias.className = 'lb-alias';
+        var avatar = document.createElement('i');
+        avatar.className = 'av av-' + ((index % 5) + 1);
+        alias.appendChild(avatar);
+        appendText(alias, row.publicAlias || 'Donante');
+
+        var amount = document.createElement('span');
+        appendText(amount, money(row.amountCents, row.currency));
+
+        var donations = document.createElement('span');
+        appendText(donations, Number(row.donations) === 1 ? '1 aporte' : (Number(row.donations) || 0) + ' aportes');
+
+        var chip = document.createElement('span');
+        chip.className = 'chip ' + badge[1];
+        appendText(chip, badge[0]);
+
+        item.appendChild(rank);
+        item.appendChild(alias);
+        item.appendChild(amount);
+        item.appendChild(donations);
+        item.appendChild(chip);
+        preview.appendChild(item);
+      });
+    }
+
+    window.fetch('https://vueltito-api-production.up.railway.app/v1/public/leaderboard?limit=5', { cache: 'no-store' })
+      .then(function (response) {
+        if (!response.ok) throw new Error('leaderboard_unavailable');
+        return response.json();
+      })
+      .then(function (payload) {
+        var rows = payload && Array.isArray(payload.rows) ? payload.rows : [];
+        if (rows.length) render(rows);
+      })
+      .catch(function () {});
+  })();
+
   // ---- smooth FAQ (animated <details>) ----
   var reduceMotion = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
