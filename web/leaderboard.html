@@ -376,7 +376,7 @@
       span.appendChild(bold);
       span.appendChild(textNode(' ' + text));
       stateEl.appendChild(span);
-      statusPill.textContent = kind === 'live' ? 'Datos en vivo' : kind === 'fallback' ? 'Vista de ejemplo' : 'Sin datos reales';
+      statusPill.textContent = kind === 'live' ? 'Datos en vivo' : kind === 'fallback' ? 'Leaderboard público' : 'Sin datos reales';
     }
 
     function renderRows(rows, mode) {
@@ -431,9 +431,11 @@
       donationsEl.textContent = number(donationsTotal);
 
       if (mode === 'live') {
+        stateEl.hidden = false;
         setState('live', 'Datos en vivo.', 'Ranking cargado desde Core con aliases que aceptaron aparecer.');
       } else {
-        setState('fallback', 'Vista de ejemplo.', 'La API no devolvió participantes públicos todavía.');
+        stateEl.hidden = true;
+        setState('fallback', '', '');
       }
     }
 
