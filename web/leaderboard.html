@@ -31,8 +31,6 @@
   .lbp-stat .lbp-k{font-family:var(--font-serif);font-weight:400;font-size:1.9rem;line-height:1;color:var(--ink)}
   .lbp-stat .lbp-l{display:block;margin-top:8px;font-size:.86rem;color:var(--gris-oscuro)}
 
-  .lbp-live{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.76);border:1px solid rgba(255,255,255,.9);border-radius:999px;padding:9px 14px;font-size:.86rem;font-weight:700;color:var(--gris-oscuro);box-shadow:var(--shadow-soft)}
-  .lbp-live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--verde);box-shadow:0 0 0 6px rgba(122,201,67,.14)}
 
   .lbp-body{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:8px 32px 76px}
   .lbp-layout{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(280px,.72fr);gap:26px;align-items:start}
@@ -139,11 +137,9 @@
   <div class="lbp-head reveal">
     <div class="lbp-topline">
       <div>
-        <span class="eyebrow-pill">Leaderboard público</span>
         <h2 class="serif-h2 big">Quiénes hacen<br>el vuelto grande.</h2>
         <p class="lead">El ranking público de quienes eligen aparecer con alias. Si el comprador dona en privado, su aporte suma al impacto agregado pero no aparece acá.</p>
       </div>
-      <span class="lbp-live" id="leaderboard-status-pill">Cargando datos</span>
     </div>
     <div class="lbp-stats">
       <div class="lbp-stat">
@@ -334,11 +330,10 @@
 
     var rowsEl = document.getElementById('leaderboard-rows');
     var stateEl = document.getElementById('leaderboard-state');
-    var statusPill = document.getElementById('leaderboard-status-pill');
     var totalEl = document.getElementById('leaderboard-total');
     var donorsEl = document.getElementById('leaderboard-donors');
     var donationsEl = document.getElementById('leaderboard-donations');
-    if (!rowsEl || !stateEl || !statusPill || !totalEl || !donorsEl || !donationsEl) return;
+    if (!rowsEl || !stateEl || !totalEl || !donorsEl || !donationsEl) return;
 
     function money(cents, currency) {
       try {
@@ -376,7 +371,6 @@
       span.appendChild(bold);
       span.appendChild(textNode(' ' + text));
       stateEl.appendChild(span);
-      statusPill.textContent = kind === 'live' ? 'Datos en vivo' : kind === 'fallback' ? 'Leaderboard público' : 'Sin datos reales';
     }
 
     function renderRows(rows, mode) {
