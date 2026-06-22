@@ -1,6 +1,6 @@
 <div align="center">
 
-# don.ar
+# vueltito
 
 ### Donar el vuelto nunca fue tan simple
 
@@ -19,7 +19,7 @@ a las compras de todos los días.
 
 ## La idea en una frase
 
-> Cuando comprás en un comercio integrado, **don.ar** te deja sumar un aporte mínimo
+> Cuando comprás en un comercio integrado, **vueltito** te deja sumar un aporte mínimo
 > —un redondeo, unos pesos fijos o un porcentaje chico— que se asigna a una ONG verificada.
 > Lo ves antes de pagar, lo podés sacar, y queda registrado para siempre.
 
@@ -43,12 +43,12 @@ El resultado: mucha gente con ganas de aportar que **nunca llega a hacerlo**.
 
 ## La solución
 
-don.ar convierte la donación en algo que pasa **en el momento exacto** en que ya
+vueltito convierte la donación en algo que pasa **en el momento exacto** en que ya
 estás dispuesto a pagar: el checkout.
 
 ```
 Tu compra:        $ 4.380
-Tu aporte don.ar: $ 20      →  Comedor Los Pibes
+Tu aporte vueltito: $ 20      →  Comedor Los Pibes
 Total:            $ 4.400
 ```
 
@@ -64,7 +64,7 @@ Lo poco se vuelve mucho cuando lo hacen muchas personas, muchas veces.
 
 ## Por qué es distinto
 
-| | don.ar |
+| | vueltito |
 |---|---|
 | **Transparente** | El aporte se muestra siempre antes de pagar. Nunca es un cargo sorpresa. |
 | **Opcional** | Es opt-in. Lo activás vos y lo podés quitar en cualquier momento. |
@@ -80,7 +80,7 @@ Lo poco se vuelve mucho cuando lo hacen muchas personas, muchas veces.
 Aportás sin esfuerzo, ves a dónde va tu plata y elegís cuánto.
 
 **Para los comercios.**
-Suman una causa a su marca y activan don.ar sin tocar su stack de pagos.
+Suman una causa a su marca y activan vueltito sin tocar su stack de pagos.
 
 **Para las ONGs.**
 Reciben aportes recurrentes, verificables y con reportes claros.
@@ -89,7 +89,7 @@ Reciben aportes recurrentes, verificables y con reportes claros.
 
 ## El extra: que sumar dé ganas
 
-don.ar incluye un **leaderboard opcional** y reconocimientos no monetarios.
+vueltito incluye un **leaderboard opcional** y reconocimientos no monetarios.
 El que quiere, participa con un alias; el que no, dona igual de tranquilo y en privado.
 La idea es simple: **hacer del aporte algo que se sienta bien y dé ganas de repetir.**
 
@@ -114,6 +114,7 @@ Hoy **vueltito** ya tiene una primera integración instalable para WooCommerce.
 - La idea, la estrategia y la arquitectura están documentadas.
 - WooCommerce 0.4.7 permite instalar el plugin, mostrar una donación visible en checkout y reportar eventos al core.
 - Buscamos ONGs, comercios y aliados para crecer con un modelo claro: el comercio cobra la donación, transfiere el 100% a la ONG y vueltito no custodia esos fondos.
+- Para los primeros pilotos, vueltito no descuenta ni cobra comisión sobre las donaciones. El objetivo inicial es validar checkout, trazabilidad, remesas y confianza antes de activar cualquier modelo pago para comercios.
 
 > ¿Te interesa la idea, querés sumar tu ONG o tu comercio, o simplemente charlar?
 > Estamos abriendo la conversación.

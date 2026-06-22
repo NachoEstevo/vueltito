@@ -25,6 +25,7 @@
   --white:#ffffff;
 
   --maxw:1280px;
+  --nav-h:77px;
   --r-sm:12px;
   --r-md:18px;
   --r-lg:26px;
@@ -48,7 +49,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h)}
 body{
   font-family:var(--font-sans);
   background:var(--papel);
@@ -57,6 +58,10 @@ body{
   text-rendering:optimizeLegibility;
   line-height:1.5;
   overflow-x:hidden;
+}
+::selection{
+  background:rgba(174,227,247,.72);
+  color:var(--ink);
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
@@ -155,11 +160,13 @@ img{max-width:100%;display:block}
 /* =================================================================
    1 · HERO
    ================================================================= */
+.hero,.wedge,.flow,.impact,.trust,.final,.msec,.lbp{min-height:calc(100vh - var(--nav-h));min-height:calc(100dvh - var(--nav-h));scroll-margin-top:var(--nav-h)}
+.wedge,.flow,.impact,.trust,.final,.msec,.lbp{display:flex;flex-direction:column;justify-content:center}
 .hero{position:relative;padding:64px 32px 0;overflow:hidden}
-.hero-vh{min-height:calc(100vh - 260px);min-height:calc(100svh - 260px);display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:48px}
+.hero-vh{display:flex;flex-direction:column;justify-content:center;padding-top:96px;padding-bottom:48px}
 .hero-vh .hero-content{padding-top:0}
 .hero-vh .hero-card-wrap{margin-top:30px;padding-bottom:0}
-@media (max-height:800px){.hero-vh{justify-content:flex-start;padding-top:84px}}
+@media (max-height:800px){.hero-vh{padding-top:84px}}
 .hero-bg{
   position:absolute;inset:0;z-index:0;background-color:#e3eff0;
   background-image:
@@ -477,8 +484,8 @@ img{max-width:100%;display:block}
 .footer-cols{display:grid;grid-template-columns:repeat(4,1fr) 1.1fr;gap:30px}
 .fcol{display:flex;flex-direction:column;gap:13px}
 .fcol h5{font-size:.95rem;font-weight:700;margin-bottom:5px}
-.fcol a{font-size:.9rem;color:var(--gris-oscuro);transition:color .2s}
-.fcol a:hover{color:var(--ink)}
+.fcol a,.fcol button{font:inherit;font-size:.9rem;color:var(--gris-oscuro);transition:color .2s;text-align:left;background:none;border:0;padding:0;cursor:pointer}
+.fcol a:hover,.fcol button:hover{color:var(--ink)}
 .fcol-brand{align-items:flex-start;gap:10px}
 .fcol-brand p{font-size:.88rem;color:var(--gris-oscuro)}
 .socials{display:flex;gap:14px;margin-top:6px;color:var(--gris-oscuro)}
@@ -638,6 +645,7 @@ body.modal-lock{overflow:hidden}
   .connector{display:none}
 }
 @media (max-width:900px){
+  :root{--nav-h:62px}
   .nav-links,.nav-cta{display:none}
   .nav-burger{display:flex;margin-left:auto}
   /* stacked dropdown: items flow on their own full-width rows (no absolute hacks) */
@@ -660,6 +668,7 @@ body.modal-lock{overflow:hidden}
   .audit-row code{grid-column:1 / -1}
 }
 @media (max-width:560px){
+  :root{--nav-h:58px}
   .hero{padding:48px 18px 0}
   .wedge,.flow,.impact,.trust,.final{padding-left:18px;padding-right:18px}
   .cc-options{grid-template-columns:1fr 1fr}
@@ -687,7 +696,7 @@ body.modal-lock{overflow:hidden}
 @media (max-width:680px){
   /* ---- tighter section rhythm ---- */
   /* hero still fills the viewport on phones (short hero content = full screen) */
-  .hero-vh{min-height:calc(100vh - 180px);min-height:calc(100svh - 180px);padding-top:84px;padding-bottom:30px}
+  .hero-vh{min-height:calc(100dvh - var(--nav-h));padding-top:84px;padding-bottom:30px}
   .hero-vh .hero-card-wrap{margin-top:22px}
   .wedge{padding-top:48px;padding-bottom:48px}
   .flow{padding-top:48px;padding-bottom:48px}
