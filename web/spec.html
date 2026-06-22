@@ -43,12 +43,7 @@
 <section class="doc-hero">
   <span class="eyebrow eyebrow-dark">Spec técnico</span>
   <h1 class="serif-h2 big">Cómo funciona vueltito por dentro.</h1>
-  <p class="lead">Arquitectura, flujo de checkout, ledger auditable, integraciones y roadmap. Una vista técnica de cómo procesamos microaportes visibles y conciliables sobre pagos cotidianos.</p>
-  <div class="doc-meta">
-    <span class="chip chip-dot">Versión preliminar · 2026</span>
-    <span class="chip">Microaportes · Argentina</span>
-    <span class="chip">Ledger · Remesas · ONGs verificadas</span>
-  </div>
+  <p class="lead">Una guía simple para entender el modelo V1: cómo se muestra la donación, qué registra vueltito, cómo se concilia y qué integraciones están previstas.</p>
 </section>
 
 <div class="doc">
@@ -56,39 +51,39 @@
   <section class="doc-sec">
     <h2>Resumen</h2>
     <p><strong>vueltito</strong> habilita microdonaciones autorizadas sobre pagos cotidianos. En el checkout de un comercio integrado, el comprador acepta una donación —un monto fijo, un porcentaje chico de la compra o un redondeo— de forma visible. vueltito calcula la donación, registra el consentimiento y la asigna a una ONG verificada, con ledger auditable y conciliación.</p>
-    <p>La estrategia no depende de un acuerdo directo con una pasarela desde el día uno. El primer wedge es una suite de plugins para comercios que ya cobran online; WooCommerce es la primera integración instalable.</p>
+    <p>La estrategia no depende de un acuerdo directo con una pasarela desde el día uno. El primer paso es una suite de plugins para comercios que ya cobran online; WooCommerce es la primera integración instalable.</p>
     <div class="doc-callout">
       <strong>La tesis es simple:</strong> vueltito habilita microdonaciones solidarias, visibles y conciliables en el checkout. En v1, el comercio cobra la donación y vueltito <strong>no</strong> recibe ni custodia esos fondos.
     </div>
   </section>
 
   <section class="doc-sec">
-    <h2>Arquitectura en tres capas</h2>
-    <p>El diseño separa la lógica de negocio del procesamiento de pagos y de cada canal de venta. Los plugins no duplican cálculos ni reglas: solo adaptan el canal.</p>
-    <h3>1 · Core vueltito</h3>
-    <p>El servicio central concentra la lógica: donantes, reglas de aporte, ONGs, campañas, comercios, transacciones, ledger, conciliación, leaderboard y auditoría.</p>
-    <h3>2 · Billing y conciliación</h3>
-    <p>Calcula saldos comercio-a-ONG, remesas reportadas, reversas por reembolsos y la factura mensual de vueltito. Mercado Pago queda como proveedor de cobro para facturas del comercio, no como split de donaciones en v1.</p>
-    <h3>3 · Adapter layer</h3>
-    <p>Cada canal resuelve instalación y autenticación del comercio, lectura del carrito, UI de consentimiento, envío del cálculo al Core y creación/redirección del pago.</p>
+    <h2>Cómo se organiza</h2>
+    <p>vueltito separa la operación en tres partes: el Core que registra las donaciones, la conciliación de remesas y los conectores de cada plataforma. Así el comercio puede sumar donaciones sin cambiar su forma de cobrar.</p>
+    <h3>1 · Core de vueltito</h3>
+    <p>El servicio central guarda reglas de aporte, ONGs, campañas, comercios, transacciones, consentimiento, ledger, conciliación, leaderboard y auditoría.</p>
+    <h3>2 · Conciliación y remesas</h3>
+    <p>Calcula saldos comercio-a-ONG, remesas reportadas y reversas por reembolsos. La donación no pasa por vueltito: el comercio cobra con su pasarela actual y luego reporta la remesa a la ONG.</p>
+    <h3>3 · Integraciones de plataforma</h3>
+    <p>Cada conector resuelve instalación, autenticación del comercio, lectura del carrito, consentimiento del comprador, envío del cálculo al Core y reporte de eventos de la orden.</p>
   </section>
 
   <section class="doc-sec">
-    <h2>Flujo de checkout con aporte</h2>
+    <h2>Qué pasa en el checkout</h2>
     <ol class="doc-steps">
-      <li>El adapter lee subtotal, moneda, ítems y comercio.</li>
+      <li>El conector lee subtotal, moneda, ítems y comercio.</li>
       <li>Le pide al Core las opciones de aporte: fijo, porcentaje, redondeo, límites mínimos/máximos y ONG/campaña elegida.</li>
       <li>La interfaz muestra el aporte como una <strong>línea visible</strong> antes de pagar.</li>
       <li>El comprador acepta y se registra el consentimiento con su snapshot.</li>
       <li>El comercio cobra el pedido completo con su pasarela actual.</li>
-      <li>El adapter informa el evento de orden pagada, cancelada o reembolsada.</li>
+      <li>El conector informa el evento de orden pagada, cancelada o reembolsada.</li>
       <li>El ledger registra compra, donación, reversas y saldo pendiente de remesa a la ONG.</li>
       <li>El leaderboard se actualiza <strong>solo si</strong> el donante optó por participar.</li>
     </ol>
   </section>
 
   <section class="doc-sec">
-    <h2>Ledger y principios de datos</h2>
+    <h2>Qué registra vueltito</h2>
     <ul class="doc-list">
       <li><strong>Ledger append-only:</strong> nunca se editan entradas históricas; los cambios se registran como reversas.</li>
       <li><strong>Webhooks idempotentes:</strong> ningún evento puede crear un doble aporte ni una doble entrada de ledger.</li>
@@ -96,34 +91,34 @@
       <li><strong>Estados separados:</strong> orden, donación, asignación a ONG, remesa y facturación se modelan por separado.</li>
       <li><strong>Sin PII</strong> en el leaderboard: alias por defecto y visibilidad opt-in.</li>
     </ul>
-    <h3>Tipos de entrada del ledger</h3>
-    <div class="doc-chips">
-      <span class="chip chip-gray">purchase_observed</span>
-      <span class="chip chip-gray">donation_authorized</span>
-      <span class="chip chip-gray">ngo_allocated</span>
-      <span class="chip chip-gray">remittance_reported</span>
-      <span class="chip chip-gray">refund_reversed</span>
-      <span class="chip chip-gray">adjustment</span>
-    </div>
+    <h3>Eventos principales del ledger</h3>
+    <ul class="doc-list doc-list-compact">
+      <li><code>purchase_observed</code>: compra detectada en el canal.</li>
+      <li><code>donation_authorized</code>: donación aceptada por el comprador.</li>
+      <li><code>ngo_allocated</code>: asignación a ONG o campaña.</li>
+      <li><code>remittance_reported</code>: remesa reportada por el comercio.</li>
+      <li><code>refund_reversed</code>: reversa por cancelación o reembolso.</li>
+      <li><code>adjustment</code>: ajuste operativo auditado.</li>
+    </ul>
   </section>
 
   <section class="doc-sec">
-    <h2>Integraciones</h2>
-    <p>Cada canal tiene un nivel de control técnico y requisitos distintos. El roadmap prioriza dónde podemos demostrar valor primero.</p>
+    <h2>Canales de integración</h2>
+    <p>Cada canal tiene requisitos distintos. La prioridad es empezar por donde el comercio puede instalar vueltito con menos fricción y con trazabilidad completa.</p>
     <div class="doc-cols">
-      <div class="doc-card"><div class="ch-row"><h4>WooCommerce</h4><span class="chip chip-blue">Disponible</span></div><p>Mejor control técnico para producción inicial. Plugin propio que muestra la donación como fee visible y reporta eventos.</p></div>
-      <div class="doc-card"><div class="ch-row"><h4>Tiendanube</h4><span class="chip chip-amber">Próximo</span></div><p>App en desarrollo. Storefront sirve para demo; checkout productivo depende de capacidades aprobadas por Tiendanube.</p></div>
-      <div class="doc-card"><div class="ch-row"><h4>Shopify</h4><span class="chip chip-gray">Roadmap</span></div><p>App de configuración e intención; checkout extensions dependen del plan/permisos de la tienda.</p></div>
-      <div class="doc-card"><div class="ch-row"><h4>QR / Point</h4><span class="chip chip-gray">Roadmap</span></div><p>Pagos presenciales posteriores. Requiere consentimiento, comprobantes y conciliación fuera de checkout web.</p></div>
-      <div class="doc-card"><div class="ch-row"><h4>VTEX</h4><span class="chip chip-gray">Enterprise</span></div><p>Payment Provider Protocol con homologación y test suite. Expansión a comercios grandes.</p></div>
-      <div class="doc-card"><div class="ch-row"><h4>Adobe Commerce</h4><span class="chip chip-gray">Enterprise</span></div><p>Módulo PHP y customización de checkout. Posterior a un core y una integración MP maduros.</p></div>
+      <div class="doc-card"><div class="ch-row"><h4>WooCommerce</h4></div><p>Disponible para producción inicial. Plugin propio que muestra la donación como línea visible y reporta eventos.</p></div>
+      <div class="doc-card"><div class="ch-row"><h4>Tiendanube</h4></div><p>App en desarrollo. Storefront sirve para demo; checkout productivo depende de capacidades aprobadas por Tiendanube.</p></div>
+      <div class="doc-card"><div class="ch-row"><h4>Shopify</h4></div><p>Roadmap futuro. Checkout extensions dependen del plan y permisos de la tienda.</p></div>
+      <div class="doc-card"><div class="ch-row"><h4>QR / Point</h4></div><p>Pagos presenciales posteriores. Requiere consentimiento, comprobantes y conciliación fuera de checkout web.</p></div>
+      <div class="doc-card"><div class="ch-row"><h4>VTEX</h4></div><p>Expansión enterprise. Payment Provider Protocol con homologación y test suite.</p></div>
+      <div class="doc-card"><div class="ch-row"><h4>Adobe Commerce</h4></div><p>Expansión enterprise. Módulo PHP y customización de checkout posterior al piloto.</p></div>
     </div>
   </section>
 
   <section class="doc-sec">
     <h2>Seguridad y privacidad</h2>
     <ul class="doc-list">
-      <li>API keys, tokens de plataformas y credenciales de billing <strong>cifrados</strong>.</li>
+      <li>API keys, tokens de plataformas y credenciales operativas <strong>cifrados</strong>.</li>
       <li>Validación de firma de webhooks donde la plataforma la provea.</li>
       <li>No se guardan tarjetas ni datos sensibles de pago.</li>
       <li>Leaderboard <strong>opt-in</strong> y alias por defecto.</li>
@@ -131,26 +126,15 @@
       <li><strong>Audit log</strong> para cambios en ONGs, payouts y ajustes; permisos separados para admin, comercio y ONG.</li>
     </ul>
   </section>
-
   <section class="doc-sec">
-    <h2>Principios de UX</h2>
-    <ul class="doc-list">
-      <li>El aporte es <strong>visible antes</strong> de pagar.</li>
-      <li>El usuario entiende la ONG, el monto y la regla.</li>
-      <li>El aporte es <strong>opcional y reversible</strong> antes de pagar.</li>
-      <li>Nunca se le llama "fee" al aporte hacia el usuario final: es una donación.</li>
-    </ul>
-  </section>
-
-  <section class="doc-sec">
-    <h2>Roadmap</h2>
+    <h2>Próximos pasos</h2>
     <ul class="doc-list">
       <li><strong>Fase 0 — Base:</strong> spec aprobado, modelo legal/fiscal, política de reembolsos y lista de ONGs demo.</li>
       <li><strong>Fase 1 — Core + WooCommerce:</strong> Core API, ledger, leaderboard opt-in y demo end-to-end con orden WooCommerce.</li>
       <li><strong>Fase 2 — Tiendanube:</strong> app OAuth, storefront spike y validación formal del checkout productivo.</li>
       <li><strong>Fase 3 — Enterprise:</strong> conector VTEX (PPP) y módulo Adobe Commerce.</li>
       <li><strong>Fase 4 — Shopify:</strong> según acceso a Plus / partner aprobado.</li>
-      <li><strong>Fase 5 — Presencial y partnership:</strong> QR/Point y propuesta de alianza con una pasarela solo si no introduce custodia de donaciones.</li>
+      <li><strong>Fase 5 — Presencial y alianzas:</strong> QR/Point y propuesta de alianza con una pasarela solo si no introduce custodia de donaciones.</li>
     </ul>
     <div class="doc-callout">
       <strong>Recomendación:</strong> proceder con una arquitectura que no dependa de promesas no verificadas. Primero confianza y evidencia; después, escala.
