@@ -113,12 +113,15 @@
   if (modal) {
     var obForm = document.getElementById('ob-form');
     var obSuccess = modal.querySelector('.ob-success');
+    var obError = modal.querySelector('[data-ob-error]');
+    var obSubmit = obForm.querySelector('.ob-submit');
     var lastFocus = null;
 
     function openModal() {
       lastFocus = document.activeElement;
       obForm.hidden = false;
       obSuccess.hidden = true;
+      if (obError) obError.hidden = true;
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('modal-lock');
@@ -147,8 +150,21 @@
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
     });
 
-    obForm.addEventListener('submit', function (e) {
+    function setObBusy(isBusy) {
+      if (!obSubmit) return;
+      obSubmit.disabled = isBusy;
+      obSubmit.textContent = isBusy ? 'Enviando...' : 'Enviar solicitud';
+    }
+
+    function showObError() {
+      if (!obError) return;
+      obError.hidden = false;
+    }
+
+    obForm.addEventListener('submit', async function (e) {
       e.preventDefault();
+      if (obError) obError.hidden = true;
+
       var ong = obForm.ong, email = obForm.email;
       var ok = true;
       [ong, email].forEach(function (f) {
@@ -163,16 +179,27 @@
         email: email.value.trim(),
         area: obForm.area.value,
         msg: obForm.msg.value.trim(),
+        website: obForm.website ? obForm.website.value : '',
+        source: 'landing_ong',
+        pagePath: window.location.pathname,
         ts: new Date().toISOString()
       };
-      // Persist the request locally. To capture server-side, POST `data`
-      // to a form endpoint (Formspree, Sheets, etc.) here.
+
+      setObBusy(true);
       try {
-        var key = 'vueltito_ong_requests';
-        var arr = JSON.parse(localStorage.getItem(key) || '[]');
-        arr.push(data);
-        localStorage.setItem(key, JSON.stringify(arr));
-      } catch (err) {}
+        var response = await fetch('/api/waitlist/ongs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        var payload = await response.json().catch(function () { return {}; });
+        if (!response.ok || !payload.ok) throw new Error(payload.error || 'waitlist_unavailable');
+      } catch (err) {
+        showObError();
+        return;
+      } finally {
+        setObBusy(false);
+      }
 
       modal.querySelector('#ob-name').textContent = data.ong || 'tu ONG';
       modal.querySelector('#ob-mail').textContent = data.email;

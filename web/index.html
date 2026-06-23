@@ -463,6 +463,11 @@
         <label for="ob-msg">Contanos en una línea <span class="ob-opt">(opcional)</span></label>
         <textarea id="ob-msg" name="msg" rows="2" placeholder="Qué hacen y a quién ayudan."></textarea>
       </div>
+      <div class="ob-field hp-field" aria-hidden="true">
+        <label for="ob-website">Sitio web</label>
+        <input id="ob-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <p class="ob-error" data-ob-error hidden>No pudimos registrar la solicitud. Revisa tu conexion e intenta de nuevo.</p>
       <button class="btn btn-dark btn-lg ob-submit" type="submit">Enviar solicitud</button>
       <p class="ob-fine">Solo usamos tu mail para contactarte por la inscripción.</p>
     </form>

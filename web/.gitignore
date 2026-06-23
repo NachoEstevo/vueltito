@@ -3,3 +3,5 @@
 output/
 *.local.png
 .DS_Store
+node_modules/
+.vercel

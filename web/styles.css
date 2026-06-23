@@ -509,6 +509,9 @@ img{max-width:100%;display:block}
 .ob-field input.invalid,.ob-field select.invalid{border-color:var(--red);box-shadow:0 0 0 3px rgba(229,86,75,.14)}
 .ob-submit{margin-top:6px;width:100%}
 .ob-fine{font-size:.78rem;color:var(--gris-medio);text-align:center;margin-top:2px}
+.hp-field{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.ob-error{font-size:.82rem;line-height:1.45;color:var(--red);text-align:center;margin:-2px 0 0}
+.ob-submit:disabled{opacity:.68;cursor:wait;transform:none;box-shadow:none}
 .ob-success{text-align:center;padding:18px 6px 8px;animation:obFade .3s var(--ease)}
 .ob-check{width:56px;height:56px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;margin:0 auto 16px}
 .ob-check .ic{width:26px;height:26px}

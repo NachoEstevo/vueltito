@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>vueltito admin — Waitlist ONGs</title>
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="stylesheet" href="styles.css" />
+<style>
+  body{background:var(--papel);color:var(--ink)}
+  .admin-shell{max-width:1180px;margin:0 auto;padding:34px 24px 56px}
+  .admin-top{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:28px}
+  .admin-kicker{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--gris-medio)}
+  .admin-title{font-family:var(--font-serif);font-size:clamp(2rem,4vw,4rem);line-height:.94;margin:10px 0 12px}
+  .admin-sub{max-width:760px;color:var(--gris-oscuro);line-height:1.55}
+  .admin-panel{border:1px solid var(--line);background:#fff;border-radius:8px;box-shadow:var(--shadow-soft);padding:18px;margin-bottom:18px}
+  .admin-auth{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end}
+  .admin-field{display:flex;flex-direction:column;gap:6px}
+  .admin-field label{font-size:.82rem;font-weight:700;color:var(--gris-oscuro)}
+  .admin-field input{font-family:var(--font-sans);font-size:.95rem;border:1px solid var(--line);border-radius:8px;padding:12px 13px;outline:none}
+  .admin-field input:focus{border-color:var(--verde);box-shadow:0 0 0 3px rgba(122,201,67,.18)}
+  .admin-meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--gris-medio);font-size:.85rem;margin-bottom:14px}
+  .admin-table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:#fff}
+  .admin-table{width:100%;border-collapse:collapse;min-width:900px;font-size:.9rem}
+  .admin-table th,.admin-table td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  .admin-table th{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gris-medio);background:#fafaf8}
+  .admin-table tr:last-child td{border-bottom:0}
+  .admin-table strong{display:block;font-weight:800;margin-bottom:3px}
+  .admin-muted{color:var(--gris-medio)}
+  .admin-message{max-width:340px;white-space:normal;color:var(--gris-oscuro);line-height:1.4}
+  .admin-state{padding:18px;color:var(--gris-oscuro)}
+  .admin-error{color:var(--red);font-size:.9rem;margin-top:10px}
+  @media (max-width:720px){.admin-top,.admin-auth{display:block}.admin-auth .btn{width:100%;margin-top:12px}}
+</style>
+</head>
+<body>
+<main class="admin-shell">
+  <div class="admin-top">
+    <div>
+      <span class="admin-kicker">Vueltito admin</span>
+      <h1 class="admin-title">Waitlist ONGs</h1>
+      <p class="admin-sub">Solicitudes enviadas desde el boton de ONG de la landing. El endpoint lee la base configurada por <code>DATABASE_URL</code>.</p>
+    </div>
+    <a class="btn btn-ghost" href="index.html">Volver</a>
+  </div>
+
+  <section class="admin-panel">
+    <form class="admin-auth" id="admin-auth">
+      <div class="admin-field">
+        <label for="admin-token">Token admin</label>
+        <input id="admin-token" name="token" type="password" autocomplete="current-password" placeholder="ADMIN_WAITLIST_TOKEN" required />
+      </div>
+      <button class="btn btn-dark" type="submit">Cargar waitlist</button>
+    </form>
+    <p class="admin-error" id="admin-error" hidden>No pudimos cargar la waitlist.</p>
+  </section>
+
+  <section class="admin-panel">
+    <div class="admin-meta">
+      <span id="admin-count">0 solicitudes</span>
+      <span id="admin-updated">Sin cargar</span>
+    </div>
+    <div class="admin-table-wrap">
+      <div class="admin-state" id="admin-state">Ingresá el token para ver solicitudes.</div>
+      <table class="admin-table" id="admin-table" hidden>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>ONG</th>
+            <th>Email</th>
+            <th>Area</th>
+            <th>Mensaje</th>
+            <th>Fuente</th>
+          </tr>
+        </thead>
+        <tbody id="admin-rows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var form = document.getElementById('admin-auth');
+  var tokenInput = document.getElementById('admin-token');
+  var error = document.getElementById('admin-error');
+  var table = document.getElementById('admin-table');
+  var rows = document.getElementById('admin-rows');
+  var state = document.getElementById('admin-state');
+  var count = document.getElementById('admin-count');
+  var updated = document.getElementById('admin-updated');
+
+  function text(value) {
+    return value == null || value === '' ? '-' : String(value);
+  }
+
+  function date(value) {
+    if (!value) return '-';
+    try {
+      return new Intl.DateTimeFormat('es-AR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(value));
+    } catch (err) {
+      return value;
+    }
+  }
+
+  function appendCell(tr, value, className) {
+    var td = document.createElement('td');
+    if (className) td.className = className;
+    td.appendChild(document.createTextNode(text(value)));
+    tr.appendChild(td);
+  }
+
+  function render(data) {
+    rows.innerHTML = '';
+    data.forEach(function (lead) {
+      var tr = document.createElement('tr');
+      appendCell(tr, date(lead.createdAt));
+      appendCell(tr, lead.organizationName);
+      appendCell(tr, lead.email);
+      appendCell(tr, lead.area);
+      appendCell(tr, lead.message, 'admin-message');
+      appendCell(tr, lead.source || lead.pagePath);
+      rows.appendChild(tr);
+    });
+
+    count.textContent = data.length === 1 ? '1 solicitud' : data.length + ' solicitudes';
+    updated.textContent = 'Actualizado ' + date(new Date().toISOString());
+    table.hidden = data.length === 0;
+    state.hidden = data.length > 0;
+    state.textContent = data.length === 0 ? 'Todavia no hay solicitudes.' : '';
+  }
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    error.hidden = true;
+    table.hidden = true;
+    state.hidden = false;
+    state.textContent = 'Cargando...';
+
+    try {
+      var response = await fetch('/api/admin/waitlist/ongs?limit=200', {
+        headers: { Authorization: 'Bearer ' + tokenInput.value.trim() }
+      });
+      var payload = await response.json().catch(function () { return {}; });
+      if (!response.ok || !payload.ok) throw new Error(payload.error || 'waitlist_unavailable');
+      render(Array.isArray(payload.rows) ? payload.rows : []);
+    } catch (err) {
+      state.textContent = 'No se pudo cargar la waitlist.';
+      error.hidden = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>
