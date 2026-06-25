@@ -5,3 +5,6 @@
 *.log
 *.zone
 vueltito-platform-staging/
+.codex-browser/
+.codex-railway-login/
+output/

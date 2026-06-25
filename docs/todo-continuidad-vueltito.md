@@ -1,6 +1,6 @@
 # To-do de continuidad Vueltito
 
-Estado: 2026-06-22. Documento operativo para retomar trabajo sin depender del thread.
+Estado: 2026-06-24. Documento operativo para retomar trabajo sin depender del thread.
 
 ## 1. Confirmar landing actual
 
@@ -15,7 +15,7 @@ Estado: 2026-06-22. Documento operativo para retomar trabajo sin depender del th
 
 ## 2. Hacer accesibles los runbooks
 
-- [ ] Crear un indice publico/interno de operaciones con links a todos los runbooks relevantes.
+- [x] Crear un indice publico/interno de operaciones con links a todos los runbooks relevantes. Ver `docs/integrations/README.md`.
 - [ ] Separar el contenido por tabs o secciones claras:
   - Producto y modelo operativo.
   - WooCommerce piloto.
@@ -26,6 +26,9 @@ Estado: 2026-06-22. Documento operativo para retomar trabajo sin depender del th
   - Remesas, conciliacion y refunds.
   - Soporte e incidentes.
   - Tienda Negocio spike.
+- [x] Crear runbook de spike TiendaNube con evidencia oficial y bloqueantes. Ver `docs/runbooks/tiendanube-spike.md`.
+- [x] Crear runbook de spike TiendaNegocio con bloqueantes y contrato esperado. Ver `docs/runbooks/tiendanegocio-spike.md`.
+- [x] Crear reporte de decision TiendaNube con evidencia real 2026-06-24. Ver `docs/reports/2026-06-24-tiendanube-checkout-validation.md`.
 - [ ] Decidir si ese hub vive en la landing, en `vueltito-platform/docs`, en Notion, o en los tres con roles distintos.
 - [ ] Escribir version corta para usuarios no tecnicos y version completa para operadores.
 - [ ] Evitar que documentos tecnicos internos parezcan terminos legales finales.
@@ -53,7 +56,7 @@ Estado: 2026-06-22. Documento operativo para retomar trabajo sin depender del th
 - [ ] Elegir primer comercio real o staging representativo.
 - [ ] Elegir primera ONG real.
 - [ ] Crear configuracion real de comercio, ONG, campana e instalacion.
-- [ ] Instalar ZIP `vueltito-donations-0.4.7.zip`.
+- [ ] Instalar ZIP `vueltito-donations-0.4.8.zip`.
 - [ ] Ejecutar health check desde WooCommerce.
 - [ ] Hacer compra real chica con donacion.
 - [ ] Verificar metadata Woo, ledger, conciliacion y dashboard.
@@ -83,13 +86,28 @@ Estado: 2026-06-22. Documento operativo para retomar trabajo sin depender del th
 
 ## 8. Tienda Negocio
 
-- [ ] Esperar credenciales/sandbox real.
+- [ ] Esperar credenciales/sandbox real. Estado actual: bloqueado en este repo; ver `docs/runbooks/tiendanegocio-spike.md`.
 - [ ] Validar OAuth e instalacion.
 - [ ] Provisionar productos de donacion.
 - [ ] Probar agregar, quitar y reemplazar linea de donacion.
 - [ ] Confirmar si el producto puede quedar oculto del catalogo.
 - [ ] Confirmar webhook de orden pagada y line items.
 - [ ] Decidir `pilot_candidate` o `blocked` con evidencia.
+
+## 8.1 TiendaNube
+
+- [x] Crear app partner Vueltito con redirect/support/privacy URLs.
+- [x] Validar OAuth authorization code en tienda demo propia.
+- [x] Confirmar scopes minimos: orders, products y scripts solo si son necesarios.
+- [x] Probar NubeSDK checkout en tienda demo propia.
+- [x] Ajustar UI checkout NubeSDK: card clara, sin icono de checkbox, encabezado alineado y pills `$100/$250/$500`.
+- [x] Probar agregar, quitar y reemplazar linea de donacion con producto publicado temporalmente.
+- [x] Confirmar bloqueo de producto tecnico oculto: `published=false` devuelve `variant_unavailable`.
+- [ ] Escalar a Partner Support por primitiva de checkout-only line/optional fee/private buyable product.
+- [ ] Escalar/confirmar navegacion externa desde checkout: `Link` renderiza anchor sin `href` hacia `https://vueltito.org/`.
+- [ ] Confirmar webhook `order/paid` y line items.
+- [ ] Probar cancel/refund o flujo equivalente de reversa.
+- [x] Decidir `blocked` para V1 productiva con evidencia. Ver `docs/runbooks/tiendanube-spike.md` y `docs/reports/2026-06-24-tiendanube-checkout-validation.md`.
 
 ## 9. Notion y seguimiento
 
