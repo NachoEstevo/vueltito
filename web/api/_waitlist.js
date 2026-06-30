@@ -1,4 +1,5 @@
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const DEFAULT_FORWARD_TIMEOUT_MS = 2500;
 
 function normalizeText(value, maxLength) {
   if (typeof value !== 'string') return '';
@@ -14,6 +15,7 @@ function validateNgoWaitlistPayload(payload) {
   }
 
   const organizationName = normalizeText(data.ong || data.organizationName, 120);
+  const contactName = normalizeText(data.contactName || data.name || data.responsibleName, 120);
   const email = normalizeText(data.email, 160).toLowerCase();
   const area = normalizeText(data.area, 80);
   const message = normalizeText(data.msg || data.message, 1000);
@@ -22,6 +24,7 @@ function validateNgoWaitlistPayload(payload) {
   const fields = {};
 
   if (!organizationName) fields.ong = 'required';
+  if (!contactName) fields.contactName = 'required';
   if (!email) fields.email = 'required';
   else if (!EMAIL_PATTERN.test(email)) fields.email = 'invalid';
 
@@ -39,6 +42,7 @@ function validateNgoWaitlistPayload(payload) {
     value: {
       type: 'ngo',
       organizationName,
+      contactName,
       email,
       area: area || null,
       message: message || null,
@@ -85,6 +89,18 @@ async function createNgoWaitlistLead(payload, requestMeta, deps) {
     }
   }
 
+  if (typeof deps.forwardLead === 'function') {
+    try {
+      await withTimeout(
+        deps.forwardLead(toPlatformNgoApplication(saved)),
+        deps.forwardTimeoutMs ?? DEFAULT_FORWARD_TIMEOUT_MS,
+        'platform_forward_timeout'
+      );
+    } catch (error) {
+      if (typeof deps.onForwardError === 'function') deps.onForwardError(error, saved);
+    }
+  }
+
   return {
     status: 201,
     body: {
@@ -95,6 +111,20 @@ async function createNgoWaitlistLead(payload, requestMeta, deps) {
       }
     }
   };
+}
+
+function toPlatformNgoApplication(lead) {
+  const application = {
+    publicName: lead.organizationName,
+    contactName: lead.contactName,
+    contactEmail: lead.email,
+    source: 'landing-waitlist'
+  };
+
+  if (lead.area) application.cause = lead.area;
+  if (lead.message) application.message = lead.message;
+
+  return application;
 }
 
 function requestMetaFromNodeRequest(req) {
@@ -110,6 +140,22 @@ function requestMetaFromNodeRequest(req) {
   };
 }
 
+function withTimeout(promise, timeoutMs, message) {
+  const ms = Number(timeoutMs);
+  if (!Number.isFinite(ms) || ms <= 0) return Promise.resolve(promise);
+
+  let timeoutId;
+  const timeout = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      const error = new Error(message);
+      error.code = 'forward_timeout';
+      reject(error);
+    }, ms);
+  });
+
+  return Promise.race([Promise.resolve(promise), timeout]).finally(() => clearTimeout(timeoutId));
+}
+
 function sendJson(res, status, body) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -120,5 +166,6 @@ module.exports = {
   createNgoWaitlistLead,
   requestMetaFromNodeRequest,
   sendJson,
+  toPlatformNgoApplication,
   validateNgoWaitlistPayload
 };

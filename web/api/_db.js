@@ -27,6 +27,7 @@ async function ensureWaitlistTable() {
         id BIGSERIAL PRIMARY KEY,
         type TEXT NOT NULL,
         organization_name TEXT NOT NULL,
+        contact_name TEXT,
         email TEXT NOT NULL,
         area TEXT,
         message TEXT,
@@ -44,6 +45,9 @@ async function ensureWaitlistTable() {
 
       CREATE INDEX IF NOT EXISTS waitlist_leads_status_created_idx
         ON waitlist_leads (status, created_at DESC);
+
+      ALTER TABLE waitlist_leads
+        ADD COLUMN IF NOT EXISTS contact_name TEXT;
     `);
   }
 
@@ -55,6 +59,7 @@ function mapLeadRow(row) {
     id: Number(row.id),
     type: row.type,
     organizationName: row.organization_name,
+    contactName: row.contact_name,
     email: row.email,
     area: row.area,
     message: row.message,
@@ -75,6 +80,7 @@ async function saveWaitlistLead(lead) {
     `INSERT INTO waitlist_leads (
       type,
       organization_name,
+      contact_name,
       email,
       area,
       message,
@@ -83,11 +89,12 @@ async function saveWaitlistLead(lead) {
       ip_address,
       user_agent,
       referrer
-    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
     RETURNING *`,
     [
       lead.type,
       lead.organizationName,
+      lead.contactName,
       lead.email,
       lead.area,
       lead.message,

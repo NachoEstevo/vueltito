@@ -12,6 +12,7 @@ function leadText(lead) {
     'Nueva ONG en waitlist de vueltito',
     '',
     `ONG: ${lead.organizationName}`,
+    `Contacto: ${lead.contactName || 'Sin contacto'}`,
     `Email: ${lead.email}`,
     `Area: ${lead.area || 'Sin area'}`,
     `Mensaje: ${lead.message || 'Sin mensaje'}`,
@@ -24,6 +25,7 @@ function leadHtml(lead) {
   return `
     <h2>Nueva ONG en waitlist de vueltito</h2>
     <p><strong>ONG:</strong> ${escapeHtml(lead.organizationName)}</p>
+    <p><strong>Contacto:</strong> ${escapeHtml(lead.contactName || 'Sin contacto')}</p>
     <p><strong>Email:</strong> ${escapeHtml(lead.email)}</p>
     <p><strong>Area:</strong> ${escapeHtml(lead.area || 'Sin area')}</p>
     <p><strong>Mensaje:</strong> ${escapeHtml(lead.message || 'Sin mensaje')}</p>

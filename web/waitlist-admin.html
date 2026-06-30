@@ -67,6 +67,7 @@
           <tr>
             <th>Fecha</th>
             <th>ONG</th>
+            <th>Contacto</th>
             <th>Email</th>
             <th>Area</th>
             <th>Mensaje</th>
@@ -116,6 +117,7 @@
       var tr = document.createElement('tr');
       appendCell(tr, date(lead.createdAt));
       appendCell(tr, lead.organizationName);
+      appendCell(tr, lead.contactName);
       appendCell(tr, lead.email);
       appendCell(tr, lead.area);
       appendCell(tr, lead.message, 'admin-message');
