@@ -85,6 +85,14 @@ async function createNgoWaitlistLead(payload, requestMeta, deps) {
     }
   }
 
+  if (typeof deps.forwardLead === 'function') {
+    try {
+      await deps.forwardLead(toPlatformNgoApplication(saved));
+    } catch (error) {
+      if (typeof deps.onForwardError === 'function') deps.onForwardError(error, saved);
+    }
+  }
+
   return {
     status: 201,
     body: {
@@ -95,6 +103,20 @@ async function createNgoWaitlistLead(payload, requestMeta, deps) {
       }
     }
   };
+}
+
+function toPlatformNgoApplication(lead) {
+  const application = {
+    publicName: lead.organizationName,
+    contactName: lead.organizationName,
+    contactEmail: lead.email,
+    source: 'landing-waitlist'
+  };
+
+  if (lead.area) application.cause = lead.area;
+  if (lead.message) application.message = lead.message;
+
+  return application;
 }
 
 function requestMetaFromNodeRequest(req) {
@@ -120,5 +142,6 @@ module.exports = {
   createNgoWaitlistLead,
   requestMetaFromNodeRequest,
   sendJson,
+  toPlatformNgoApplication,
   validateNgoWaitlistPayload
 };

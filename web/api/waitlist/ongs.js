@@ -24,6 +24,23 @@ async function readJsonBody(req) {
   return raw ? JSON.parse(raw) : {};
 }
 
+async function forwardNgoApplication(application) {
+  const platformBaseUrl = process.env.VUELTITO_PLATFORM_API_BASE_URL;
+  if (!platformBaseUrl) return;
+
+  const response = await fetch(new URL('/v1/public/ngo-applications', platformBaseUrl), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(application)
+  });
+
+  if (!response.ok) {
+    const error = new Error(`platform application forward failed with ${response.status}`);
+    error.statusCode = response.status;
+    throw error;
+  }
+}
+
 module.exports = async function handler(req, res) {
   setCors(res);
 
@@ -47,7 +64,17 @@ module.exports = async function handler(req, res) {
       {
         saveLead: saveWaitlistLead,
         notifyLead: notifyWaitlistLead,
-        onNotifyError: (error) => console.error('waitlist notification failed', error)
+        forwardLead: forwardNgoApplication,
+        onNotifyError: (error) => console.error('waitlist notification failed', error),
+        onForwardError: (error, lead) => console.error(
+          'waitlist platform forward failed',
+          {
+            error: error.message,
+            statusCode: error.statusCode,
+            leadId: lead.id,
+            email: lead.email
+          }
+        )
       }
     );
 

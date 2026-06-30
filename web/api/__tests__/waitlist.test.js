@@ -125,3 +125,62 @@ test('does not fail the saved lead when notification fails', async () => {
     createdAt: '2026-06-22T23:00:00.000Z'
   });
 });
+
+test('forwards the saved waitlist lead to platform applications', async () => {
+  const forwarded = [];
+
+  const result = await createNgoWaitlistLead(
+    {
+      ong: 'Fundacion Puente',
+      email: 'hola@puente.org',
+      area: 'Educacion',
+      msg: 'Acompanamos escuelas rurales.'
+    },
+    {},
+    {
+      saveLead: async (lead) => ({ ...lead, id: 11, createdAt: '2026-06-30T12:00:00.000Z' }),
+      forwardLead: async (lead) => {
+        forwarded.push(lead);
+      }
+    }
+  );
+
+  assert.equal(result.status, 201);
+  assert.equal(forwarded.length, 1);
+  assert.deepEqual(forwarded[0], {
+    publicName: 'Fundacion Puente',
+    contactName: 'Fundacion Puente',
+    contactEmail: 'hola@puente.org',
+    cause: 'Educacion',
+    message: 'Acompanamos escuelas rurales.',
+    source: 'landing-waitlist'
+  });
+});
+
+test('does not fail the saved lead when platform forwarding fails', async () => {
+  let forwardError;
+
+  const result = await createNgoWaitlistLead(
+    {
+      ong: 'Fundacion Resiliente',
+      email: 'hola@resiliente.org'
+    },
+    {},
+    {
+      saveLead: async (lead) => ({ ...lead, id: 12, createdAt: '2026-06-30T12:30:00.000Z' }),
+      forwardLead: async () => {
+        throw new Error('platform_down');
+      },
+      onForwardError: (error) => {
+        forwardError = error;
+      }
+    }
+  );
+
+  assert.equal(result.status, 201);
+  assert.deepEqual(result.body.lead, {
+    id: 12,
+    createdAt: '2026-06-30T12:30:00.000Z'
+  });
+  assert.equal(forwardError.message, 'platform_down');
+});
