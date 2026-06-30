@@ -111,7 +111,7 @@ async function createNgoWaitlistLead(payload, requestMeta, deps) {
 function toPlatformNgoApplication(lead) {
   const application = {
     publicName: lead.organizationName,
-    contactName: lead.contactName || lead.organizationName,
+    contactName: lead.contactName,
     contactEmail: lead.email,
     source: 'landing-waitlist'
   };

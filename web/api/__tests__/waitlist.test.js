@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 
 const {
   createNgoWaitlistLead,
+  toPlatformNgoApplication,
   validateNgoWaitlistPayload
 } = require('../_waitlist');
 
@@ -193,4 +194,14 @@ test('does not fail the saved lead when platform forwarding fails', async () => 
     createdAt: '2026-06-30T12:30:00.000Z'
   });
   assert.equal(forwardError.message, 'platform_down');
+});
+
+test('does not use the organization name as contact fallback when mapping to platform', () => {
+  const mapped = toPlatformNgoApplication({
+    organizationName: 'Fundacion Sin Contacto',
+    email: 'hola@sincontacto.org'
+  });
+
+  assert.equal(mapped.publicName, 'Fundacion Sin Contacto');
+  assert.equal(mapped.contactName, undefined);
 });
