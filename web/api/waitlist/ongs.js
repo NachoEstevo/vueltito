@@ -28,11 +28,25 @@ async function forwardNgoApplication(application) {
   const platformBaseUrl = process.env.VUELTITO_PLATFORM_API_BASE_URL;
   if (!platformBaseUrl) return;
 
-  const response = await fetch(new URL('/v1/public/ngo-applications', platformBaseUrl), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(application)
-  });
+  const timeoutMs = Number(process.env.VUELTITO_PLATFORM_FORWARD_TIMEOUT_MS || 2500);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), Number.isFinite(timeoutMs) ? timeoutMs : 2500);
+  const headers = { 'Content-Type': 'application/json' };
+  if (process.env.VUELTITO_PLATFORM_API_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.VUELTITO_PLATFORM_API_TOKEN}`;
+  }
+
+  let response;
+  try {
+    response = await fetch(new URL('/v1/public/ngo-applications', platformBaseUrl), {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(application),
+      signal: controller.signal
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   if (!response.ok) {
     const error = new Error(`platform application forward failed with ${response.status}`);
@@ -65,6 +79,7 @@ module.exports = async function handler(req, res) {
         saveLead: saveWaitlistLead,
         notifyLead: notifyWaitlistLead,
         forwardLead: forwardNgoApplication,
+        forwardTimeoutMs: Number(process.env.VUELTITO_PLATFORM_FORWARD_TIMEOUT_MS || 2500),
         onNotifyError: (error) => console.error('waitlist notification failed', error),
         onForwardError: (error, lead) => console.error(
           'waitlist platform forward failed',

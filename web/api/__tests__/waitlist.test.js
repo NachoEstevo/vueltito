@@ -196,6 +196,34 @@ test('does not fail the saved lead when platform forwarding fails', async () => 
   assert.equal(forwardError.message, 'platform_down');
 });
 
+test('bounds platform forwarding latency before responding', async () => {
+  let forwardError;
+
+  const result = await createNgoWaitlistLead(
+    {
+      ong: 'Fundacion Rapida',
+      contactName: 'Rita Lopez',
+      email: 'hola@rapida.org'
+    },
+    {},
+    {
+      saveLead: async (lead) => ({ ...lead, id: 13, createdAt: '2026-06-30T13:00:00.000Z' }),
+      forwardLead: async () => new Promise(() => {}),
+      forwardTimeoutMs: 5,
+      onForwardError: (error) => {
+        forwardError = error;
+      }
+    }
+  );
+
+  assert.equal(result.status, 201);
+  assert.deepEqual(result.body.lead, {
+    id: 13,
+    createdAt: '2026-06-30T13:00:00.000Z'
+  });
+  assert.equal(forwardError.code, 'forward_timeout');
+});
+
 test('does not use the organization name as contact fallback when mapping to platform', () => {
   const mapped = toPlatformNgoApplication({
     organizationName: 'Fundacion Sin Contacto',

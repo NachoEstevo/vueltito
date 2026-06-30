@@ -1,4 +1,5 @@
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const DEFAULT_FORWARD_TIMEOUT_MS = 2500;
 
 function normalizeText(value, maxLength) {
   if (typeof value !== 'string') return '';
@@ -90,7 +91,11 @@ async function createNgoWaitlistLead(payload, requestMeta, deps) {
 
   if (typeof deps.forwardLead === 'function') {
     try {
-      await deps.forwardLead(toPlatformNgoApplication(saved));
+      await withTimeout(
+        deps.forwardLead(toPlatformNgoApplication(saved)),
+        deps.forwardTimeoutMs ?? DEFAULT_FORWARD_TIMEOUT_MS,
+        'platform_forward_timeout'
+      );
     } catch (error) {
       if (typeof deps.onForwardError === 'function') deps.onForwardError(error, saved);
     }
@@ -133,6 +138,22 @@ function requestMetaFromNodeRequest(req) {
     userAgent: req.headers['user-agent'] || '',
     referrer: req.headers.referer || req.headers.referrer || ''
   };
+}
+
+function withTimeout(promise, timeoutMs, message) {
+  const ms = Number(timeoutMs);
+  if (!Number.isFinite(ms) || ms <= 0) return Promise.resolve(promise);
+
+  let timeoutId;
+  const timeout = new Promise((_, reject) => {
+    timeoutId = setTimeout(() => {
+      const error = new Error(message);
+      error.code = 'forward_timeout';
+      reject(error);
+    }, ms);
+  });
+
+  return Promise.race([Promise.resolve(promise), timeout]).finally(() => clearTimeout(timeoutId));
 }
 
 function sendJson(res, status, body) {
