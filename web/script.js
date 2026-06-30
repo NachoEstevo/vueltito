@@ -165,17 +165,21 @@
       e.preventDefault();
       if (obError) obError.hidden = true;
 
-      var ong = obForm.ong, email = obForm.email;
+      var ong = obForm.ong, contactName = obForm.contactName, email = obForm.email;
       var ok = true;
-      [ong, email].forEach(function (f) {
+      [ong, contactName, email].forEach(function (f) {
         var valid = f.value.trim() && (f.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.value));
         f.classList.toggle('invalid', !valid);
         if (!valid) ok = false;
       });
-      if (!ok) { (ong.classList.contains('invalid') ? ong : email).focus(); return; }
+      if (!ok) {
+        (ong.classList.contains('invalid') ? ong : contactName.classList.contains('invalid') ? contactName : email).focus();
+        return;
+      }
 
       var data = {
         ong: ong.value.trim(),
+        contactName: contactName.value.trim(),
         email: email.value.trim(),
         area: obForm.area.value,
         msg: obForm.msg.value.trim(),

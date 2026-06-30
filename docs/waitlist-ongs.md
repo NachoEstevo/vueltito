@@ -7,6 +7,7 @@ La landing ahora envia las solicitudes de ONG a `POST /api/waitlist/ongs`.
 El endpoint usa Postgres via `DATABASE_URL` y crea automaticamente la tabla `waitlist_leads` al primer uso. Esta tabla guarda:
 
 - nombre de la ONG
+- persona de contacto
 - email de contacto
 - area
 - mensaje opcional
@@ -44,7 +45,7 @@ El payload enviado a platform usa el contrato publico de aplicaciones ONG:
 ```json
 {
   "publicName": "Fundacion Agua Clara",
-  "contactName": "Fundacion Agua Clara",
+  "contactName": "Ana Perez",
   "contactEmail": "hola@tuong.org",
   "cause": "Salud",
   "message": "Acompanamos familias.",

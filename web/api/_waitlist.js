@@ -14,6 +14,7 @@ function validateNgoWaitlistPayload(payload) {
   }
 
   const organizationName = normalizeText(data.ong || data.organizationName, 120);
+  const contactName = normalizeText(data.contactName || data.name || data.responsibleName, 120);
   const email = normalizeText(data.email, 160).toLowerCase();
   const area = normalizeText(data.area, 80);
   const message = normalizeText(data.msg || data.message, 1000);
@@ -22,6 +23,7 @@ function validateNgoWaitlistPayload(payload) {
   const fields = {};
 
   if (!organizationName) fields.ong = 'required';
+  if (!contactName) fields.contactName = 'required';
   if (!email) fields.email = 'required';
   else if (!EMAIL_PATTERN.test(email)) fields.email = 'invalid';
 
@@ -39,6 +41,7 @@ function validateNgoWaitlistPayload(payload) {
     value: {
       type: 'ngo',
       organizationName,
+      contactName,
       email,
       area: area || null,
       message: message || null,
@@ -108,7 +111,7 @@ async function createNgoWaitlistLead(payload, requestMeta, deps) {
 function toPlatformNgoApplication(lead) {
   const application = {
     publicName: lead.organizationName,
-    contactName: lead.organizationName,
+    contactName: lead.contactName || lead.organizationName,
     contactEmail: lead.email,
     source: 'landing-waitlist'
   };

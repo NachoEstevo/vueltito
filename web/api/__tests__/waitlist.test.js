@@ -9,6 +9,7 @@ const {
 test('validates and normalizes an ONG waitlist request', () => {
   const result = validateNgoWaitlistPayload({
     ong: '  Fundacion Agua Clara  ',
+    contactName: '  Ana Perez  ',
     email: '  HOLA@TUONG.ORG ',
     area: 'Salud',
     msg: '  Acompanamos familias.  '
@@ -18,6 +19,7 @@ test('validates and normalizes an ONG waitlist request', () => {
   assert.deepEqual(result.value, {
     type: 'ngo',
     organizationName: 'Fundacion Agua Clara',
+    contactName: 'Ana Perez',
     email: 'hola@tuong.org',
     area: 'Salud',
     message: 'Acompanamos familias.',
@@ -29,6 +31,7 @@ test('validates and normalizes an ONG waitlist request', () => {
 test('rejects missing organization name and invalid email', () => {
   const result = validateNgoWaitlistPayload({
     ong: ' ',
+    contactName: ' ',
     email: 'no-es-email'
   });
 
@@ -36,6 +39,7 @@ test('rejects missing organization name and invalid email', () => {
   assert.equal(result.status, 400);
   assert.deepEqual(result.fields, {
     ong: 'required',
+    contactName: 'required',
     email: 'invalid'
   });
 });
@@ -46,6 +50,7 @@ test('creates a lead with request metadata and notifies after saving', async () 
   const result = await createNgoWaitlistLead(
     {
       ong: 'Comedor Los Pinos',
+      contactName: 'Sofia Lima',
       email: 'contacto@lospinos.org',
       area: 'Alimentacion',
       msg: 'Merendero barrial.',
@@ -76,6 +81,7 @@ test('creates a lead with request metadata and notifies after saving', async () 
   assert.equal(calls.length, 2);
   assert.equal(calls[0][0], 'save');
   assert.equal(calls[0][1].organizationName, 'Comedor Los Pinos');
+  assert.equal(calls[0][1].contactName, 'Sofia Lima');
   assert.equal(calls[0][1].ipAddress, '203.0.113.10');
   assert.equal(calls[0][1].userAgent, 'node-test');
   assert.equal(calls[0][1].referrer, 'https://vueltito.org/');
@@ -88,6 +94,7 @@ test('silently accepts honeypot submissions without saving', async () => {
   const result = await createNgoWaitlistLead(
     {
       ong: 'Fundacion Real',
+      contactName: 'Persona Real',
       email: 'hola@fundacion.org',
       website: 'https://spam.example'
     },
@@ -108,6 +115,7 @@ test('does not fail the saved lead when notification fails', async () => {
   const result = await createNgoWaitlistLead(
     {
       ong: 'Fundacion Guardada',
+      contactName: 'Contacto Guardado',
       email: 'hola@guardada.org'
     },
     {},
@@ -132,6 +140,7 @@ test('forwards the saved waitlist lead to platform applications', async () => {
   const result = await createNgoWaitlistLead(
     {
       ong: 'Fundacion Puente',
+      contactName: 'Sofia Gomez',
       email: 'hola@puente.org',
       area: 'Educacion',
       msg: 'Acompanamos escuelas rurales.'
@@ -149,7 +158,7 @@ test('forwards the saved waitlist lead to platform applications', async () => {
   assert.equal(forwarded.length, 1);
   assert.deepEqual(forwarded[0], {
     publicName: 'Fundacion Puente',
-    contactName: 'Fundacion Puente',
+    contactName: 'Sofia Gomez',
     contactEmail: 'hola@puente.org',
     cause: 'Educacion',
     message: 'Acompanamos escuelas rurales.',
@@ -163,6 +172,7 @@ test('does not fail the saved lead when platform forwarding fails', async () => 
   const result = await createNgoWaitlistLead(
     {
       ong: 'Fundacion Resiliente',
+      contactName: 'Rosa Arias',
       email: 'hola@resiliente.org'
     },
     {},
