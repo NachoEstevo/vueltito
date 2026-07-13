@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ciclo de fondos — vueltito</title>
+<meta name="description" content="Panel para recorrer el ciclo de fondos de Vueltito." />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="demo-operations.css" />
+</head>
+<body class="cycle-page">
+<header class="cycle-topbar">
+  <a class="brand" href="index.html" aria-label="Vueltito inicio">
+    <span class="brand-mark"></span><span class="wordmark">vueltito</span>
+  </a>
+  <div class="cycle-top-actions">
+    <a class="cycle-link" href="demo.html">Reiniciar recorrido</a>
+  </div>
+</header>
+
+<main class="cycle-shell" data-cycle-operations>
+  <header class="cycle-heading">
+    <div>
+      <span class="cycle-eyebrow">Pedido CF-2847 · Casa Fina</span>
+      <h1>Ciclo de fondos</h1>
+      <p>Una única obligación, vista desde cada rol.</p>
+    </div>
+    <div class="cycle-current-status">
+      <span>Estado actual</span>
+      <strong data-current-status>Registrado</strong>
+    </div>
+  </header>
+
+  <nav class="cycle-tabs" aria-label="Vista del panel" role="tablist">
+    <button type="button" role="tab" data-role-tab="merchant">Comercio</button>
+    <button type="button" role="tab" data-role-tab="ngo">ONG</button>
+    <button type="button" role="tab" data-role-tab="admin">Admin</button>
+  </nav>
+
+  <section class="cycle-metrics" aria-label="Métricas del rol" data-role-metrics></section>
+
+  <div class="cycle-workspace">
+    <section class="cycle-main-panel" aria-labelledby="role-title">
+      <div class="cycle-section-head">
+        <div>
+          <span class="cycle-eyebrow" data-role-kicker>Comercio</span>
+          <h2 id="role-title" data-role-title>Obligación de remesa</h2>
+        </div>
+        <span class="cycle-order-amount" data-order-amount>$200,00</span>
+      </div>
+      <div data-role-content></div>
+    </section>
+
+    <aside class="cycle-side-panel" aria-labelledby="action-title">
+      <span class="cycle-eyebrow">Siguiente paso</span>
+      <h2 id="action-title" data-action-title></h2>
+      <p data-action-description></p>
+      <div data-action-control></div>
+      <p class="cycle-action-feedback" data-action-feedback role="status" aria-live="polite" hidden></p>
+    </aside>
+  </div>
+
+  <section class="cycle-timeline" aria-labelledby="timeline-title">
+    <div class="cycle-section-head">
+      <div><span class="cycle-eyebrow">Trazabilidad</span><h2 id="timeline-title">Estado de los fondos</h2></div>
+      <span>Impacto sólo después de la confirmación</span>
+    </div>
+    <ol data-fund-timeline></ol>
+  </section>
+</main>
+
+<script src="demo-cycle.js"></script>
+<script src="demo-operations.js"></script>
+</body>
+</html>

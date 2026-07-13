@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Checkout con Vueltito</title>
+<meta name="description" content="Checkout con aporte opcional destinado a una ONG." />
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="demo-checkout.css" />
+</head>
+<body class="checkout-page">
+<header class="checkout-topbar">
+  <a class="brand" href="index.html" aria-label="Vueltito inicio">
+    <span class="brand-mark"></span><span class="wordmark">vueltito</span>
+  </a>
+  <div class="checkout-top-actions">
+    <a href="comercios.html">Salir</a>
+  </div>
+</header>
+
+<main class="checkout-shell" data-cycle-checkout>
+  <header class="checkout-heading">
+    <div>
+      <span class="checkout-eyebrow">Paso 1 de 2 · Checkout</span>
+      <h1>Elegí si querés aportar.</h1>
+    </div>
+  </header>
+
+  <div class="checkout-layout">
+    <section class="checkout-context" aria-label="Datos de la compra">
+      <div class="checkout-store">
+        <span class="checkout-storemark" aria-hidden="true"><span>C</span><span>F</span></span>
+        <div><strong>Casa Fina</strong><span>Pedido CF-2847 · WooCommerce</span></div>
+      </div>
+      <dl class="checkout-details">
+        <div><dt>Contacto</dt><dd>nacho@vueltito.org</dd></div>
+        <div><dt>Entrega</dt><dd>Retiro en tienda · Hoy, 17:30</dd></div>
+        <div><dt>Pago</dt><dd>VISA terminada en 4421</dd></div>
+      </dl>
+    </section>
+
+    <aside class="checkout-summary is-off" data-cycle-summary aria-label="Resumen de compra">
+      <div class="checkout-product">
+        <img src="assets/img/product.webp" alt="Set de mesa artesanal" />
+        <div><strong>Set de mesa artesanal</strong><span>2 unidades</span></div>
+        <b>$57.250,00</b>
+      </div>
+      <div class="checkout-totals">
+        <div><span>Subtotal</span><strong>$57.250,00</strong></div>
+        <div><span>Envío</span><strong>$0,00</strong></div>
+        <div data-demo-donation-line hidden><span>Aporte Vueltito</span><strong data-demo-donation>$0,00</strong></div>
+      </div>
+
+      <section class="checkout-donation" aria-label="Aporte opcional">
+        <button class="checkout-toggle" type="button" data-demo-toggle aria-pressed="false">
+          <span class="checkout-check" aria-hidden="true"></span>
+          <span><small>Aporte opcional</small><strong>Sumar mi Vueltito</strong></span>
+          <b data-demo-pill>$0,00</b>
+        </button>
+        <div class="checkout-amounts" role="group" aria-label="Monto del aporte">
+          <button type="button" data-demo-amount="50">$50</button>
+          <button type="button" data-demo-amount="100">$100</button>
+          <button type="button" data-demo-amount="200">$200</button>
+          <button type="button" data-demo-other>Otro</button>
+        </div>
+        <form class="checkout-custom" data-demo-custom hidden>
+          <label for="demo-custom-amount">Monto en pesos</label>
+          <div><input id="demo-custom-amount" inputmode="numeric" autocomplete="off" placeholder="Ej. 350" /><button type="submit">Aplicar</button></div>
+          <p data-demo-error hidden>Ingresá un monto mayor a cero.</p>
+        </form>
+        <div class="checkout-cause">
+          <span class="checkout-causemark">B</span>
+          <span><small>Destinado a</small><strong>Banco de Alimentos</strong></span>
+        </div>
+        <label class="checkout-leaderboard"><input type="checkbox" data-demo-leaderboard /><span>Aparecer con alias si el aporte llega a la ONG</span></label>
+        <div class="checkout-alias" data-demo-identity hidden><input type="text" data-demo-alias placeholder="Alias público" aria-label="Alias público" /></div>
+        <div class="checkout-email">
+          <label for="impact-email">Email para recibir el resumen <span>Opcional</span></label>
+          <input id="impact-email" type="email" data-impact-email autocomplete="email" placeholder="nombre@ejemplo.com" />
+          <small>Te escribiremos cuando la ONG confirme la recepción.</small>
+        </div>
+      </section>
+
+      <div class="checkout-total"><span>Total</span><strong data-demo-total>$57.250,00</strong></div>
+      <button class="checkout-pay" type="button" data-demo-pay>Completar compra</button>
+      <p class="checkout-pay-status" data-demo-pay-status role="status" aria-live="polite" hidden></p>
+      <p class="checkout-note" data-demo-note>Sin aporte. La compra continúa normalmente.</p>
+    </aside>
+  </div>
+</main>
+
+<script src="demo-cycle.js"></script>
+<script src="demo-checkout.js"></script>
+</body>
+</html>
