@@ -41,7 +41,8 @@ async function postJson(url, headers, body) {
       'Content-Type': 'application/json',
       ...headers
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(2500)
   });
 
   if (!response.ok) {

@@ -1,5 +1,7 @@
 # To-do de continuidad Vueltito
 
+Para el estado revisado en noviembre de 2026, consultá el [índice de integraciones](integrations/README.md). Los pendientes de abajo reflejan el punto de partida de junio.
+
 Estado: 2026-06-24. Documento operativo para retomar trabajo sin depender del thread.
 
 ## 1. Confirmar landing actual

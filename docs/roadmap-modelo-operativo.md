@@ -75,7 +75,7 @@ Si Vueltito cobra, guarda y distribuye donaciones, aparecen obligaciones legales
 
 El plan implementable vive en el repo de plataforma:
 
-`D:\GithubProjects\vueltito-platform\docs\plans\2026-06-20-production-readiness.md`
+[Plan de preparación para producción, junio de 2026](https://github.com/NachoEstevo/vueltito-platform/blob/main/docs/plans/2026-06-20-production-readiness.md)
 
 Ese documento baja los bloqueantes a tareas: modo bonificado, aceptacion de terminos,
 runbook WooCommerce, release hardening, observabilidad, CI Woo y spike Tienda Negocio.

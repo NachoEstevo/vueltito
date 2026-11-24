@@ -1,9 +1,14 @@
+const { createHash, timingSafeEqual } = require('node:crypto');
 const { listWaitlistLeads } = require('../../_db');
 const { sendJson } = require('../../_waitlist');
 
 function bearerToken(req) {
   const value = req.headers.authorization || '';
   return value.startsWith('Bearer ') ? value.slice(7).trim() : '';
+}
+
+function hashToken(token) {
+  return createHash('sha256').update(token).digest();
 }
 
 module.exports = async function handler(req, res) {
@@ -27,7 +32,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  if (bearerToken(req) !== expectedToken) {
+  if (!timingSafeEqual(hashToken(bearerToken(req)), hashToken(expectedToken))) {
     sendJson(res, 401, { ok: false, error: 'unauthorized' });
     return;
   }
@@ -45,7 +50,7 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    console.error('admin waitlist request failed', error);
+    console.error('admin waitlist request failed');
     sendJson(res, 500, { ok: false, error: 'waitlist_unavailable' });
   }
 };

@@ -1,128 +1,48 @@
-<div align="center">
+# Vueltito
 
-# vueltito
+Vueltito propone sumar una microdonación opcional al pagar una compra online. Nació en la **Halketon de Paisanos**. La idea y el desarrollo inicial son de **Mauro Proto, Ignacio Estevo, Juan Martin Giorgio y Franco Ferreira**, del equipo Acelera.
 
-### Donar el vuelto nunca fue tan simple
+Este repositorio contiene la [landing](https://vueltito.vercel.app/), las páginas para comercios y de ranking, el formulario de interés para ONG y la documentación de producto. El código del plugin de WooCommerce, la app experimental de Tiendanube, el cálculo de donaciones y el registro de remesas viven en [vueltito-platform](https://github.com/NachoEstevo/vueltito-platform), que requiere acceso.
 
-**Microdonaciones que suceden solas, mientras ya estás pagando.**
+## Estado al 24 de noviembre de 2026
 
-Una plataforma argentina para sumar un aporte solidario, chico y transparente,
-a las compras de todos los días.
+| Componente | Estado |
+| --- | --- |
+| Landing | Publicada como demo de producto. La página de ranking puede mostrar ejemplos. |
+| Demo del circuito de fondos | En la rama [`codex/vueltito-demo-cycle`](https://github.com/NachoEstevo/vueltito/tree/codex/vueltito-demo-cycle). Simula compra, remesa y confirmación de recepción con datos de prueba. |
+| WooCommerce | Plugin 0.4.8 en el repositorio de plataforma. Candidato a piloto. |
+| Tiendanube | Widget NubeSDK probado en una tienda demo. Su uso en producción quedó bloqueado por la forma de agregar el aporte al checkout. |
+| Shopify | Previsto en el diseño y en los contratos de la API. Queda por desarrollar una app o extensión de checkout. |
 
----
+En el modelo previsto para el piloto, el comercio cobra el pedido con su pasarela habitual y remite el 100 % de las donaciones a la ONG. Vueltito registra la aceptación, la obligación y la rendición. Cobro de comisiones y custodia de fondos quedan fuera del piloto.
 
-*Opt-in · Visible antes de pagar · Trazable hasta la ONG*
+## Vista local
 
-</div>
+Desde la raíz del repositorio, con Python 3:
 
----
-
-## La idea en una frase
-
-> Cuando comprás en un comercio integrado, **vueltito** te deja sumar un aporte mínimo
-> —un redondeo, unos pesos fijos o un porcentaje chico— que se asigna a una ONG verificada.
-> Lo ves antes de pagar, lo podés sacar, y queda registrado para siempre.
-
-No desviamos pagos. No cobramos cargos ocultos. No es un impuesto.
-Es una donación **autorizada, visible y reversible** que el usuario decide.
-
----
-
-## El problema
-
-Donar hoy es incómodo.
-
-- Hay que **acordarse** de hacerlo.
-- Hay que **buscar** la ONG, confiar en ella, hacer una transferencia aparte.
-- Las donaciones grandes asustan; las chicas se sienten "que no sirven".
-- Y del otro lado, las ONGs viven de campañas puntuales y poca previsibilidad.
-
-El resultado: mucha gente con ganas de aportar que **nunca llega a hacerlo**.
-
----
-
-## La solución
-
-vueltito convierte la donación en algo que pasa **en el momento exacto** en que ya
-estás dispuesto a pagar: el checkout.
-
-```
-Tu compra:        $ 4.380
-Tu aporte vueltito: $ 20      →  Comedor Los Pibes
-Total:            $ 4.400
+```sh
+python -m http.server 4173 --bind 127.0.0.1 --directory web
 ```
 
-Tres pasos, sin fricción:
+Abrí [la portada](http://127.0.0.1:4173/), [comercios](http://127.0.0.1:4173/comercios.html) o [ranking](http://127.0.0.1:4173/leaderboard.html). El servidor estático permite revisar las páginas. El formulario de ONG requiere funciones serverless y una base de prueba. El formulario de comercios simula la inscripción en el navegador. El ranking trae datos de ejemplo si Core no responde.
 
-1. **Elegís cómo aportar.** Redondeás el total, sumás un monto fijo o un porcentaje chico.
-2. **Lo ves antes de pagar.** Aparece como una línea clara en el checkout. Si no querés, lo sacás.
-3. **Llega a una ONG real.** Verificada, con seguimiento, y vos podés ver tu historial.
+Con Node.js 22, desde `web/`:
 
-Lo poco se vuelve mucho cuando lo hacen muchas personas, muchas veces.
+```sh
+npm ci
+npm test
+```
 
----
+Para recorrer la demo del circuito, usá un checkout de la rama indicada arriba, levantá el mismo servidor y abrí `/demo.html` y `/demo-operations.html` en el mismo navegador y origen. Las pruebas de esa rama se corren desde `web/` con `node --test tests/demo-cycle.test.js`.
 
-## Por qué es distinto
+## Documentación
 
-| | vueltito |
-|---|---|
-| **Transparente** | El aporte se muestra siempre antes de pagar. Nunca es un cargo sorpresa. |
-| **Opcional** | Es opt-in. Lo activás vos y lo podés quitar en cualquier momento. |
-| **Trazable** | Cada aporte queda registrado y conciliado, de la compra hasta la ONG. |
-| **Confiable** | Solo ONGs verificadas. Sin datos personales expuestos. |
-| **Sin rehacer nada** | El comercio lo activa sin cambiar su forma de cobrar. |
+- [Integraciones y próximos pasos](docs/integrations/README.md)
+- [Modelo operativo](docs/roadmap-modelo-operativo.md)
+- [Formulario de interés, variables y privacidad](docs/waitlist-ongs.md)
+- [Presentación original](PRESENTACION.md) y [diseño de junio de 2026](docs/superpowers/specs/2026-06-06-don-ar-platform-design.md)
+- [Lista de continuidad de junio de 2026](docs/todo-continuidad-vueltito.md)
 
----
+## Derechos de uso
 
-## Para quién es
-
-**Para vos, que comprás.**
-Aportás sin esfuerzo, ves a dónde va tu plata y elegís cuánto.
-
-**Para los comercios.**
-Suman una causa a su marca y activan vueltito sin tocar su stack de pagos.
-
-**Para las ONGs.**
-Reciben aportes recurrentes, verificables y con reportes claros.
-
----
-
-## El extra: que sumar dé ganas
-
-vueltito incluye un **leaderboard opcional** y reconocimientos no monetarios.
-El que quiere, participa con un alias; el que no, dona igual de tranquilo y en privado.
-La idea es simple: **hacer del aporte algo que se sienta bien y dé ganas de repetir.**
-
----
-
-## La visión
-
-Empezamos por las compras online, con un primer canal simple y sólido.
-El camino es claro:
-
-> Que sumar un aporte solidario sea tan natural como recibir el vuelto.
-
-Un país donde dar la vuelta de la compra a una buena causa sea la opción más fácil,
-no la más difícil.
-
----
-
-## Estado del proyecto
-
-Hoy **vueltito** ya tiene una primera integración instalable para WooCommerce.
-
-- La idea, la estrategia y la arquitectura están documentadas.
-- WooCommerce 0.4.7 permite instalar el plugin, mostrar una donación visible en checkout y reportar eventos al core.
-- Buscamos ONGs, comercios y aliados para crecer con un modelo claro: el comercio cobra la donación, transfiere el 100% a la ONG y vueltito no custodia esos fondos.
-- Para los primeros pilotos, vueltito no descuenta ni cobra comisión sobre las donaciones. El objetivo inicial es validar checkout, trazabilidad, remesas y confianza antes de activar cualquier modelo pago para comercios.
-
-> ¿Te interesa la idea, querés sumar tu ONG o tu comercio, o simplemente charlar?
-> Estamos abriendo la conversación.
-
----
-
-<div align="center">
-
-**vueltito** — Donar el vuelto, sin pensarlo.
-
-</div>
+El repositorio de la landing no tiene una licencia general publicada. La autorización para reutilizar su código, marca, fotos y logos de terceros se confirma con los titulares de cada material. La licencia declarada por el plugin WooCommerce corresponde al plugin.

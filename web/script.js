@@ -242,7 +242,6 @@
 
     var destName = document.querySelector('.cc-dest-name');
     var destMeta = document.querySelector('.cc-dest-meta');
-    var destImg = document.querySelector('.cc-dest-logo img');
     var ongOpts = picker.querySelectorAll('.ong-opt');
     ongOpts.forEach(function (o) {
       o.addEventListener('click', function () {
@@ -250,7 +249,6 @@
         o.classList.add('is-active');
         if (destName) destName.textContent = o.dataset.name;
         if (destMeta) destMeta.textContent = o.dataset.meta;
-        if (destImg) { destImg.src = o.dataset.logo; destImg.alt = o.dataset.name; }
         closePicker();
       });
     });
@@ -323,7 +321,6 @@
       } catch (err) {}
 
       mModal.querySelector('#m-name-out').textContent = data.comercio || 'tu comercio';
-      mModal.querySelector('#m-mail-out').textContent = data.email;
       mForm.reset();
       mForm.hidden = true;
       mSuccess.hidden = false;
@@ -333,6 +330,7 @@
   // ---- live leaderboard preview on the home page ----
   (function hydrateLeaderboardPreview() {
     var preview = document.getElementById('home-leaderboard-preview');
+    var status = document.getElementById('home-leaderboard-status');
     if (!preview || !window.fetch) return;
 
     function money(cents, currency) {
@@ -405,7 +403,10 @@
       })
       .then(function (payload) {
         var rows = payload && Array.isArray(payload.rows) ? payload.rows : [];
-        if (rows.length) render(rows);
+        if (rows.length) {
+          render(rows);
+          if (status) status.textContent = 'Datos en vivo';
+        }
       })
       .catch(function () {});
   })();

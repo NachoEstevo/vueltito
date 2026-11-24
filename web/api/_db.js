@@ -48,7 +48,10 @@ async function ensureWaitlistTable() {
 
       ALTER TABLE waitlist_leads
         ADD COLUMN IF NOT EXISTS contact_name TEXT;
-    `);
+    `).catch((error) => {
+      ensurePromise = undefined;
+      throw error;
+    });
   }
 
   await ensurePromise;
@@ -65,9 +68,6 @@ function mapLeadRow(row) {
     message: row.message,
     source: row.source,
     pagePath: row.page_path,
-    ipAddress: row.ip_address,
-    userAgent: row.user_agent,
-    referrer: row.referrer,
     status: row.status,
     createdAt: row.created_at instanceof Date ? row.created_at.toISOString() : row.created_at
   };
@@ -85,11 +85,8 @@ async function saveWaitlistLead(lead) {
       area,
       message,
       source,
-      page_path,
-      ip_address,
-      user_agent,
-      referrer
-    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+      page_path
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
     RETURNING *`,
     [
       lead.type,
@@ -99,10 +96,7 @@ async function saveWaitlistLead(lead) {
       lead.area,
       lead.message,
       lead.source,
-      lead.pagePath,
-      lead.ipAddress,
-      lead.userAgent,
-      lead.referrer
+      lead.pagePath
     ]
   );
 
@@ -113,11 +107,12 @@ async function listWaitlistLeads(options) {
   await ensureWaitlistTable();
 
   const opts = options || {};
-  const limit = Math.max(1, Math.min(Number(opts.limit) || 100, 200));
+  const limit = Math.max(1, Math.min(Math.trunc(Number(opts.limit)) || 100, 200));
   const type = opts.type || 'ngo';
 
   const result = await getPool().query(
-    `SELECT *
+    `SELECT id, type, organization_name, contact_name, email, area, message,
+            source, page_path, status, created_at
      FROM waitlist_leads
      WHERE type = $1
      ORDER BY created_at DESC

@@ -52,7 +52,7 @@ function validateNgoWaitlistPayload(payload) {
   };
 }
 
-async function createNgoWaitlistLead(payload, requestMeta, deps) {
+async function createNgoWaitlistLead(payload, deps) {
   const validation = validateNgoWaitlistPayload(payload);
 
   if (!validation.ok) {
@@ -71,15 +71,7 @@ async function createNgoWaitlistLead(payload, requestMeta, deps) {
     throw new Error('saveLead dependency is required');
   }
 
-  const meta = requestMeta || {};
-  const lead = {
-    ...validation.value,
-    ipAddress: normalizeText(meta.ipAddress, 80) || null,
-    userAgent: normalizeText(meta.userAgent, 500) || null,
-    referrer: normalizeText(meta.referrer, 500) || null
-  };
-
-  const saved = await deps.saveLead(lead);
+  const saved = await deps.saveLead(validation.value);
 
   if (typeof deps.notifyLead === 'function') {
     try {
@@ -127,19 +119,6 @@ function toPlatformNgoApplication(lead) {
   return application;
 }
 
-function requestMetaFromNodeRequest(req) {
-  const forwardedFor = req.headers['x-forwarded-for'];
-  const ipAddress = Array.isArray(forwardedFor)
-    ? forwardedFor[0]
-    : String(forwardedFor || req.socket?.remoteAddress || '').split(',')[0];
-
-  return {
-    ipAddress,
-    userAgent: req.headers['user-agent'] || '',
-    referrer: req.headers.referer || req.headers.referrer || ''
-  };
-}
-
 function withTimeout(promise, timeoutMs, message) {
   const ms = Number(timeoutMs);
   if (!Number.isFinite(ms) || ms <= 0) return Promise.resolve(promise);
@@ -159,12 +138,12 @@ function withTimeout(promise, timeoutMs, message) {
 function sendJson(res, status, body) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
   res.end(JSON.stringify(body));
 }
 
 module.exports = {
   createNgoWaitlistLead,
-  requestMetaFromNodeRequest,
   sendJson,
   toPlatformNgoApplication,
   validateNgoWaitlistPayload

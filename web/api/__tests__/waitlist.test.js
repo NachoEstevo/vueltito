@@ -45,7 +45,7 @@ test('rejects missing organization name and invalid email', () => {
   });
 });
 
-test('creates a lead with request metadata and notifies after saving', async () => {
+test('stores the form fields and notifies after saving, without network metadata', async () => {
   const calls = [];
 
   const result = await createNgoWaitlistLead(
@@ -56,11 +56,6 @@ test('creates a lead with request metadata and notifies after saving', async () 
       area: 'Alimentacion',
       msg: 'Merendero barrial.',
       pagePath: '/index.html'
-    },
-    {
-      ipAddress: '203.0.113.10',
-      userAgent: 'node-test',
-      referrer: 'https://vueltito.org/'
     },
     {
       saveLead: async (lead) => {
@@ -83,9 +78,10 @@ test('creates a lead with request metadata and notifies after saving', async () 
   assert.equal(calls[0][0], 'save');
   assert.equal(calls[0][1].organizationName, 'Comedor Los Pinos');
   assert.equal(calls[0][1].contactName, 'Sofia Lima');
-  assert.equal(calls[0][1].ipAddress, '203.0.113.10');
-  assert.equal(calls[0][1].userAgent, 'node-test');
-  assert.equal(calls[0][1].referrer, 'https://vueltito.org/');
+  assert.equal(calls[0][1].pagePath, '/index.html');
+  assert.equal('ipAddress' in calls[0][1], false);
+  assert.equal('userAgent' in calls[0][1], false);
+  assert.equal('referrer' in calls[0][1], false);
   assert.deepEqual(calls[1], ['notify', 42]);
 });
 
@@ -99,7 +95,6 @@ test('silently accepts honeypot submissions without saving', async () => {
       email: 'hola@fundacion.org',
       website: 'https://spam.example'
     },
-    {},
     {
       saveLead: async () => {
         saved = true;
@@ -119,7 +114,6 @@ test('does not fail the saved lead when notification fails', async () => {
       contactName: 'Contacto Guardado',
       email: 'hola@guardada.org'
     },
-    {},
     {
       saveLead: async (lead) => ({ ...lead, id: 7, createdAt: '2026-06-22T23:00:00.000Z' }),
       notifyLead: async () => {
@@ -146,7 +140,6 @@ test('forwards the saved waitlist lead to platform applications', async () => {
       area: 'Educacion',
       msg: 'Acompanamos escuelas rurales.'
     },
-    {},
     {
       saveLead: async (lead) => ({ ...lead, id: 11, createdAt: '2026-06-30T12:00:00.000Z' }),
       forwardLead: async (lead) => {
@@ -176,7 +169,6 @@ test('does not fail the saved lead when platform forwarding fails', async () => 
       contactName: 'Rosa Arias',
       email: 'hola@resiliente.org'
     },
-    {},
     {
       saveLead: async (lead) => ({ ...lead, id: 12, createdAt: '2026-06-30T12:30:00.000Z' }),
       forwardLead: async () => {
@@ -205,7 +197,6 @@ test('bounds platform forwarding latency before responding', async () => {
       contactName: 'Rita Lopez',
       email: 'hola@rapida.org'
     },
-    {},
     {
       saveLead: async (lead) => ({ ...lead, id: 13, createdAt: '2026-06-30T13:00:00.000Z' }),
       forwardLead: async () => new Promise(() => {}),

@@ -252,8 +252,6 @@ img{max-width:100%;display:block}
 .cc-dest{margin-top:22px}
 .cc-dest-row{display:flex;align-items:center;gap:12px;margin-top:12px}
 .cc-dest-ic{width:38px;height:38px;border-radius:50%;background:#E6F1FB;color:#3a83c2;display:grid;place-items:center;flex:none}
-.cc-dest-logo{background:#fff;overflow:hidden}
-.cc-dest-logo img{width:100%;height:100%;object-fit:cover;display:block}
 .cc-dest-info{display:flex;flex-direction:column;flex:1}
 .cc-dest-name{font-weight:600;font-size:.95rem}
 .cc-dest-meta{font-size:.8rem;color:var(--gris-medio)}
@@ -527,8 +525,6 @@ body.modal-lock{overflow:hidden}
 .ong-opt{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:#fff;cursor:pointer;text-align:left;font-family:inherit;transition:border-color .2s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease)}
 .ong-opt:hover{border-color:var(--gris-medio);transform:translateY(-1px);box-shadow:var(--shadow-soft)}
 .ong-opt.is-active{border-color:var(--verde);box-shadow:0 0 0 1px var(--verde)}
-.ong-logo{width:40px;height:40px;border-radius:50%;overflow:hidden;background:#fff;border:1px solid var(--line);flex:none;display:grid;place-items:center}
-.ong-logo img{width:100%;height:100%;object-fit:cover;display:block}
 .ong-info{display:flex;flex-direction:column;min-width:0}
 .ong-name{font-weight:600;font-size:.92rem;line-height:1.18;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ong-meta{font-size:.78rem;color:var(--gris-medio)}

@@ -10,7 +10,7 @@ Validar si Vueltito puede instalarse en TiendaNegocio, provisionar productos de 
 
 - Este repo no contiene cliente TiendaNegocio, rutas backend ni docs tecnicos locales para `referrer/api/v1`.
 - La busqueda local no encontro `tiendanegocio`, `donation-config`, `provision-donation` ni endpoints backend relacionados.
-- La memoria de trabajo previa menciona un adapter en `D:\GithubProjects\vueltito-platform`, pero este repo no debe asumir ese codigo como fuente de verdad sin copiarlo o verificarlo.
+- La [guía de plataforma](https://github.com/NachoEstevo/vueltito-platform/blob/main/docs/runbooks/tiendanegocio-spike.md) documenta el adapter y las pruebas posteriores del 25 de junio de 2026. Requiere acceso.
 
 ## Contrato esperado a verificar
 

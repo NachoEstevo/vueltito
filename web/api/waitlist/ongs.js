@@ -2,9 +2,10 @@ const { saveWaitlistLead } = require('../_db');
 const { notifyWaitlistLead } = require('../_notify');
 const {
   createNgoWaitlistLead,
-  requestMetaFromNodeRequest,
   sendJson
 } = require('../_waitlist');
+
+const MAX_BODY_BYTES = 16 * 1024;
 
 function setCors(res) {
   res.setHeader('Access-Control-Allow-Origin', process.env.WAITLIST_ALLOWED_ORIGIN || '*');
@@ -13,12 +14,27 @@ function setCors(res) {
 }
 
 async function readJsonBody(req) {
-  if (req.body && typeof req.body === 'object') return req.body;
-  if (typeof req.body === 'string') return JSON.parse(req.body || '{}');
+  const declaredBytes = Number(req.headers['content-length']);
+  if (declaredBytes > MAX_BODY_BYTES) throw new RangeError('request_too_large');
+  if (req.body !== undefined) {
+    if (typeof req.body === 'string' || Buffer.isBuffer(req.body)) {
+      const raw = req.body.toString();
+      if (Buffer.byteLength(raw) > MAX_BODY_BYTES) throw new RangeError('request_too_large');
+      return JSON.parse(raw);
+    }
+    if (Buffer.byteLength(JSON.stringify(req.body)) > MAX_BODY_BYTES) {
+      throw new RangeError('request_too_large');
+    }
+    return req.body;
+  }
 
   const chunks = [];
+  let size = 0;
   for await (const chunk of req) {
-    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(String(chunk)));
+    const bytes = Buffer.isBuffer(chunk) ? chunk : Buffer.from(String(chunk));
+    size += bytes.length;
+    if (size > MAX_BODY_BYTES) throw new RangeError('request_too_large');
+    chunks.push(bytes);
   }
   const raw = Buffer.concat(chunks).toString('utf8');
   return raw ? JSON.parse(raw) : {};
@@ -70,24 +86,38 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  const contentType = String(req.headers['content-type'] || '').split(';')[0].trim().toLowerCase();
+  if (contentType !== 'application/json') {
+    sendJson(res, 415, { ok: false, error: 'unsupported_media_type' });
+    return;
+  }
+
+  let payload;
   try {
-    const payload = await readJsonBody(req);
+    payload = await readJsonBody(req);
+  } catch (error) {
+    if (error instanceof RangeError) {
+      sendJson(res, 413, { ok: false, error: 'request_too_large' });
+    } else {
+      sendJson(res, 400, { ok: false, error: 'invalid_json' });
+    }
+    return;
+  }
+
+  try {
     const result = await createNgoWaitlistLead(
       payload,
-      requestMetaFromNodeRequest(req),
       {
         saveLead: saveWaitlistLead,
         notifyLead: notifyWaitlistLead,
         forwardLead: forwardNgoApplication,
         forwardTimeoutMs: Number(process.env.VUELTITO_PLATFORM_FORWARD_TIMEOUT_MS || 2500),
-        onNotifyError: (error) => console.error('waitlist notification failed', error),
+        onNotifyError: () => console.error('waitlist notification failed'),
         onForwardError: (error, lead) => console.error(
           'waitlist platform forward failed',
           {
-            error: error.message,
             statusCode: error.statusCode,
-            leadId: lead.id,
-            email: lead.email
+            leadId: lead.id
           }
         )
       }
@@ -100,7 +130,7 @@ module.exports = async function handler(req, res) {
       return;
     }
 
-    console.error('waitlist request failed', error);
+    console.error('waitlist request failed');
     sendJson(res, 500, { ok: false, error: 'waitlist_unavailable' });
   }
 };

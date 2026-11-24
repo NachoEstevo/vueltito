@@ -144,7 +144,7 @@
     <div class="lbp-stats">
       <div class="lbp-stat">
         <span class="lbp-k" id="leaderboard-total">$0</span>
-        <span class="lbp-l">Impacto opt-in publicado</span>
+        <span class="lbp-l">Monto registrado con opt-in</span>
       </div>
       <div class="lbp-stat">
         <span class="lbp-k" id="leaderboard-donors">0</span>
@@ -165,7 +165,7 @@
         <div class="lb-head">
           <h3>Ranking actual</h3>
           <div class="lb-tools">
-            <span class="lb-date"><svg class="ic"><use href="#i-cal"/></svg> Datos públicos</span>
+            <span class="lb-date"><svg class="ic"><use href="#i-cal"/></svg> Aportes y alias</span>
             <span class="lb-filter"><svg class="ic"><use href="#i-filter"/></svg></span>
           </div>
         </div>
@@ -181,7 +181,7 @@
             <span><strong>Cargando leaderboard.</strong> Buscando donantes con opt-in público.</span>
           </div>
           <div class="lb-table">
-            <div class="lb-thead"><span>#</span><span>Alias</span><span>Impacto generado</span><span>Aportes</span><span>Insignias</span></div>
+            <div class="lb-thead"><span>#</span><span>Alias</span><span>Monto registrado</span><span>Aportes</span><span>Insignias</span></div>
             <div id="leaderboard-rows" aria-live="polite"></div>
           </div>
         </div>
@@ -207,18 +207,18 @@
       <!-- sidebar -->
       <aside class="lbp-side">
         <div class="mini-card">
-          <h4>Top ONGs del mes</h4>
-          <div class="lbp-ong"><span class="lbp-ong-rank">1</span><span class="lbp-ong-name">Banco de Alimentos</span><span class="lbp-ong-amt">$1.74M</span></div>
-          <div class="lbp-ong"><span class="lbp-ong-rank">2</span><span class="lbp-ong-name">Fundación Paisanos</span><span class="lbp-ong-amt">$1.12M</span></div>
-          <div class="lbp-ong"><span class="lbp-ong-rank">3</span><span class="lbp-ong-name">Pequeños Pasos</span><span class="lbp-ong-amt">$842K</span></div>
-          <div class="lbp-ong"><span class="lbp-ong-rank">4</span><span class="lbp-ong-name">Alegría Intensiva</span><span class="lbp-ong-amt">$610K</span></div>
+          <h4>Ejemplo de ranking de ONG</h4>
+          <div class="lbp-ong"><span class="lbp-ong-rank">1</span><span class="lbp-ong-name">Comedor comunitario</span><span class="lbp-ong-amt">$1.74M</span></div>
+          <div class="lbp-ong"><span class="lbp-ong-rank">2</span><span class="lbp-ong-name">Apoyo escolar</span><span class="lbp-ong-amt">$1.12M</span></div>
+          <div class="lbp-ong"><span class="lbp-ong-rank">3</span><span class="lbp-ong-name">Campaña ambiental</span><span class="lbp-ong-amt">$842K</span></div>
+          <div class="lbp-ong"><span class="lbp-ong-rank">4</span><span class="lbp-ong-name">Acompañamiento en salud</span><span class="lbp-ong-amt">$610K</span></div>
           <a class="mini-link" href="index.html#impacto">Ver todas <svg class="ic"><use href="#i-arrow"/></svg></a>
         </div>
 
         <div class="mini-card">
           <h4>Cómo se mide</h4>
           <ul class="trans-list">
-            <li><span class="tl-ic"><svg class="ic"><use href="#i-heart"/></svg></span><div><strong>Impacto generado</strong><span>Suma de aportes publicados</span></div></li>
+            <li><span class="tl-ic"><svg class="ic"><use href="#i-heart"/></svg></span><div><strong>Aportes registrados</strong><span>La recepción por la ONG se confirma mediante la remesa.</span></div></li>
             <li><span class="tl-ic"><svg class="ic"><use href="#i-badge"/></svg></span><div><strong>Insignias</strong><span>Constancia, transparencia y más</span></div></li>
             <li><span class="tl-ic"><svg class="ic"><use href="#i-ledger"/></svg></span><div><strong>Ledger</strong><span>Cada aporte queda registrado</span></div></li>
           </ul>
@@ -412,12 +412,11 @@
       donorsEl.textContent = number(rows.length);
       donationsEl.textContent = number(donationsTotal);
 
+      stateEl.hidden = false;
       if (mode === 'live') {
-        stateEl.hidden = false;
         setState('live', 'Datos en vivo.', 'Ranking cargado desde Core con aliases que aceptaron aparecer.');
       } else {
-        stateEl.hidden = true;
-        setState('fallback', '', '');
+        setState('fallback', 'Datos de ejemplo.', 'Los alias y montos de esta vista son ilustrativos.');
       }
     }
 

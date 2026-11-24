@@ -55,7 +55,7 @@
     </nav>
     <div class="nav-cta">
       <a class="btn btn-ghost" href="index.html"><svg class="ic"><use href="#i-back"/></svg> Inicio</a>
-      <button class="btn btn-dark" type="button" data-merchant>Instalar vueltito</button>
+      <button class="btn btn-dark" type="button" data-merchant>Probar formulario</button>
     </div>
     <button class="nav-burger" aria-label="Abrir menú" id="burger"><span></span><span></span></button>
   </div>
@@ -71,7 +71,7 @@
     <h1 class="hero-title" style="margin-top:14px">Sumá impacto<br>a tu checkout.</h1>
     <p class="hero-sub">Tus clientes suman una donación opcional y visible al pagar. Vos cobrás con tu pasarela de siempre; vueltito registra consentimiento, reportes y remesas.</p>
     <div class="hero-actions">
-      <a class="btn btn-dark btn-lg" href="downloads/vueltito-donations-0.4.7.zip" download>Descargar WooCommerce</a>
+      <a class="btn btn-dark btn-lg" href="#plataformas">Ver estado de las integraciones</a>
       <a class="btn btn-link" href="#instalar">Cómo se instala <svg class="ic"><use href="#i-arrow"/></svg></a>
     </div>
   </div>
@@ -96,12 +96,12 @@
 <!-- ============ INSTALACIÓN ============ -->
 <section class="msec msec-tint install-steps" id="instalar">
   <div class="msec-head">
-    <h2 class="serif-h2">En cinco pasos, listo.</h2>
-    <p class="lead">WooCommerce ya está disponible. Descargás el plugin, lo conectás con tus credenciales y probás una compra antes de activarlo.</p>
+    <h2 class="serif-h2">Cómo se prueba en WooCommerce.</h2>
+    <p class="lead">El plugin está pensado para un piloto. Estos pasos requieren acceso al entorno de prueba de Vueltito.</p>
   </div>
   <div class="steps-wrap">
     <ol class="doc-steps">
-      <li>Descargá el ZIP de WooCommerce 0.4.7 desde esta página o desde tu dashboard.</li>
+      <li>Obtené el ZIP del plugin y las credenciales del entorno de prueba con el equipo del piloto.</li>
       <li>Instalá el plugin desde WordPress, en Plugins > Añadir nuevo > Subir plugin.</li>
       <li>Conectá la instalación con el ID y la API key que te damos en el dashboard.</li>
       <li>Elegí las ONGs y campañas verificadas que querés habilitar.</li>
@@ -147,10 +147,10 @@
     <p class="lead">Cada plataforma tiene un camino distinto. Empezamos por donde podemos controlar el checkout sin romper la operación del comercio.</p>
   </div>
   <div class="doc-cols">
-    <div class="doc-card plat-card"><span class="plat-ic tint-violet"><svg class="ic"><use href="#i-cart"/></svg></span><div class="ch-row"><h4>WooCommerce</h4><span class="chip chip-blue">Disponible</span></div><p>Plugin propio para Classic Checkout y Checkout Blocks. Agrega una fee no gravada por defecto y reporta eventos de orden.</p><a class="plat-cta" href="downloads/vueltito-donations-0.4.7.zip" download>Descargar plugin <svg class="ic"><use href="#i-arrow"/></svg></a></div>
-    <div class="doc-card plat-card"><span class="plat-ic tint-sky"><svg class="ic"><use href="#i-cloud"/></svg></span><div class="ch-row"><h4>Tiendanube</h4><span class="chip chip-amber">Próximo</span></div><p>App en desarrollo. La versión storefront sirve para demo; checkout real depende de las capacidades aprobadas por Tiendanube.</p><button class="plat-cta" type="button" data-merchant>Avisame cuando esté <svg class="ic"><use href="#i-arrow"/></svg></button></div>
-    <div class="doc-card plat-card"><span class="plat-ic tint-green"><svg class="ic"><use href="#i-bag"/></svg></span><div class="ch-row"><h4>Shopify</h4><span class="chip chip-gray">Roadmap</span></div><p>App futura con checkout extensions donde aplique. Para tiendas sin extensibilidad suficiente, empezará por reportes y campañas.</p><button class="plat-cta" type="button" data-merchant>Avisame cuando esté <svg class="ic"><use href="#i-arrow"/></svg></button></div>
-    <div class="doc-card plat-card"><span class="plat-ic tint-sky"><svg class="ic"><use href="#i-scan"/></svg></span><div class="ch-row"><h4>QR / Point</h4><span class="chip chip-gray">Roadmap</span></div><p>Pagos presenciales más adelante. Primero necesitamos resolver consentimiento, comprobantes y conciliación fuera de checkout web.</p><button class="plat-cta" type="button" data-merchant>Avisame cuando esté <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+    <div class="doc-card plat-card"><span class="plat-ic tint-violet"><svg class="ic"><use href="#i-cart"/></svg></span><div class="ch-row"><h4>WooCommerce</h4><span class="chip chip-blue">Candidato a piloto</span></div><p>Plugin para Classic Checkout y Checkout Blocks. Agrega una línea de aporte opcional y reporta eventos de pedido.</p><a class="plat-cta" href="#instalar">Ver pasos del piloto <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+    <div class="doc-card plat-card"><span class="plat-ic tint-sky"><svg class="ic"><use href="#i-cloud"/></svg></span><div class="ch-row"><h4>Tiendanube</h4><span class="chip chip-amber">Experimental</span></div><p>Widget probado en una tienda de prueba. Falta validar con Tiendanube cómo agregar el aporte al checkout.</p></div>
+    <div class="doc-card plat-card"><span class="plat-ic tint-green"><svg class="ic"><use href="#i-bag"/></svg></span><div class="ch-row"><h4>Shopify</h4><span class="chip chip-gray">Pendiente</span></div><p>Falta desarrollar la app y validar qué planes de tienda admiten la integración.</p></div>
+    <div class="doc-card plat-card"><span class="plat-ic tint-sky"><svg class="ic"><use href="#i-scan"/></svg></span><div class="ch-row"><h4>QR / Point</h4><span class="chip chip-gray">Pendiente</span></div><p>Pagos presenciales más adelante. Primero necesitamos resolver consentimiento, comprobantes y conciliación fuera de checkout web.</p></div>
   </div>
 </section>
 
@@ -199,7 +199,7 @@
     <h2 class="serif-h2 big center">Sumá vueltito<br>a tu tienda.</h2>
     <p class="lead center">Empezá con WooCommerce. Tiendanube y Shopify siguen después.</p>
     <div class="hero-actions center">
-      <button class="btn btn-dark btn-lg" type="button" data-merchant>Solicitar credenciales</button>
+      <button class="btn btn-dark btn-lg" type="button" data-merchant>Probar formulario de comercios</button>
       <a class="btn btn-ghost btn-lg" href="spec.html">Leer spec técnico</a>
     </div>
   </div>
@@ -223,8 +223,8 @@
       </div>
       <div class="fcol">
         <h5>Acciones</h5>
-        <a href="downloads/vueltito-donations-0.4.7.zip" download>Descargar WooCommerce</a>
-        <button type="button" data-merchant>Contactar comercio</button>
+        <a href="#instalar">Ver pasos del piloto WooCommerce</a>
+        <button type="button" data-merchant>Demo de inscripción</button>
       </div>
       <div class="fcol">
         <h5>Modelo</h5>
@@ -252,8 +252,8 @@
     </button>
 
     <form class="ob-form" id="m-form" novalidate>
-      <h3 id="m-title" class="modal-title">Instalar vueltito</h3>
-      <p class="modal-sub">Dejanos los datos de tu comercio y te contactamos con las credenciales y los pasos de conexión.</p>
+      <h3 id="m-title" class="modal-title">Probá el formulario para comercios</h3>
+      <p class="modal-sub">Usá datos ficticios. La demo guarda la prueba solo en este navegador.</p>
 
       <div class="ob-field">
         <label for="m-name">Nombre del comercio</label>
@@ -281,14 +281,13 @@
         <label for="m-msg">Contanos sobre tu tienda <span class="ob-opt">(opcional)</span></label>
         <textarea id="m-msg" name="msg" rows="2" placeholder="Qué vendés y cuánto vendés por mes."></textarea>
       </div>
-      <button class="btn btn-dark btn-lg ob-submit" type="submit">Solicitar credenciales</button>
-      <p class="ob-fine">Solo usamos tu mail para responderte sobre la instalación.</p>
+      <button class="btn btn-dark btn-lg ob-submit" type="submit">Guardar prueba</button>
     </form>
 
     <div class="ob-success" hidden>
       <span class="ob-check"><svg class="ic"><use href="#i-check"/></svg></span>
-      <h3>¡Te anotamos!</h3>
-      <p>Gracias, <b id="m-name-out">tu comercio</b>. Te escribimos a <b id="m-mail-out"></b> para coordinar la instalación.</p>
+      <h3>Prueba completada</h3>
+      <p>La solicitud de ejemplo para <b id="m-name-out">tu comercio</b> quedó en este navegador.</p>
       <button class="btn btn-ghost" type="button" data-close>Cerrar</button>
     </div>
   </div>
