@@ -4,15 +4,9 @@ Vueltito propone sumar una microdonación opcional al pagar una compra online. N
 
 Este repositorio contiene la [landing](https://vueltito.vercel.app/), las páginas para comercios y de ranking, el formulario de interés para ONG y la documentación de producto. El código del plugin de WooCommerce, la app experimental de Tiendanube, el cálculo de donaciones y el registro de remesas viven en [vueltito-platform](https://github.com/NachoEstevo/vueltito-platform), que requiere acceso.
 
-## Estado al 24 de noviembre de 2026
+## Dónde empezar
 
-| Componente | Estado |
-| --- | --- |
-| Landing | Publicada como demo de producto. La página de ranking puede mostrar ejemplos. |
-| Demo del circuito de fondos | En la rama [`codex/vueltito-demo-cycle`](https://github.com/NachoEstevo/vueltito/tree/codex/vueltito-demo-cycle). Simula compra, remesa y confirmación de recepción con datos de prueba. |
-| WooCommerce | Plugin 0.4.8 en el repositorio de plataforma. Candidato a piloto. |
-| Tiendanube | Widget NubeSDK probado en una tienda demo. Su uso en producción quedó bloqueado por la forma de agregar el aporte al checkout. |
-| Shopify | Previsto en el diseño y en los contratos de la API. Queda por desarrollar una app o extensión de checkout. |
+El [plan de continuidad](https://github.com/NachoEstevo/vueltito-platform/blob/main/docs/continuidad.md) prioriza un piloto de WooCommerce con un comercio y una ONG. La rama [`codex/vueltito-demo-cycle`](https://github.com/NachoEstevo/vueltito/tree/codex/vueltito-demo-cycle) permite simular compra, remesa y confirmación de recepción con datos de prueba.
 
 En el modelo previsto para el piloto, el comercio cobra el pedido con su pasarela habitual y remite el 100 % de las donaciones a la ONG. Vueltito registra la aceptación, la obligación y la rendición. Cobro de comisiones y custodia de fondos quedan fuera del piloto.
 
@@ -37,11 +31,9 @@ Para recorrer la demo del circuito, usá un checkout de la rama indicada arriba,
 
 ## Documentación
 
-- [Integraciones y próximos pasos](docs/integrations/README.md)
-- [Modelo operativo](docs/roadmap-modelo-operativo.md)
+- [Estado de las integraciones](docs/integrations/README.md)
 - [Formulario de interés, variables y privacidad](docs/waitlist-ongs.md)
-- [Presentación original](PRESENTACION.md) y [diseño de junio de 2026](docs/superpowers/specs/2026-06-06-don-ar-platform-design.md)
-- [Lista de continuidad de junio de 2026](docs/todo-continuidad-vueltito.md)
+- [Presentación original](https://github.com/NachoEstevo/vueltito/blob/b3a6201ab8b8864f049464068bba35c0d3578e68/PRESENTACION.md)
 
 ## Derechos de uso
 
